@@ -116,6 +116,7 @@
 
   function mealHtml(m) {
     const [first, ...rest] = m.options;
+    const leg = m.leg ? legHtml(m.leg) : "";
     return `
       <div class="meal">
         <div class="meal-top">
@@ -127,7 +128,7 @@
         ${optionHtml(first, 0)}
         ${rest.length ? `<details class="more"><summary>다른 후보 ${rest.length}곳 보기</summary>${rest.map((o, i) => optionHtml(o, i + 1)).join("")}</details>` : ""}
         ${m.note ? `<div class="meal-foot"><b>확인 메모</b> · ${esc(m.note)}</div>` : ""}
-      </div>`;
+      </div>${leg}`;
   }
 
   function spotsHtml(spots) {
@@ -239,7 +240,7 @@
       const d = D.days.find((x) => x.id === tabId);
       view.innerHTML = dayHtml(d, true);
     }
-    window.scrollTo({ top: 0, behavior: "instant" in document.documentElement.style ? "instant" : "auto" });
+    window.scrollTo(0, 0);
   }
 
   tabsEl.addEventListener("click", (e) => {

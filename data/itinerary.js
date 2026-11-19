@@ -67,13 +67,7 @@ window.TRIP_DATA = {
           hours: "프런트 24시간 · 체크인 14:00부터",
           note: "3박 내내 같은 방(리뉴얼 플로어 트리플룸·금연)입니다. 아고다 예약 2건(11/21 1박 + 11/22~24 2박)을 이어 붙인 구조라, 체크인 때 같은 방 배정을 한 번 더 확인하세요. 1층 24시간 패밀리마트, 3층 전자레인지·당일 무료 짐보관, 각 층 제빙기.",
           img: "images/washington-hotel.jpg",
-          map: "https://maps.google.com/?cid=6872319874272201570",
-          leg: {
-            type: "walk",
-            label: "버스에서 내려 바로",
-            detail: "리무진 정류장이 호텔 정문 앞입니다. 캐리어는 벨보이에 맡기고 3층 프런트로.",
-            alt: ""
-          }
+          map: "https://maps.google.com/?cid=6872319874272201570"
         },
         {
           id: "d1-4",
@@ -83,13 +77,7 @@ window.TRIP_DATA = {
           hours: "24시간 영업",
           note: "시부야 센터가이 입구 3층 규모. 드럭·과자·생활잡화·기념품을 한 번에 사기 좋습니다. 하치코 출구에서 도보 3~4분. 22:45까지 보고 숙소로 돌아갑니다.",
           img: "images/shibuya-donki.jpg",
-          map: "https://maps.google.com/?cid=9124525651654476405",
-          leg: {
-            type: "walk",
-            label: "호텔 → 신주쿠역 도보 8분 + JR 7분",
-            detail: "신주쿠역 지하보도로 내려가 JR 山手線(시부야 방면) 2정거장 · 7분 → 시부야역 ハチ公口 → 도보 3~4분",
-            alt: "택시로는 약 15분(2,000엔 전후). 어머니가 피곤하시면 택시 추천."
-          }
+          map: "https://maps.google.com/?cid=9124525651654476405"
         },
         {
           id: "d1-5",
@@ -153,7 +141,13 @@ window.TRIP_DATA = {
               img: null,
               map: "https://maps.google.com/?cid=6872319874272201570"
             }
-          ]
+          ],
+          leg: {
+            type: "train",
+            label: "신주쿠역 도보 8분 + JR 7분",
+            detail: "식사 후 21:30 호텔 출발 → 신주쿠역 지하보도 도보 8분 → JR 山手線(시부야 방면) 7분 → 시부야역 ハチ公口 → 도보 3~4분",
+            alt: "택시는 약 15분·2,000엔 전후. 어머니가 피곤하시면 택시가 낫습니다."
+          }
         }
       ],
       spots: [
@@ -785,16 +779,6 @@ window.TRIP_DATA = {
           img: "images/lbreath.jpg",
           map: "https://maps.google.com/?cid=67978450380853922",
           leg: { type: "walk", label: "도보 10분", detail: "신주쿠 4-1-11 → 니시신주쿠 호텔", alt: "" }
-        },
-        {
-          id: "d3-14",
-          time: "20:10",
-          title: "생일 저녁 · 숙소 복귀",
-          jp: "新宿ワシントンホテル",
-          hours: "24시간",
-          note: "오늘은 호진님과 여동생분 음력 생일이 겹치는 날. 저녁은 아래 후보 중 하나로 예약하세요. 식사 후 21:40 호텔, 다음 날 10:38 N'EX라 늦지 않게.",
-          img: "images/washington-hotel.jpg",
-          map: "https://maps.google.com/?cid=6872319874272201570"
         }
       ],
       meals: [
@@ -917,7 +901,7 @@ window.TRIP_DATA = {
           slot: "생일 저녁",
           icon: "🎂",
           time: "20:10 ~ 21:40",
-          after: "d3-14",
+          after: "d3-13",
           area: "신주쿠(기본) · 에비스·롯폰기 조정안 포함",
           why: "원래 일정(롯폰기 야경 17:55)을 지키면 신주쿠 20:10이 가장 자연스럽습니다. 에비스에서 먼저 먹는 안은 롯폰기 야경을 19:30 이후로 미루는 조건입니다.",
           options: [
