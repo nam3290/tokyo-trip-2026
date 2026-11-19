@@ -1,0 +1,17 @@
+{
+  "name": "도쿄 3박 4일 (2026.11.21–24)",
+  "short_name": "도쿄여행",
+  "description": "호진님 가족 도쿄 3박 4일 일정·맛집·이동 안내",
+  "lang": "ko",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf7f2",
+  "theme_color": "#12161c",
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "./icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
