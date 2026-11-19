@@ -235,7 +235,7 @@
       bindChecklist();
     } else if (tabId === "all") {
       view.innerHTML = `
-        <div class="jump">${D.days.map((d) => `<a href="#${d.id}" data-jump="${d.id}">${esc(d.date)} ${esc(d.weekday)} · ${esc(d.tab.replace(/^\d일차\s*/, ""))}</a>`).join("")}</div>
+        <div class="jump">${D.days.map((d) => `<a href="#${d.id}" data-jump="${d.id}">${esc(d.date)} ${esc(d.weekday)}</a>`).join("")}</div>
         ${D.days.map((d, i) => (i ? '<hr class="day-sep">' : "") + dayHtml(d, true)).join("")}`;
     } else {
       const d = D.days.find((x) => x.id === tabId);
