@@ -60,6 +60,9 @@
     const map = it.map
       ? `<a class="btn" href="${it.map}" target="_blank" rel="noopener">📍 구글맵 열기</a>`
       : "";
+    const map2 = it.map2
+      ? `<a class="btn ghost" href="${it.map2}" target="_blank" rel="noopener">📍 ${esc(it.map2Label || "지도")}</a>`
+      : "";
     return `
       <span class="node" aria-hidden="true"></span>
       <article class="card">
@@ -73,7 +76,7 @@
           ${it.hours ? `<div class="meta-row"><span class="ico">🕘</span><span>${esc(it.hours)}</span></div>` : ""}
         </div>
         ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
-        ${map ? `<div class="actions">${map}</div>` : ""}
+        ${map || map2 ? `<div class="actions">${map}${map2}</div>` : ""}
       </article>`;
   }
 
@@ -94,7 +97,7 @@
       </div>`;
   }
 
-  function optionHtml(o, first) {
+  function optionHtml(o, first, total) {
     return `
       <div class="opt">
         <div class="opt-name">${esc(o.name)}</div>
@@ -111,13 +114,28 @@
         </dl>
         ${o.tip ? `<p class="opt-tip">${esc(o.tip)}</p>` : ""}
         <div class="opt-foot">
-          <span class="walk">${first === 0 ? "1순위" : ""}</span>
+          <span class="walk">${total === 1 ? "확정" : first === 0 ? "1순위" : ""}</span>
           ${o.map ? `<a class="btn ghost" href="${o.map}" target="_blank" rel="noopener">지도</a>` : ""}
         </div>
       </div>`;
   }
 
+  /* 식사 자리를 아직 정하지 않은 슬롯 — 카드 대신 조용한 안내만 남깁니다. */
+  function pendingHtml(p) {
+    return `
+      <div class="meal-pend">
+        <div class="mp-top">
+          <span class="mp-badge">${esc(p.icon || "🍽️")} ${esc(p.slot)}</span>
+          <span class="mp-time">${esc(p.time || "")}</span>
+          <span class="mp-tag">미정</span>
+        </div>
+        ${p.area ? `<div class="mp-area">${esc(p.area)}</div>` : ""}
+        ${p.note ? `<p class="mp-note">${esc(p.note)}</p>` : ""}
+      </div>`;
+  }
+
   function mealHtml(m) {
+    if (!m.options || !m.options.length) return pendingHtml(m);
     const [first, ...rest] = m.options;
     const leg = m.leg ? legHtml(m.leg) : "";
     return `
@@ -128,8 +146,8 @@
         </div>
         <h3>${esc(m.area)}</h3>
         ${m.why ? `<p class="meal-why">${esc(m.why)}</p>` : ""}
-        ${optionHtml(first, 0)}
-        ${rest.length ? `<details class="more"><summary>다른 후보 ${rest.length}곳 보기</summary>${rest.map((o, i) => optionHtml(o, i + 1)).join("")}</details>` : ""}
+        ${optionHtml(first, 0, m.options.length)}
+        ${rest.length ? `<details class="more"><summary>다른 후보 ${rest.length}곳 보기</summary>${rest.map((o, i) => optionHtml(o, i + 1, m.options.length)).join("")}</details>` : ""}
         ${m.note ? `<div class="meal-foot"><b>확인 메모</b> · ${esc(m.note)}</div>` : ""}
       </div>${leg}`;
   }
@@ -158,7 +176,7 @@
   }
 
   function dayHtml(d, withHeader) {
-    const meals = d.meals || [];
+    const meals = (d.meals || []).concat(d.mealPending || []);
     const startMeals = meals.filter((m) => m.after === "__start");
     const afterMap = {};
     meals.forEach((m) => { if (m.after !== "__start") (afterMap[m.after] = afterMap[m.after] || []).push(m); });
