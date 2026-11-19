@@ -11,8 +11,8 @@ window.TRIP_DATA = {
     hotelTel: "+81 3-3343-3111",
     flightOut: "TW257 대구 15:00 → 나리타 T2 17:10",
     flightIn: "TW252 나리타 T2 14:20 → 대구 16:50",
-    updated: "2026-11-19",
-    notice: "식사 슬롯과 이동 시간은 2026-11-19 확인 기준입니다. 도보 시간은 Google Maps 실측, 전철은 조회 시각표 기준이며, 식사 자리를 넣느라 일부 시각을 5~15분 조정했습니다.",
+    updated: "2026-11-20",
+    notice: "식사 슬롯과 이동 시간은 2026-11-20 확인 기준입니다. 도보 시간은 Google Maps 실측, 전철은 조회 시각표 기준이며, 식사 자리를 넣느라 일부 시각을 5~15분 조정했습니다.",
     startDate: "2026-11-21",
     endDate: "2026-11-24"
   },
@@ -172,10 +172,10 @@ window.TRIP_DATA = {
       date: "11/22",
       weekday: "일",
       title: "신주쿠 → 아카사카 → 하라주쿠 → 시부야",
-      summary: "이세탄 10:00 → 아카사카 벼룩시장 → 하라주쿠·오모테산도 8곳 → 시부야 4곳",
+      summary: "이세탄 10:00 → 아카사카 벼룩시장 → 하라주쿠·오모테산도 9곳 → 시부야 4곳",
       accent: "#2f6f5e",
       stats: [
-        { k: "쇼핑", v: "17곳" },
+        { k: "쇼핑", v: "18곳" },
         { k: "이동", v: "도보 중심" },
         { k: "귀숙", v: "20:00" }
       ],
@@ -283,22 +283,33 @@ window.TRIP_DATA = {
           note: "이 구간의 최북단. 여기까지 올라온 뒤로는 남쪽으로만 내려갑니다.",
           img: "images/hummingbirds.jpg",
           map: "https://maps.google.com/?cid=1374394553814675223",
-          leg: { type: "walk", label: "도보 4분", detail: "오모테산도 가로수를 따라 내려옵니다", alt: "" }
+          leg: { type: "walk", label: "도보 1분 (50m)", detail: "허밍버즈힐에서 같은 블록 동쪽으로 50m — 우즈빌 1F", alt: "" }
         },
         {
           id: "d2-9",
-          time: "15:05",
+          time: "15:00",
+          title: "THE H.W. DOG&CO. — 모자 전문점",
+          jp: "神宮前 3-28-10 ウッズビル 1F",
+          hours: "12:00~20:00 · 연중무휴 (11/22 일요일 정상 영업)",
+          note: "허밍버즈힐에서 도보 1분이라 같은 블록에서 이어 봅니다. 아메리칸 캐주얼·워크웨어 감성의 일본 모자 전문점으로 트러커캡·워크햇·헌팅캡이 주력입니다. 사이즈는 40(59~62cm)까지 나오지만 대표 모델 TRUCKER CAP은 크라운이 10~11cm로 다소 얕은 편 — 매장에서 직접 써 보고 깊은 크라운 모델과 비교해 고르세요. 구글 4.6(85) · +81 3-6427-9011.",
+          img: "images/hwdog.jpg",
+          map: "https://maps.google.com/?cid=2191060513098770626&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+          leg: { type: "walk", label: "도보 5분 (400m)", detail: "우즈빌에서 舊渋谷川遊歩道路(하라주쿠 캣스트리트)를 따라 남쪽으로 내려옵니다", alt: "" }
+        },
+        {
+          id: "d2-10",
+          time: "15:25",
           title: "côte&ciel Tokyo",
           jp: "コートエシエル 東京",
           hours: "11:00~19:00",
-          note: "진구마에 3-18-22. 가방·백팩 위주라 20분이면 충분합니다.",
+          note: "진구마에 3-18-22. 가방·백팩 위주라 15분이면 충분합니다.",
           img: "images/cote-ciel.jpg",
           map: "https://maps.google.com/?cid=7071675195158719693",
           leg: { type: "walk", label: "도보 2분", detail: "", alt: "" }
         },
         {
-          id: "d2-10",
-          time: "15:25",
+          id: "d2-11",
+          time: "15:45",
           title: "Ralph Lauren Omotesando",
           jp: "ラルフローレン 表参道",
           hours: "11:00~20:00",
@@ -308,8 +319,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 6분", detail: "오모테산도 → 하라주쿠 방향", alt: "" }
         },
         {
-          id: "d2-11",
-          time: "15:55",
+          id: "d2-12",
+          time: "16:15",
           title: "Harry Potter Shop Harajuku",
           jp: "ハリー・ポッター ショップ 原宿",
           hours: "11:00~21:00",
@@ -319,8 +330,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 6분", detail: "", alt: "" }
         },
         {
-          id: "d2-12",
-          time: "16:25",
+          id: "d2-13",
+          time: "16:45",
           title: "RAGTAG 하라주쿠",
           jp: "ラグタグ 原宿",
           hours: "11:00~20:00",
@@ -330,8 +341,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 3분", detail: "", alt: "" }
         },
         {
-          id: "d2-13",
-          time: "16:50",
+          id: "d2-14",
+          time: "17:10",
           title: "DANTON TOKYO",
           jp: "ダントン 東京",
           hours: "11:00~20:00",
@@ -341,8 +352,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 3분", detail: "", alt: "" }
         },
         {
-          id: "d2-14",
-          time: "17:10",
+          id: "d2-15",
+          time: "17:30",
           title: "Patagonia Tokyo Shibuya",
           jp: "パタゴニア 東京 渋谷",
           hours: "11:00~19:00 (수요일 휴무)",
@@ -352,8 +363,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 7분", detail: "미야시타파크 방향", alt: "", img: "images/miyashita-park.jpg" }
         },
         {
-          id: "d2-15",
-          time: "17:40",
+          id: "d2-16",
+          time: "18:00",
           title: "Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
           jp: "メゾン キツネ 宮下パーク",
           hours: "11:00~21:00",
@@ -363,8 +374,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 3분", detail: "", alt: "" }
         },
         {
-          id: "d2-16",
-          time: "18:15",
+          id: "d2-17",
+          time: "18:35",
           title: "FREAK'S STORE 시부야",
           jp: "フリークス ストア 渋谷",
           hours: "12:00~20:30 (일요일 12:00 오픈)",
@@ -374,8 +385,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 1분", detail: "", alt: "" }
         },
         {
-          id: "d2-17",
-          time: "18:40",
+          id: "d2-18",
+          time: "19:00",
           title: "SUN HOUSE 진난",
           jp: "サンハウス 神南",
           hours: "11:00~20:30",
@@ -385,8 +396,8 @@ window.TRIP_DATA = {
           leg: { type: "walk", label: "도보 2분", detail: "", alt: "" }
         },
         {
-          id: "d2-18",
-          time: "19:00",
+          id: "d2-19",
+          time: "19:20",
           title: "2nd STREET 시부야 진난점",
           jp: "セカンドストリート 渋谷神南店",
           hours: "11:00~21:00",
@@ -402,7 +413,7 @@ window.TRIP_DATA = {
           }
         },
         {
-          id: "d2-19",
+          id: "d2-20",
           time: "20:00",
           title: "신주쿠 워싱턴 복귀",
           jp: "新宿ワシントンホテル",
@@ -497,10 +508,10 @@ window.TRIP_DATA = {
         {
           slot: "카페",
           icon: "☕",
-          time: "15:25 ~ 15:45",
-          after: "d2-10",
+          time: "15:45 ~ 16:05",
+          after: "d2-11",
           area: "오모테산도 · 랄프로렌 매장 1층",
-          why: "오후 3시 반이 오늘 걸음이 가장 많은 구간입니다. 여기서 20분 앉아야 남은 8곳을 무리 없이 돕니다.",
+          why: "오후 3시 45분이 오늘 걸음이 가장 많은 구간입니다. 여기서 20분 앉아야 남은 8곳을 무리 없이 돕니다.",
           options: [
             {
               name: "랄프스 커피 오모테산도 (Ralph's Coffee)",
@@ -532,7 +543,7 @@ window.TRIP_DATA = {
           slot: "저녁",
           icon: "🍖",
           time: "20:05 ~ 21:30",
-          after: "d2-19",
+          after: "d2-20",
           area: "신주쿠 · 호텔 도보 5~10분",
           why: "20:00 귀숙 후라 짐을 두고 나갈 수 있습니다. 시부야에서 먼저 먹고 오려면 19:00에 2nd STREET을 나와야 해서 조금 빡빡합니다.",
           options: [
