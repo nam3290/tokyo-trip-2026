@@ -164,8 +164,9 @@
     startMeals.forEach((m) => { html += mealHtml(m); });
     d.items.forEach((it) => {
       html += itemHtml(it);
+      (afterMap[it.id] || []).filter((m) => !m.afterLeg).forEach((m) => { html += mealHtml(m); });
       if (it.leg) html += legHtml(it.leg);
-      (afterMap[it.id] || []).forEach((m) => { html += mealHtml(m); });
+      (afterMap[it.id] || []).filter((m) => m.afterLeg).forEach((m) => { html += mealHtml(m); });
     });
 
     return `
