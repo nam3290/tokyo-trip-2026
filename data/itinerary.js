@@ -55,6 +55,7 @@ window.TRIP_DATA = {
           leg: {
             type: "bus",
             label: "리무진버스 18:20 → 20:15",
+            img: "images/limousine.jpg",
             detail: "1층 카운터·발권기 현장 구매 · 16·17번 승강장 · 1인 3,600엔 · 약 1시간 55분 · 호텔 정문 앞 하차",
             alt: "다음 차 18:50 → 20:40 / 전철 대안: 空港第2ビル 18:22 스카이라이너 → 日暮里 19:04 → JR 山手線 → 新宿 19:32 (2,820엔·환승 1회)"
           }
@@ -145,6 +146,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "신주쿠역 도보 8분 + JR 7분",
+            img: "images/hachiko.jpg",
             detail: "식사 후 21:30 호텔 출발 → 신주쿠역 지하보도 도보 8분 → JR 山手線(시부야 방면) 7분 → 시부야역 ハチ公口 → 도보 3~4분",
             alt: "택시는 약 15분·2,000엔 전후. 어머니가 피곤하시면 택시가 낫습니다."
           }
@@ -239,6 +241,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "丸ノ内線 新宿三丁目 → 赤坂見附 8분",
+            img: "images/shinjuku-sanchome.jpg",
             detail: "BEAMS에서 新宿三丁目역 도보 4분 → 丸ノ内線 8분(178엔) → 赤坂見附 하차 → 溜池山王 방면 지하통로 → 13번 출구로 나오면 광장까지 도보 1분",
             alt: "赤坂見附에서 지상으로 나와 걸으면 16분(1.2km)이라 지하통로 쪽이 편합니다."
           }
@@ -255,6 +258,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "銀座線 → 表参道 환승 → 明治神宮前 13분",
+            img: "images/harajuku-station.jpg",
             detail: "13:30 광장 출발 → 溜池山王역 銀座線 → 表参道에서 千代田線 환승 → 明治神宮前 하차 (약 13분) → 2·3번 출구 도보 1분",
             alt: "タクシーなら約15분(2,000엔 전후). 3인이라 전철과 비용 차이가 크지 않습니다."
           }
@@ -345,7 +349,7 @@ window.TRIP_DATA = {
           note: "진구마에 6-16-8. 19:00 마감이라 이 시간대가 마지막입니다.",
           img: "images/patagonia.jpg",
           map: "https://maps.google.com/?cid=9042211536900144705",
-          leg: { type: "walk", label: "도보 7분", detail: "미야시타파크 방향", alt: "" }
+          leg: { type: "walk", label: "도보 7분", detail: "미야시타파크 방향", alt: "", img: "images/miyashita-park.jpg" }
         },
         {
           id: "d2-15",
@@ -392,6 +396,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "시부야역 도보 3분 + JR 7분",
+            img: "images/shibuya-crossing.jpg",
             detail: "19:40 시부야역 → JR 山手線 → 신주쿠역 19:47 → 지하보도 도보 8분 → 호텔 20:00",
             alt: ""
           }
@@ -566,6 +571,18 @@ window.TRIP_DATA = {
               walk: "2nd STREET에서 도보 5분",
               img: "images/r-katsugyu.jpg",
               map: "https://maps.google.com/?cid=11439916912159261095"
+            },
+            {
+              name: "규카츠 모토무라 시부야점 (牛かつもと村)",
+              rating: "구글 4.9 (17,248)",
+              tabelog: "타베로그 3.13",
+              menu: "규카츠 정식 (돌판에 직접 구워 먹기)",
+              price: "1,300~2,300엔",
+              hours: "11:00~22:00 (L.O. 21:30)",
+              tip: "구글 평점이 가장 높지만 19~20시엔 30~60분 대기. 어머니 동반이면 가츠규가 편합니다.",
+              walk: "2nd STREET에서 도보 4분",
+              img: "images/r-motomura.jpg",
+              map: "https://maps.google.com/?cid=8963800606739303068"
             }
           ]
         }
@@ -619,6 +636,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "JR 21분 · 253엔",
+            img: "images/yurakucho.jpg",
             detail: "新宿 08:38 → 神田 환승 → 有楽町 08:59 → 국제포럼까지 도보 2분 (D5 출구 지하 콘코스 직결)",
             alt: "08:30 이전 출발이면 山手線만으로 30분. 공휴일 아침이라 좌석은 여유롭습니다."
           }
@@ -635,6 +653,7 @@ window.TRIP_DATA = {
           leg: {
             type: "walk",
             label: "도보 7분 (550m)",
+            img: "images/tokyo-station.jpg",
             detail: "국제포럼 → 도쿄역 마루노우치 방향 → 신마루노우치 빌딩 4F",
             alt: ""
           }
@@ -664,7 +683,7 @@ window.TRIP_DATA = {
           note: "도쿄 스퀘어 가든 1·2F, 교바시역 직결. 아웃도어 장비가 넓게 있어 아크테릭스와 비교하기 좋습니다.",
           img: "images/montbell.jpg",
           map: "https://maps.google.com/?cid=18111296058751286170",
-          leg: { type: "walk", label: "도보 4분 (300m)", detail: "교바시 → 긴자 2초메", alt: "" }
+          leg: { type: "walk", label: "도보 4분 (300m)", detail: "교바시 → 긴자 2초메", alt: "", img: "images/kyobashi.jpg" }
         },
         {
           id: "d3-5",
@@ -689,6 +708,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "日比谷線 銀座 → 恵比寿 16분",
+            img: "images/ginza.jpg",
             detail: "긴자역 도보 5분 → 日比谷線(中目黒 방면) 16분·209엔 → 恵比寿역 東口 → 카피탈까지 도보 6분",
             alt: ""
           }
@@ -738,6 +758,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "日比谷線 5분 · 178엔",
+            img: "images/ebisu-station.jpg",
             detail: "에비스역 도보 7분 → 日比谷線 2정거장 5분 → 六本木역 1C 출구로 나오면 롯폰기 힐즈와 지하 콘코스 직결",
             alt: "1C 출구가 힐즈 직결이라 계단 없이 올라갑니다."
           }
@@ -1029,6 +1050,7 @@ window.TRIP_DATA = {
           leg: {
             type: "train",
             label: "N'EX 19호 10:38 → 11:53",
+            img: "images/omotesando.jpg",
             detail: "JR 신주쿠역 5·6번선(나리타 익스프레스) · 전좌석 지정석 · 나리타 제2터미널까지 직행 · 3,330엔(3인 지정석 9,990엔)",
             alt: "10:09발(11:23 도착)도 있지만 면세 쇼핑 1시간을 넣으면 10:38이 마지노선입니다."
           }

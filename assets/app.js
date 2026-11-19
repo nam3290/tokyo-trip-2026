@@ -82,12 +82,15 @@
     return `
       <span class="node leg-node" aria-hidden="true"></span>
       <div class="leg">
-        <div class="leg-head">
-          <span class="leg-type">${LEG_LABEL[leg.type] || "이동"}</span>
-          <span class="leg-label">${esc(leg.label)}</span>
+        ${leg.img ? `<img class="leg-thumb" src="${leg.img}" alt="${esc(leg.label)} 사진" loading="lazy" decoding="async">` : ""}
+        <div class="leg-body">
+          <div class="leg-head">
+            <span class="leg-type">${LEG_LABEL[leg.type] || "이동"}</span>
+            <span class="leg-label">${esc(leg.label)}</span>
+          </div>
+          ${leg.detail ? `<div class="leg-detail">${esc(leg.detail)}</div>` : ""}
+          ${leg.alt ? `<div class="leg-alt"><b>대안</b> · ${esc(leg.alt)}</div>` : ""}
         </div>
-        ${leg.detail ? `<div class="leg-detail">${esc(leg.detail)}</div>` : ""}
-        ${leg.alt ? `<div class="leg-alt"><b>대안</b> · ${esc(leg.alt)}</div>` : ""}
       </div>`;
   }
 

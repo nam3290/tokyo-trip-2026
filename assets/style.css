@@ -144,7 +144,9 @@ a{color:inherit}
 
 /* ── legs (이동) ── */
 .leg{position:relative; margin:0 0 10px 26px; padding:9px 12px 9px 12px; border-radius:12px;
-  background:#f6f1e8; border:1px dashed #ddd3c2}
+  background:#f6f1e8; border:1px dashed #ddd3c2; display:flex; gap:9px; align-items:flex-start}
+.leg-thumb{flex:0 0 48px; width:48px; height:48px; border-radius:10px; object-fit:cover; background:#e7dfd2}
+.leg-body{flex:1; min-width:0}
 .leg-head{display:flex; align-items:baseline; gap:7px; flex-wrap:wrap}
 .leg-type{font-size:10.5px; font-weight:800; letter-spacing:.04em; color:#7c7365; text-transform:uppercase}
 .leg-label{font-size:12.5px; font-weight:750; color:#232a33}
