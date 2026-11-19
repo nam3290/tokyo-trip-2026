@@ -1,5 +1,9 @@
-/* 도쿄 3박 4일 오프라인 캐시 — 실패해도 페이지는 그대로 동작합니다. */
-const CACHE = "tokyo-trip-v1";
+/* 도쿄 3박 4일 오프라인 캐시
+ * · 일정/HTML/JS = network-first (수정 후 push 하면 바로 최신, 오프라인일 때만 캐시)
+ * · 이미지·아이콘 = cache-first (용량이 커서 한 번 받으면 재사용)
+ * 실패해도 페이지 동작에는 영향이 없습니다.
+ */
+const CACHE = "tokyo-trip-v2";
 const ASSETS = [
  "./",
  "./index.html",
@@ -82,10 +86,12 @@ const ASSETS = [
  "./images/yurakucho.jpg"
 ];
 
+const isImage = (url) => /\/images\/|\/icons\//.test(url.pathname);
+const isDocument = (req, url) => req.mode === "navigate" || /\.(html|js|json|css)$/.test(url.pathname);
+
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
-    // 하나가 실패해도 설치가 깨지지 않게 개별로 담습니다.
     await Promise.all(ASSETS.map((u) => cache.add(new Request(u, {cache: "reload"})).catch(() => null)));
     self.skipWaiting();
   })());
@@ -99,26 +105,39 @@ self.addEventListener("activate", (event) => {
   })());
 });
 
+async function networkFirst(req) {
+  const cache = await caches.open(CACHE);
+  try {
+    const res = await fetch(req, {cache: "no-store"});
+    if (res && res.status === 200 && res.type === "basic") cache.put(req, res.clone()).catch(() => {});
+    return res;
+  } catch (e) {
+    const hit = await cache.match(req, {ignoreSearch: true});
+    if (hit) return hit;
+    if (req.mode === "navigate") {
+      const index = await cache.match("./index.html");
+      if (index) return index;
+    }
+    throw e;
+  }
+}
+
+async function cacheFirst(req) {
+  const cache = await caches.open(CACHE);
+  const hit = await cache.match(req, {ignoreSearch: true});
+  if (hit) return hit;
+  const res = await fetch(req);
+  if (res && res.status === 200 && res.type === "basic") cache.put(req, res.clone()).catch(() => {});
+  return res;
+}
+
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith((async () => {
-    const cache = await caches.open(CACHE);
-    const hit = await cache.match(req, {ignoreSearch: true});
-    if (hit) return hit;
-    try {
-      const res = await fetch(req);
-      if (res && res.status === 200 && res.type === "basic") cache.put(req, res.clone()).catch(() => {});
-      return res;
-    } catch (e) {
-      if (req.mode === "navigate") {
-        const index = await cache.match("./index.html");
-        if (index) return index;
-      }
-      throw e;
-    }
-  })());
+  if (isImage(url)) event.respondWith(cacheFirst(req));
+  else if (isDocument(req, url)) event.respondWith(networkFirst(req));
+  else event.respondWith(networkFirst(req));
 });
