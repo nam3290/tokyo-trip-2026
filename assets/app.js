@@ -526,6 +526,7 @@
           ${MAP_DAYS().map((d) => `<button class="fchip dchip ${day === d.id ? "on" : ""}" type="button" data-mday="${d.id}" style="--c:${d.color}">${esc(d.tab.replace(/\s*\(.*\)/, ""))}</button>`).join("")}
           <button class="fchip foodpin ${MAP.food ? "on" : ""}" type="button" id="foodpin">🍴 식당 핀</button>
         </div>
+        <p class="maphint">일차를 고르면 그날 순서만 크게 보입니다 · 마커를 누르면 구글맵으로 열립니다</p>
         <div id="mapcanvas" class="map" role="application" aria-label="일차별 동선 지도"></div>
         <div class="mapfallback" id="mapfallback" hidden>지도를 불러오지 못했습니다(오프라인일 수 있습니다). 아래 목록과 구글맵 버튼은 그대로 쓸 수 있습니다.</div>
         <div class="maplegend">${days.map((d) => `<span><i style="background:${d.color}"></i>${esc(d.label)}</span>`).join("")}${MAP.food ? `<span><i class="dot"></i>추천 식당</span>` : ""}</div>
@@ -557,13 +558,14 @@
       </div>`;
   }
 
-  function markerIcon(n, color) {
+  function markerIcon(n, color, small) {
+    const size = small ? 20 : 26;
     return L.divIcon({
       className: "mpin-wrap",
-      html: `<span class="mpin" style="--c:${color}">${n}</span>`,
-      iconSize: [26, 26],
-      iconAnchor: [13, 13],
-      popupAnchor: [0, -12],
+      html: `<span class="mpin${small ? " sm" : ""}" style="--c:${color}">${n}</span>`,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      popupAnchor: [0, -size / 2],
     });
   }
 
@@ -611,7 +613,7 @@
         }).addTo(map);
       }
       d.stops.forEach((s) => {
-        const m = L.marker([s.lat, s.lng], { icon: markerIcon(s.n, d.color), title: s.name, riseOnHover: true }).addTo(map);
+        const m = L.marker([s.lat, s.lng], { icon: markerIcon(s.n, d.color, MAP.day === "all"), title: s.name, riseOnHover: true }).addTo(map);
         m.bindPopup(popupHtml(s, d.color), { maxWidth: 260, minWidth: 200 });
         allPts.push([s.lat, s.lng]);
       });

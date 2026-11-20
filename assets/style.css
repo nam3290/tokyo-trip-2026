@@ -393,6 +393,8 @@ details.more[open] summary::after{content:"▴"}
 .maplegend i.dot{background:#e8b34b; border-radius:50%}
 
 .leaflet-container{font-family:inherit}
+.maphint{margin:0 0 8px; font-size:11px; color:#8d8579}
+.mpin.sm{font-size:9.5px; border-width:2px}
 .mpin{display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--c); color:#fff;
   font-size:11.5px; font-weight:800; border:2.5px solid #fff; box-shadow:0 2px 6px rgba(20,25,30,.35); font-variant-numeric:tabular-nums}
 .mpop{font-size:12.5px; line-height:1.45; min-width:180px}
