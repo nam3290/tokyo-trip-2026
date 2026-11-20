@@ -326,6 +326,13 @@ details.more[open] summary::after{content:"▴"}
 .fchip.dchip.on{background:var(--c); border-color:var(--c)}
 .fchip.foodpin.on{background:#b0741e; border-color:#b0741e}
 
+.fmore{margin-top:8px; background:#fff; border:1px solid var(--line); border-radius:11px; padding:0 10px}
+.fmore summary{cursor:pointer; list-style:none; font-size:11.5px; font-weight:700; color:#5a626e; padding:9px 0; display:flex; align-items:center; gap:7px}
+.fmore summary::-webkit-details-marker{display:none}
+.fmore summary::after{content:"▾"; margin-left:auto; color:#a29a8c; font-size:11px}
+.fmore[open] summary::after{content:"▴"}
+.fmore summary b{font-size:10.5px; font-weight:800; color:#8a6421; background:#fbf1e0; border-radius:5px; padding:1px 6px}
+.fmore .fg-label:first-of-type{margin-top:2px}
 .fmeta{display:flex; align-items:center; justify-content:space-between; margin:14px 0 8px; font-size:12px; color:#6f7783}
 .fmeta button{border:1px solid var(--line); background:#fff; border-radius:8px; font-family:inherit; font-size:11.5px; font-weight:650; color:#5a626e; padding:5px 9px; cursor:pointer}
 

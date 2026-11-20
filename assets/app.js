@@ -423,10 +423,13 @@
           ${chipRow("days", dayChips.map((d) => d.id), FOOD.slot && FOOD.slot.startsWith("d") && !FOOD.slot.includes("-") ? FOOD.slot : "", (id) => (dayChips.find((d) => d.id === id) || {}).label)}
           <div class="fg-label">끼니</div>
           ${chipRow("slot", R.slots.map((s) => s.id), FOOD.slot.includes("-") ? FOOD.slot : "", (id) => slotLabel(id))}
-          <div class="fg-label">테마</div>
-          ${chipRow("tag", R.tags, FOOD.tag)}
-          <div class="fg-label">권역</div>
-          ${chipRow("area", R.bigAreas, FOOD.area)}
+          <details class="fmore" ${FOOD.tag || FOOD.area ? "open" : ""}>
+            <summary>테마 · 권역 필터${FOOD.tag || FOOD.area ? ` <b>${esc(FOOD.tag || FOOD.area)}</b>` : ""}</summary>
+            <div class="fg-label">테마</div>
+            ${chipRow("tag", R.tags, FOOD.tag)}
+            <div class="fg-label">권역</div>
+            ${chipRow("area", R.bigAreas, FOOD.area)}
+          </details>
         </div>
 
         <div class="fmeta"><span id="fcount"></span><button type="button" id="freset">필터 초기화</button></div>
@@ -523,7 +526,7 @@
           ${MAP_DAYS().map((d) => `<button class="fchip dchip ${day === d.id ? "on" : ""}" type="button" data-mday="${d.id}" style="--c:${d.color}">${esc(d.tab.replace(/\s*\(.*\)/, ""))}</button>`).join("")}
           <button class="fchip foodpin ${MAP.food ? "on" : ""}" type="button" id="foodpin">🍴 식당 핀</button>
         </div>
-        <div id="map" class="map" role="application" aria-label="일차별 동선 지도"></div>
+        <div id="mapcanvas" class="map" role="application" aria-label="일차별 동선 지도"></div>
         <div class="mapfallback" id="mapfallback" hidden>지도를 불러오지 못했습니다(오프라인일 수 있습니다). 아래 목록과 구글맵 버튼은 그대로 쓸 수 있습니다.</div>
         <div class="maplegend">${days.map((d) => `<span><i style="background:${d.color}"></i>${esc(d.label)}</span>`).join("")}${MAP.food ? `<span><i class="dot"></i>추천 식당</span>` : ""}</div>
 
@@ -550,7 +553,7 @@
                 </li>`).join("")}
             </ol>
           </section>`).join("")}
-        <p class="foodnote">지도 타일: OpenStreetMap · CARTO / 좌표: 각 장소 구글맵 기준 · ${total}개 지점</p>
+        <p class="foodnote">지도 타일: OpenStreetMap / 좌표: 각 장소 구글맵 기준 · ${total}개 지점</p>
       </div>`;
   }
 
@@ -577,7 +580,7 @@
   }
 
   function initMap() {
-    const box = document.getElementById("map");
+    const box = document.getElementById("mapcanvas");
     if (!box) return;
     if (!window.L) {
       document.getElementById("mapfallback").hidden = false;
@@ -593,10 +596,9 @@
     });
     leaflet = map;
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
-      subdomains: "abcd",
-      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
 
     const allPts = [];
