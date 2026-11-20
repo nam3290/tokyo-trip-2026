@@ -431,3 +431,36 @@ details.more[open] summary::after{content:"▴"}
   border:1px solid var(--line); border-radius:7px; padding:3px 7px; font-family:inherit; cursor:pointer}
 
 @media (min-width:560px){ .map{height:440px} }
+
+
+/* 선택된 여행 수정: 동선 상태·다음 방문지·식당 후보 (2026-11-20) */
+.next-visit{margin-top:14px;padding:13px 14px;border-radius:13px;background:#f5ede0;color:#23303c;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.next-visit div{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.next-visit small{color:#586373;font-size:11px;font-weight:650}
+.next-visit b{font-size:14px;line-height:1.35}
+.next-visit span{font-size:11px;color:#73777d}
+.next-visit a{white-space:nowrap;background:#26374c;color:#fff;text-decoration:none;font-size:12px;font-weight:700;border-radius:9px;padding:8px 10px}
+.priority-badge{display:inline-block;vertical-align:middle;margin-left:6px;font-size:10.5px;font-weight:750;padding:3px 8px;border-radius:999px;background:#e5f3eb;color:#24744c;border:1px solid #b2d7bf}
+.priority-badge.optional{background:#fff5e0;color:#90601f;border-color:#ead4a6}
+.visit-actions{padding:0 14px 13px;display:flex;flex-wrap:wrap;gap:7px}
+.visit-actions button{border-radius:8px;border:1px solid #d9dce1;background:#f6f7f8;color:#485261;font:600 11.5px/1.3 inherit;padding:7px 10px;cursor:pointer}
+.visit-actions button[aria-pressed="true"]{background:#294f3c;color:#fff;border-color:#294f3c}
+.visit-actions button[data-visit="skip"][aria-pressed="true"]{background:#795d38;border-color:#795d38}
+.card[data-status="done"]{border-color:#8cbfa1}
+.card[data-status="skip"]{opacity:.72}
+.card[data-status="skip"] h3{text-decoration:line-through;text-decoration-color:#947e62}
+.source-foot{font-size:11px;margin:0 14px 10px;color:#576476}
+.source-foot a{color:#2c6291;text-decoration:underline;text-underline-offset:2px}
+.pending-recs{margin:12px 14px;border:1px solid #efdfc2;background:#fffdfa;border-radius:12px;padding:10px 11px}
+.pending-recs>b{font-size:12px;color:#745528}
+.pending-rec{border-top:1px solid #efe8dc;padding:10px 0;display:flex;gap:8px;align-items:flex-start}
+.pending-rec:first-of-type{margin-top:8px}
+.rec-rank{border-radius:6px;background:#f4e7d1;color:#7e5528;font-size:10px;font-weight:750;padding:3px 5px;white-space:nowrap}
+.pending-rec>div{flex:1;min-width:0}
+.pending-rec strong{display:block;font-size:12.5px}
+.pending-rec small{display:block;color:#6c7177;font-size:11px;line-height:1.5;margin-top:3px}
+.pending-rec a{color:#2b5b83;font-size:11.5px;font-weight:700;text-decoration:none;padding:4px}
+.rec-warning{font-size:10.5px;color:#8b6246;margin:3px 0 0}
+.rchip.unverified{background:#fff5e3;color:#8c6525;border:1px solid #ead5a7}
+.rverify{margin:0 13px 8px;font-size:11px;color:#755f3f;background:#fff9ee;border-radius:8px;padding:7px 9px;line-height:1.55}
+@media(max-width:380px){.next-visit{align-items:flex-start;flex-direction:column}.next-visit a{align-self:flex-end}}
