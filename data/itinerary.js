@@ -682,6 +682,7 @@ window.TRIP_DATA = {
           icon: "🎂",
           time: "19:30 ~ 21:00 (목표)",
           after: "d3-13",
+          afterLeg: true,
           area: "신주쿠역 주변 · 장소·예약 미정",
           note: "19:30 전후 식사 시작 목표. 예약된 식당은 아직 없습니다. 후보 3곳을 비교하고 식당 위치를 확정한 뒤 롯폰기 출발시간을 역산하세요. 충돌 시 L-Breath는 건너뜁니다.",
           recommendations: ["r117","r120","r121"],
