@@ -5455,7 +5455,7 @@ window.RESTAURANTS = {
     "d3-birthday"
    ],
    "budget": "코스 8,800엔~ · 예산대 20,000~29,999엔",
-   "tabelog": "11",
+   "tabelog": null,
    "google": 4.6,
    "reviews": "230",
    "hours": {
@@ -5495,7 +5495,7 @@ window.RESTAURANTS = {
     "d3-birthday"
    ],
    "budget": "코스 8,580 / 10,780 / 13,200엔 (2시간·음료 별도)",
-   "tabelog": "11",
+   "tabelog": null,
    "google": 4.4,
    "reviews": "1,559",
    "hours": {
