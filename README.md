@@ -14,16 +14,18 @@
 ## 구조
 - `index.html` — 화면 틀 (데이터를 읽어 그림)
 - `data/itinerary.js` — **일정·식사·꿀팁 데이터**
-- `data/restaurants.js` — **식당추천 데이터 146곳** (이름·장르·권역·예산·평점·전화·11/21~24 영업시간·좌표·구글맵 CID)
+- `data/restaurants.js` — **식당추천 데이터 146곳** (이름·장르·권역·예산·평점·전화·11/21~24 영업시간·좌표·구글맵 CID·카드 사진 `image`)
 - `data/route.js` — 동선 지도용 일차별 지점 순서·좌표·구글맵 경로 URL
 - `assets/style.css`, `assets/app.js` — 디자인·동작
-- `images/` — 장소·맛집 사진 (880×587)
+- `images/` — 일정·장소 사진 (880×587)
+- `images/restaurants/` — **식당추천 146곳 카드 사진** (`{id}.jpg`, 가로 600px·JPEG 20~55KB, 구글맵 장소 사진). 사진이 없으면 `image: null`로 두면 카드에서 사진 칸이 빠집니다.
 - `manifest.json`, `sw.js`, `icons/` — 홈 화면 앱·오프라인
 - 지도: Leaflet 1.9.4(CDN) + CARTO Voyager 타일(OpenStreetMap). 오프라인이면 지도만 비고 목록·구글맵 버튼은 동작합니다.
 
 ## 고치는 법
 1. 일정은 `data/itinerary.js`, 식당은 `data/restaurants.js`의 `items` 값만 수정
 2. `index.html`의 `?v=...` 5곳과 `sw.js`의 `CACHE` 버전을 함께 올림(아이폰 캐시 방지)
+   - 사진은 `loading="lazy"` + `onerror` fallback이라 146장이 한 번에 내려받지 않습니다. 파일을 바꾸면 `CACHE` 버전도 함께 올려야 아이폰에 남은 옛 사진이 갱신됩니다.
 3. `git add -A && git commit -m "수정" && git push` → 1~2분 뒤 Pages 반영
 
 식당 좌표(`lat`/`lng`)는 구글맵 `?cid=` 기준입니다. 새 식당을 넣을 때는 구글맵 공유 링크의 `cid`를 `map`에 넣고, 좌표는 구글맵에서 확인해 채우면 지도 핀까지 붙습니다.
