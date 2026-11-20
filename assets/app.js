@@ -421,7 +421,7 @@
           ${it.genre ? `<dt>장르</dt><dd>${esc(it.genre_full || it.genre)}</dd>` : ""}
           ${it.area ? `<dt>권역</dt><dd>${esc(it.area)}${it.walk ? ` · ${esc(it.walk)}` : ""}</dd>` : ""}
           ${it.budget ? `<dt>예산</dt><dd>${esc(it.budget)}</dd>` : ""}
-          ${it.phone ? `<dt>전화</dt><dd>${esc(it.phone)}</dd>` : ""}
+          ${it.phone ? `<dt>전화</dt><dd>${esc(it.phone)}${it.phoneVerification?.status === "confirmed" ? ` <a href="${esc(it.phoneVerification.source)}" target="_blank" rel="noopener">번호 출처</a>` : ""}</dd>` : ""}
         </dl>
         <div class="rscores">${scoreHtml(it)}</div>
         ${it.tip ? `<p class="rtip"><b>팁</b> · ${esc(it.tip)}</p>` : ""}
@@ -569,6 +569,7 @@
       const actual = D.days.find((day) => day.id === old.id);
       if (!actual) return old;
       const byId = new Map(actual.items.map((it) => [it.id, it]));
+      const railOrBus = new Set(["d1-2","d1-3","d1-4","d2-5","d2-6","d2-18","d3-1","d3-6","d3-10","d3-12","d4-2","d4-3"]);
       const stops = old.stops.map((stop) => {
         const it = byId.get(stop.id);
         return it ? { ...stop, time: it.time, name: it.title, priority: it.priority } : stop;
@@ -577,7 +578,7 @@
       const pieces = [];
       for (let j = 0; j < stops.length - 1; j++) {
         const from = stops[j], to = stops[j+1], current = byId.get(from.id);
-        let mode = current?.leg?.type === "bus" || current?.leg?.type === "train" ? "transit" : "walking";
+        let mode = railOrBus.has(from.id) || current?.leg?.type === "bus" || current?.leg?.type === "train" ? "transit" : "walking";
         if (from.id === "d4-3") mode = "transit"; // N'EX 본구간
         if (from.id === "d1-2") mode = "transit"; // 공항 리무진
         const last = pieces[pieces.length - 1];
