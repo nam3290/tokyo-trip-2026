@@ -3,7 +3,7 @@
  * · 이미지·아이콘 = cache-first (용량이 커서 한 번 받으면 재사용)
  * 실패해도 페이지 동작에는 영향이 없습니다.
  */
-const CACHE = "tokyo-trip-v6";
+const CACHE = "tokyo-trip-v7";
 const ASSETS = [
  "./",
  "./index.html",
@@ -11,6 +11,8 @@ const ASSETS = [
  "./assets/style.css",
  "./assets/app.js",
  "./data/itinerary.js",
+ "./data/restaurants.js",
+ "./data/route.js",
  "./icons/apple-touch-icon.png",
  "./icons/icon-192.png",
  "./icons/icon-512.png",

@@ -5,16 +5,25 @@
 아이폰 사파리에서 열고 **공유 → 홈 화면에 추가**하면 앱처럼 열립니다(오프라인 캐시 포함).
 검색엔진에는 노출되지 않습니다(`noindex`).
 
+## 화면
+- **전체 / 1~4일차** — 일정 타임라인(이동·식사·쇼핑)
+- **🍴 식당추천** — 세 가이드(끼니별 94 · 생일저녁 57 · 해산물 15)를 중복 정리한 146곳. 일차·끼니 / 테마 / 권역 필터 + 검색
+- **🗺️ 동선지도** — Leaflet 지도에 일차별 번호 마커·색 동선, 구글맵 경유지 경로 버튼, 추천 식당 핀 토글
+- **💡 꿀팁·체크** — 체크리스트(브라우저 저장)와 여행 팁
+
 ## 구조
 - `index.html` — 화면 틀 (데이터를 읽어 그림)
-- `data/itinerary.js` — **일정·식사·맛집·꿀팁 데이터 (여기만 고치면 됩니다)**
+- `data/itinerary.js` — **일정·식사·꿀팁 데이터**
+- `data/restaurants.js` — **식당추천 데이터 146곳** (이름·장르·권역·예산·평점·전화·11/21~24 영업시간·좌표·구글맵 CID)
+- `data/route.js` — 동선 지도용 일차별 지점 순서·좌표·구글맵 경로 URL
 - `assets/style.css`, `assets/app.js` — 디자인·동작
-- `images/` — 장소·맛집 사진 69장 (880×587)
+- `images/` — 장소·맛집 사진 (880×587)
 - `manifest.json`, `sw.js`, `icons/` — 홈 화면 앱·오프라인
+- 지도: Leaflet 1.9.4(CDN) + CARTO Voyager 타일(OpenStreetMap). 오프라인이면 지도만 비고 목록·구글맵 버튼은 동작합니다.
 
-## 일정 고치는 법
-1. `data/itinerary.js`에서 원하는 날짜의 `items` / `meals` / `spots` 수정
-2. `git add -A && git commit -m "일정 수정" && git push`
-3. 1~2분 뒤 Pages에 반영 (HTML·JS·JSON은 네트워크 우선이라 새로고침만 하면 최신)
+## 고치는 법
+1. 일정은 `data/itinerary.js`, 식당은 `data/restaurants.js`의 `items` 값만 수정
+2. `index.html`의 `?v=...` 5곳과 `sw.js`의 `CACHE` 버전을 함께 올림(아이폰 캐시 방지)
+3. `git add -A && git commit -m "수정" && git push` → 1~2분 뒤 Pages 반영
 
-사진은 `images/`에 같은 파일명으로 교체하면 됩니다. 새 사진을 추가하면 `sw.js`의 `ASSETS` 목록에도 넣고 `CACHE` 버전을 올리세요.
+식당 좌표(`lat`/`lng`)는 구글맵 `?cid=` 기준입니다. 새 식당을 넣을 때는 구글맵 공유 링크의 `cid`를 `map`에 넣고, 좌표는 구글맵에서 확인해 채우면 지도 핀까지 붙습니다.

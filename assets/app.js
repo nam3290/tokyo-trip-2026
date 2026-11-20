@@ -1,6 +1,10 @@
-/* 도쿄 3박 4일 — 데이터(itinerary.js)를 읽어 화면을 그립니다. */
+/* 도쿄 3박 4일 — 데이터(itinerary.js)를 읽어 화면을 그립니다.
+ * 화면: 전체 / 1~4일차 · 식당추천(data/restaurants.js) · 동선지도(data/route.js) · 꿀팁·체크
+ */
 (function () {
   const D = window.TRIP_DATA;
+  const R = window.RESTAURANTS;
+  const M = window.TRIP_ROUTE;
   const view = document.getElementById("view");
   const tabsEl = document.getElementById("tabs");
   const heroEl = document.getElementById("hero");
@@ -34,20 +38,32 @@
     <div class="chips">
       <span class="chip">🏨 <b>${esc(D.meta.hotel.split("(")[0].trim())}</b> · 3박</span>
       <span class="chip">✈️ ${esc(D.meta.flightOut.split(" ")[0])} / ${esc(D.meta.flightIn.split(" ")[0])}</span>
+      <span class="chip">🍽️ 식당 ${esc(R ? R.meta.count : "")}곳</span>
+      <span class="chip">🗺️ 동선 지도</span>
     </div>
     <div class="notice">${esc(D.meta.notice)}</div>`;
 
   /* ── 탭 ── */
-  const tabs = [{ id: "all", label: "전체" }]
-    .concat(D.days.map((d) => ({ id: d.id, label: d.tab, accent: d.accent, isNow: todayDay && todayDay.id === d.id })))
-    .concat([{ id: "tips", label: "꿀팁·체크" }]);
-  const initial = location.hash && tabs.some((t) => t.id === location.hash.slice(1)) ? location.hash.slice(1) : (todayDay ? todayDay.id : "all");
+  const dayTabs = [{ id: "all", label: "전체" }]
+    .concat(D.days.map((d) => ({ id: d.id, label: d.tab, accent: d.accent, isNow: todayDay && todayDay.id === d.id })));
+  const toolTabs = [
+    { id: "food", label: "🍴 식당추천" },
+    { id: "map", label: "🗺️ 동선지도" },
+    { id: "tips", label: "💡 꿀팁·체크" },
+  ];
+  const allIds = dayTabs.map((t) => t.id).concat(toolTabs.map((t) => t.id));
+  const initial = location.hash && allIds.includes(location.hash.slice(1)) ? location.hash.slice(1) : (todayDay ? todayDay.id : "all");
 
-  tabsEl.innerHTML = tabs.map((t) => `
-    <button class="tab" role="tab" data-tab="${t.id}" ${t.accent ? `data-day style="--tab-accent:${t.accent}"` : ""}
-      aria-selected="${t.id === initial}" ${t.id === initial ? 'tabindex="0"' : 'tabindex="-1"'}>
-      ${t.isNow ? '<span class="now" aria-hidden="true"></span>' : ""}${esc(t.label)}
-    </button>`).join("");
+  tabsEl.innerHTML = `
+    <div class="tabrow tabrow-days" role="tablist" aria-label="일차·화면 선택">
+      ${dayTabs.map((t) => `
+        <button class="tab" role="tab" data-tab="${t.id}" ${t.accent ? `data-day style="--tab-accent:${t.accent}"` : ""}
+          aria-selected="${t.id === initial}">${t.isNow ? '<span class="now" aria-hidden="true"></span>' : ""}${esc(t.label)}</button>`).join("")}
+    </div>
+    <div class="tabrow tabrow-tools" role="tablist" aria-label="식당·지도·꿀팁">
+      ${toolTabs.map((t) => `
+        <button class="tab tool" role="tab" data-tab="${t.id}" aria-selected="${t.id === initial}">${esc(t.label)}</button>`).join("")}
+    </div>`;
 
   /* ── 아이템/이동/식사 렌더 ── */
   function photoCard(src, alt) {
@@ -121,7 +137,7 @@
   }
 
   /* 식사 자리를 아직 정하지 않은 슬롯 — 카드 대신 조용한 안내만 남깁니다. */
-  function pendingHtml(p) {
+  function pendingHtml(p, dayId) {
     return `
       <div class="meal-pend">
         <div class="mp-top">
@@ -131,11 +147,12 @@
         </div>
         ${p.area ? `<div class="mp-area">${esc(p.area)}</div>` : ""}
         ${p.note ? `<p class="mp-note">${esc(p.note)}</p>` : ""}
+        ${R ? `<div class="mp-foot"><button class="mini-btn" type="button" data-gofood="${esc(p.slot)}" data-gday="${esc(dayId || "")}">🍴 이 자리 식당추천 보기</button></div>` : ""}
       </div>`;
   }
 
-  function mealHtml(m) {
-    if (!m.options || !m.options.length) return pendingHtml(m);
+  function mealHtml(m, dayId) {
+    if (!m.options || !m.options.length) return pendingHtml(m, dayId);
     const [first, ...rest] = m.options;
     const leg = m.leg ? legHtml(m.leg) : "";
     return `
@@ -182,12 +199,12 @@
     meals.forEach((m) => { if (m.after !== "__start") (afterMap[m.after] = afterMap[m.after] || []).push(m); });
 
     let html = "";
-    startMeals.forEach((m) => { html += mealHtml(m); });
+    startMeals.forEach((m) => { html += mealHtml(m, d.id); });
     d.items.forEach((it) => {
       html += itemHtml(it);
-      (afterMap[it.id] || []).filter((m) => !m.afterLeg).forEach((m) => { html += mealHtml(m); });
+      (afterMap[it.id] || []).filter((m) => !m.afterLeg).forEach((m) => { html += mealHtml(m, d.id); });
       if (it.leg) html += legHtml(it.leg);
-      (afterMap[it.id] || []).filter((m) => m.afterLeg).forEach((m) => { html += mealHtml(m); });
+      (afterMap[it.id] || []).filter((m) => m.afterLeg).forEach((m) => { html += mealHtml(m, d.id); });
     });
 
     return `
@@ -197,6 +214,10 @@
           <h2>${esc(d.title)}</h2>
           <p class="summary">${esc(d.summary)}</p>
           <div class="stats">${d.stats.map((s) => `<div class="stat"><div class="k">${esc(s.k)}</div><div class="v">${esc(s.v)}</div></div>`).join("")}</div>
+          <div class="day-actions">
+            <button class="mini-btn" type="button" data-gomap="${d.id}">🗺️ 이 날 동선 지도</button>
+            <button class="mini-btn" type="button" data-gofood="${d.id}">🍴 이 날 식당</button>
+          </div>
         </div>
         <div class="tl" style="--accent:${d.accent}">${html}</div>
         ${spotsHtml(d.spots)}
@@ -249,11 +270,433 @@
     paint();
   }
 
+  /* ══════════════════════ 식당추천 ══════════════════════ */
+  const FOOD = { slot: "", tag: "", area: "", q: "" };
+
+  const slotOrder = () => {
+    const map = {};
+    (R.slots || []).forEach((s, i) => { map[s.id] = i; });
+    return map;
+  };
+
+  function minSlot(item) {
+    const ord = slotOrder();
+    return Math.min(...(item.slots || []).map((s) => (ord[s] == null ? 99 : ord[s])), 99);
+  }
+
+  function slotLabel(id) {
+    const s = (R.slots || []).find((x) => x.id === id);
+    return s ? s.label : id;
+  }
+
+  function slotsForDay(dayId) {
+    return (R.slots || []).filter((s) => s.day === dayId).map((s) => s.id);
+  }
+
+  function foodFiltered() {
+    const q = FOOD.q.trim().toLowerCase();
+    return R.items.filter((it) => {
+      if (FOOD.slot === "@day") { /* 전체 */ }
+      else if (FOOD.slot && FOOD.slot.startsWith("d") && !FOOD.slot.includes("-")) {
+        if (!(it.slots || []).some((s) => s.startsWith(FOOD.slot + "-"))) return false;
+      } else if (FOOD.slot && !(it.slots || []).includes(FOOD.slot)) return false;
+      if (FOOD.tag && !(it.tags || []).includes(FOOD.tag)) return false;
+      if (FOOD.area && it.bigArea !== FOOD.area) return false;
+      if (q) {
+        const hay = [it.name, it.jp, it.google_name, it.area, it.genre, it.genre_full, it.tip, it.note].join(" ").toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    }).sort((a, b) => (minSlot(a) - minSlot(b)) || ((b.google || 0) - (a.google || 0)) || a.name.localeCompare(b.name));
+  }
+
+  function scoreHtml(it) {
+    const g = it.google
+      ? `<span class="rate google">구글 ${it.google}${it.reviews ? ` (${esc(it.reviews)})` : ""}</span>`
+      : `<span class="rate">구글 미확인</span>`;
+    const t = it.tabelog ? `<span class="rate tabelog">타베로그 ${esc(it.tabelog)}</span>` : `<span class="rate">타베로그 미확인</span>`;
+    return g + t;
+  }
+
+  const DAY_NAME = { d1: "1일차", d2: "2일차", d3: "3일차", d4: "4일차" };
+  const HOUR_KEY = { d1: "d21", d2: "d22", d3: "d23", d4: "d24" };
+
+  function visitHours(it) {
+    const slots = it.slots || [];
+    if (!slots.length) return "";
+    const day = slots[0].slice(0, 2);
+    const h = (it.hours || {})[HOUR_KEY[day]] || "미확인";
+    return { day, h };
+  }
+
+  function rcardHtml(it) {
+    const v = visitHours(it);
+    const slots = (it.slots || []).map((s) => `<span class="rchip slot">${esc(slotLabel(s))}</span>`).join("");
+    const tags = (it.tags || []).map((t) => `<span class="rchip tag t-${esc(t.replace(/[^\w가-힣]/g, ""))}">${esc(t)}</span>`).join("");
+    const hoursList = ["d21", "d22", "d23", "d24"].map((k) => {
+      const label = k === "d21" ? "11/21" : k === "d22" ? "11/22" : k === "d23" ? "11/23 공휴일" : "11/24";
+      return `<li><b>${label}</b><span>${esc((it.hours || {})[k] || "미확인")}</span></li>`;
+    }).join("");
+    return `
+      <article class="rcard" data-rid="${it.id}">
+        <div class="rtop">
+          <div>
+            <h3>${esc(it.name)}</h3>
+            ${it.jp ? `<div class="rjp">${esc(it.jp)}</div>` : ""}
+          </div>
+          ${it.google ? `<div class="rscore"><b>${it.google}</b><span>구글</span></div>` : `<div class="rscore none"><b>–</b><span>미확인</span></div>`}
+        </div>
+        <div class="rchips">
+          ${v ? `<span class="rchip vh">${esc(DAY_NAME[v.day] || "")} ${esc(v.h)}</span>` : ""}
+          ${slots}${tags}
+        </div>
+        <dl class="rdl">
+          ${it.genre ? `<dt>장르</dt><dd>${esc(it.genre_full || it.genre)}</dd>` : ""}
+          ${it.area ? `<dt>권역</dt><dd>${esc(it.area)}${it.walk ? ` · ${esc(it.walk)}` : ""}</dd>` : ""}
+          ${it.budget ? `<dt>예산</dt><dd>${esc(it.budget)}</dd>` : ""}
+          ${it.phone ? `<dt>전화</dt><dd>${esc(it.phone)}</dd>` : ""}
+        </dl>
+        <div class="rscores">${scoreHtml(it)}</div>
+        ${it.tip ? `<p class="rtip"><b>팁</b> · ${esc(it.tip)}</p>` : ""}
+        ${it.note ? `<details class="rmore"><summary>설명·메모</summary><p>${esc(it.note)}</p>${it.awards ? `<p class="award">${esc(it.awards)}</p>` : ""}</details>` : ""}
+        <details class="rhours"><summary>11/21~24 영업시간</summary><ul>${hoursList}</ul></details>
+        <div class="racts">
+          <a class="btn" href="${it.map}" target="_blank" rel="noopener">📍 구글맵</a>
+          <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&destination=${it.lat},${it.lng}" target="_blank" rel="noopener">🧭 길찾기</a>
+          <button class="btn ghost" type="button" data-showmap="${it.id}">🗺️ 지도에서</button>
+        </div>
+      </article>`;
+  }
+
+  function foodListHtml() {
+    const list = foodFiltered();
+    if (!list.length) return `<div class="empty">조건에 맞는 식당이 없습니다. 필터를 하나씩 풀어 보세요.</div>`;
+    // 슬롯별 묶음 (슬롯 필터를 쓰지 않을 때)
+    const grouped = !FOOD.slot || FOOD.slot === "@day";
+    if (!grouped) {
+      return `<div class="rlist">${list.map(rcardHtml).join("")}</div>`;
+    }
+    const groups = new Map();
+    list.forEach((it) => {
+      const key = (it.slots && it.slots.length) ? it.slots[0] : "etc";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(it);
+    });
+    const ord = slotOrder();
+    const keys = [...groups.keys()].sort((a, b) => (ord[a] == null ? 99 : ord[a]) - (ord[b] == null ? 99 : ord[b]));
+    return keys.map((k) => {
+      const slot = (R.slots || []).find((s) => s.id === k);
+      const head = slot ? `${esc(slot.label)} <span>${esc(slot.time)}</span>` : "그 밖의 후보";
+      return `<section class="rgroup"><h3 class="rgroup-h">${head} <b>${groups.get(k).length}</b></h3>
+        <div class="rlist">${groups.get(k).map(rcardHtml).join("")}</div></section>`;
+    }).join("");
+  }
+
+  function chipRow(kind, values, current, labels) {
+    return `<div class="frow" data-group="${kind}" role="group">
+      <button class="fchip ${current === "" ? "on" : ""}" type="button" data-val="">전체</button>
+      ${values.map((v) => {
+        const val = typeof v === "string" ? v : v.id;
+        const label = labels ? labels(v) : (typeof v === "string" ? v : v.label);
+        return `<button class="fchip ${current === val ? "on" : ""}" type="button" data-val="${esc(val)}">${esc(label)}</button>`;
+      }).join("")}
+    </div>`;
+  }
+
+  function foodHtml() {
+    const dayChips = D.days.map((d) => ({ id: d.id, label: d.tab.replace(/\s*\(.*\)/, "") + " 일정" }));
+    return `
+      <div class="foodwrap">
+        <div class="foodhead">
+          <h2>식당추천 <span class="cnt">${R.meta.count}곳</span></h2>
+          <p class="lead">끼니별 가이드 · 생일 저녁 · 고급 해산물을 중복 정리해 한곳에 모았습니다. 11/23은 공휴일이라 영업시간을 날짜별로 확인하세요.</p>
+        </div>
+
+        <div class="searchbox">
+          <span aria-hidden="true">🔎</span>
+          <input id="fq" type="search" inputmode="search" autocomplete="off" placeholder="가게명 · 지역 · 장르 검색 (예: 스시, 신주쿠)" value="${esc(FOOD.q)}">
+          <button type="button" id="fq-clear" aria-label="검색 지우기">×</button>
+        </div>
+
+        <div class="filters">
+          <div class="fg-label">일차</div>
+          ${chipRow("days", dayChips.map((d) => d.id), FOOD.slot && FOOD.slot.startsWith("d") && !FOOD.slot.includes("-") ? FOOD.slot : "", (id) => (dayChips.find((d) => d.id === id) || {}).label)}
+          <div class="fg-label">끼니</div>
+          ${chipRow("slot", R.slots.map((s) => s.id), FOOD.slot.includes("-") ? FOOD.slot : "", (id) => slotLabel(id))}
+          <div class="fg-label">테마</div>
+          ${chipRow("tag", R.tags, FOOD.tag)}
+          <div class="fg-label">권역</div>
+          ${chipRow("area", R.bigAreas, FOOD.area)}
+        </div>
+
+        <div class="fmeta"><span id="fcount"></span><button type="button" id="freset">필터 초기화</button></div>
+        <div id="flist">${foodListHtml()}</div>
+        <p class="foodnote">${esc(R.meta.note)}</p>
+      </div>`;
+  }
+
+  function updateFoodCount() {
+    const n = foodFiltered().length;
+    const el = document.getElementById("fcount");
+    if (el) el.textContent = `${n}곳`;
+  }
+
+  function bindFood() {
+    const wrap = view.querySelector(".foodwrap");
+    if (!wrap) return;
+    updateFoodCount();
+
+    const input = document.getElementById("fq");
+    const redraw = () => {
+      document.getElementById("flist").innerHTML = foodListHtml();
+      updateFoodCount();
+    };
+    let t = null;
+    input.addEventListener("input", () => {
+      FOOD.q = input.value;
+      clearTimeout(t);
+      t = setTimeout(redraw, 120);
+    });
+    document.getElementById("fq-clear").addEventListener("click", () => {
+      FOOD.q = ""; input.value = ""; redraw(); input.focus();
+    });
+    document.getElementById("freset").addEventListener("click", () => {
+      FOOD.slot = FOOD.tag = FOOD.area = FOOD.q = "";
+      render("food");
+    });
+    wrap.addEventListener("click", (e) => {
+      const chip = e.target.closest(".fchip");
+      if (!chip) return;
+      const group = chip.closest(".frow").dataset.group;
+      const val = chip.dataset.val;
+      if (group === "days" || group === "slot") FOOD.slot = val || "";
+      if (group === "tag") FOOD.tag = val;
+      if (group === "area") FOOD.area = val;
+      ["days", "slot"].forEach((g) => {
+        const row = wrap.querySelector(`.frow[data-group="${g}"]`);
+        if (!row) return;
+        row.querySelectorAll(".fchip").forEach((c) => {
+          const cv = c.dataset.val;
+          const on = g === "days"
+            ? (cv === "" && !FOOD.slot.includes("-")) || cv === FOOD.slot
+            : (cv === "" && !FOOD.slot.includes("-")) || cv === FOOD.slot;
+          c.classList.toggle("on", on);
+        });
+      });
+      wrap.querySelectorAll('.frow[data-group="tag"] .fchip').forEach((c) => c.classList.toggle("on", c.dataset.val === FOOD.tag));
+      wrap.querySelectorAll('.frow[data-group="area"] .fchip').forEach((c) => c.classList.toggle("on", c.dataset.val === FOOD.area));
+      redraw();
+    });
+  }
+
+  /* ══════════════════════ 동선 지도 ══════════════════════ */
+  const MAP = { day: "all", food: false, focus: null };
+  let leaflet = null;
+
+  const MAP_DAYS = () => (M ? M.days : []);
+
+  function stopsFor(dayId) {
+    return MAP_DAYS().filter((d) => dayId === "all" || d.id === dayId);
+  }
+
+  function googleDir(points) {
+    if (!points || points.length < 2) return "";
+    const a = points[0], b = points[points.length - 1];
+    const mid = points.slice(1, -1);
+    let u = `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}`;
+    if (mid.length) u += "&waypoints=" + mid.map((p) => `${p.lat},${p.lng}`).join("%7C");
+    return u;
+  }
+
+  function mapHtml() {
+    const day = MAP.day;
+    const days = stopsFor(day);
+    const total = days.reduce((n, d) => n + d.stops.length, 0);
+    return `
+      <div class="mapwrap">
+        <div class="maphead">
+          <h2>동선 지도</h2>
+          <p class="lead">번호는 그날의 방문 순서입니다. 마커를 누르면 구글맵으로 열 수 있고, 아래 버튼으로 구간 경유지 경로가 구글맵 앱에서 바로 열립니다.</p>
+        </div>
+        <div class="mapchips">
+          <button class="fchip ${day === "all" ? "on" : ""}" type="button" data-mday="all">전체</button>
+          ${MAP_DAYS().map((d) => `<button class="fchip dchip ${day === d.id ? "on" : ""}" type="button" data-mday="${d.id}" style="--c:${d.color}">${esc(d.tab.replace(/\s*\(.*\)/, ""))}</button>`).join("")}
+          <button class="fchip foodpin ${MAP.food ? "on" : ""}" type="button" id="foodpin">🍴 식당 핀</button>
+        </div>
+        <div id="map" class="map" role="application" aria-label="일차별 동선 지도"></div>
+        <div class="mapfallback" id="mapfallback" hidden>지도를 불러오지 못했습니다(오프라인일 수 있습니다). 아래 목록과 구글맵 버튼은 그대로 쓸 수 있습니다.</div>
+        <div class="maplegend">${days.map((d) => `<span><i style="background:${d.color}"></i>${esc(d.label)}</span>`).join("")}${MAP.food ? `<span><i class="dot"></i>추천 식당</span>` : ""}</div>
+
+        ${days.map((d) => `
+          <section class="mday">
+            <h3 class="mday-h" style="--c:${d.color}"><i></i>${esc(d.label)} <span>${esc(d.title)}</span></h3>
+            <div class="mseg">
+              ${(d.segments || []).map((s, i) => `
+                <a class="btn" href="${s.url}" target="_blank" rel="noopener">🧭 구글맵 경로 ${d.segments.length > 1 ? `${i + 1}/${d.segments.length}` : ""} · ${s.from}→${s.to}</a>`).join("")}
+            </div>
+            <ol class="mstops">
+              ${d.stops.map((s) => `
+                <li data-stop="${esc(s.id)}">
+                  <span class="mnum" style="--c:${d.color}">${s.n}</span>
+                  <div class="mstop-body">
+                    <div class="mrow"><span class="mtime">${esc(s.time)}</span><b>${esc(s.name)}</b>${s.kind === "meal" ? '<span class="mkind">식사</span>' : ""}${s.kind === "hotel" ? '<span class="mkind">숙소</span>' : ""}</div>
+                    ${s.jp ? `<div class="mjp">${esc(s.jp)}</div>` : ""}
+                    <div class="mlinks">
+                      <a href="${s.map}" target="_blank" rel="noopener">구글맵</a>
+                      <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">길찾기</a>
+                      <button type="button" data-mapto="${esc(s.id)}">지도에서 보기</button>
+                    </div>
+                  </div>
+                </li>`).join("")}
+            </ol>
+          </section>`).join("")}
+        <p class="foodnote">지도 타일: OpenStreetMap · CARTO / 좌표: 각 장소 구글맵 기준 · ${total}개 지점</p>
+      </div>`;
+  }
+
+  function markerIcon(n, color) {
+    return L.divIcon({
+      className: "mpin-wrap",
+      html: `<span class="mpin" style="--c:${color}">${n}</span>`,
+      iconSize: [26, 26],
+      iconAnchor: [13, 13],
+      popupAnchor: [0, -12],
+    });
+  }
+
+  function popupHtml(s, color) {
+    return `<div class="mpop">
+      <div class="mpop-t"><span class="mpop-n" style="--c:${color}">${s.n}</span><b>${esc(s.name)}</b></div>
+      ${s.jp ? `<div class="mpop-jp">${esc(s.jp)}</div>` : ""}
+      <div class="mpop-time">${esc(s.time)}</div>
+      <div class="mpop-a">
+        <a href="${s.map}" target="_blank" rel="noopener">구글맵 열기</a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}" target="_blank" rel="noopener">길찾기</a>
+      </div>
+    </div>`;
+  }
+
+  function initMap() {
+    const box = document.getElementById("map");
+    if (!box) return;
+    if (!window.L) {
+      document.getElementById("mapfallback").hidden = false;
+      box.style.display = "none";
+      return;
+    }
+    const days = stopsFor(MAP.day);
+    const map = L.map(box, {
+      zoomControl: true,
+      attributionControl: true,
+      scrollWheelZoom: false,
+      tap: true,
+    });
+    leaflet = map;
+
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+      maxZoom: 19,
+      subdomains: "abcd",
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+    }).addTo(map);
+
+    const allPts = [];
+    days.forEach((d) => {
+      const latlngs = d.stops.map((s) => [s.lat, s.lng]);
+      if (latlngs.length > 1) {
+        L.polyline(latlngs, {
+          color: d.color, weight: 3, opacity: 0.85,
+          dashArray: MAP.day === "all" ? "1 6" : null, lineCap: "round",
+        }).addTo(map);
+      }
+      d.stops.forEach((s) => {
+        const m = L.marker([s.lat, s.lng], { icon: markerIcon(s.n, d.color), title: s.name, riseOnHover: true }).addTo(map);
+        m.bindPopup(popupHtml(s, d.color), { maxWidth: 260, minWidth: 200 });
+        allPts.push([s.lat, s.lng]);
+      });
+    });
+
+    if (MAP.food && R) {
+      const dayIds = MAP.day === "all" ? null : [MAP.day];
+      R.items.forEach((it) => {
+        if (!it.lat) return;
+        if (dayIds && !(it.slots || []).some((s) => s.startsWith(dayIds[0] + "-"))) return;
+        const bday = (it.tags || []).includes("생일저녁");
+        const cm = L.circleMarker([it.lat, it.lng], {
+          radius: 4.5, color: bday ? "#b0741e" : "#6b7787", weight: 1,
+          fillColor: bday ? "#e8b34b" : "#c9d2dc", fillOpacity: 0.95,
+        }).addTo(map);
+        cm.bindPopup(`<div class="mpop"><div class="mpop-t"><b>${esc(it.name)}</b></div>
+          <div class="mpop-jp">${esc(it.jp || "")}</div>
+          <div class="mpop-time">${esc(it.genre || "")} · ${esc(it.area || "")}${it.google ? ` · 구글 ${it.google}` : ""}</div>
+          <div class="mpop-a"><a href="${it.map}" target="_blank" rel="noopener">구글맵 열기</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=${it.lat},${it.lng}" target="_blank" rel="noopener">길찾기</a></div></div>`, { maxWidth: 250 });
+      });
+    }
+
+    if (MAP.focus) {
+      map.setView([MAP.focus.lat, MAP.focus.lng], 16);
+    } else if (allPts.length) {
+      map.fitBounds(allPts, { padding: [26, 26] });
+    } else {
+      map.setView(M.meta.center, 12);
+    }
+    setTimeout(() => map.invalidateSize(), 60);
+  }
+
+  function destroyMap() {
+    if (leaflet) {
+      leaflet.remove();
+      leaflet = null;
+    }
+  }
+
+  function bindMap() {
+    const wrap = view.querySelector(".mapwrap");
+    if (!wrap) return;
+    initMap();
+    wrap.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-mday]");
+      if (b) {
+        MAP.day = b.dataset.mday; MAP.focus = null;
+        render("map");
+        return;
+      }
+      const t = e.target.closest("#foodpin");
+      if (t) {
+        MAP.food = !MAP.food;
+        render("map");
+        return;
+      }
+      const s = e.target.closest("[data-mapto]");
+      if (s && leaflet) {
+        const id = s.dataset.mapto;
+        const day = MAP_DAYS().find((d) => d.stops.some((x) => x.id === id));
+        if (day) {
+          const stop = day.stops.find((x) => x.id === id);
+          leaflet.setView([stop.lat, stop.lng], 16);
+          leaflet.eachLayer((l) => { if (l instanceof L.Marker && l.getLatLng().lat === stop.lat && l.getLatLng().lng === stop.lng) l.openPopup(); });
+        }
+      }
+    });
+  }
+
   /* ── 렌더 ── */
+  function selectTab(tabId) {
+    [...tabsEl.querySelectorAll(".tab")].forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === tabId)));
+  }
+
   function render(tabId) {
+    destroyMap();
+    selectTab(tabId);
     if (tabId === "tips") {
       view.innerHTML = tipsHtml();
       bindChecklist();
+    } else if (tabId === "food") {
+      view.innerHTML = foodHtml();
+      bindFood();
+    } else if (tabId === "map") {
+      view.innerHTML = mapHtml();
+      bindMap();
     } else if (tabId === "all") {
       view.innerHTML = `
         <div class="jump">${D.days.map((d) => `<a href="#${d.id}" data-jump="${d.id}">${esc(d.date)} ${esc(d.weekday)}</a>`).join("")}</div>
@@ -268,7 +711,6 @@
   tabsEl.addEventListener("click", (e) => {
     const b = e.target.closest(".tab");
     if (!b) return;
-    [...tabsEl.querySelectorAll(".tab")].forEach((t) => t.setAttribute("aria-selected", String(t === b)));
     history.replaceState(null, "", "#" + b.dataset.tab);
     render(b.dataset.tab);
   });
@@ -281,6 +723,41 @@
       e.preventDefault();
       const el = document.getElementById(j.dataset.jump);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    const g = e.target.closest("[data-gomap]");
+    if (g) {
+      MAP.day = g.dataset.gomap; MAP.focus = null;
+      history.replaceState(null, "", "#map");
+      render("map");
+      return;
+    }
+    const f = e.target.closest("[data-gofood]");
+    if (f) {
+      const v = f.dataset.gofood;
+      const gd = f.dataset.gday || "";
+      FOOD.tag = FOOD.area = FOOD.q = "";
+      if (/^d[1-4]$/.test(v)) {
+        FOOD.slot = v;
+      } else {
+        const slot = (R.slots || []).find((s) => (!gd || s.day === gd) && (s.label.includes(v) || s.id === v)) ||
+          (R.slots || []).find((s) => s.label.includes(v) || s.id === v);
+        FOOD.slot = slot ? slot.id : "";
+      }
+      history.replaceState(null, "", "#food");
+      render("food");
+      return;
+    }
+    const sm = e.target.closest("[data-showmap]");
+    if (sm) {
+      const it = R.items.find((x) => x.id === sm.dataset.showmap);
+      if (it) {
+        MAP.day = (it.slots && it.slots[0]) ? it.slots[0].slice(0, 2) : "all";
+        MAP.food = true;
+        MAP.focus = { lat: it.lat, lng: it.lng };
+        history.replaceState(null, "", "#map");
+        render("map");
+      }
     }
   });
 
@@ -319,6 +796,11 @@
       navigator.serviceWorker.register("./sw.js").catch(() => {/* 오프라인 캐시는 없어도 동작 */});
     });
   }
+
+  window.addEventListener("hashchange", () => {
+    const id = location.hash.slice(1);
+    if (id && allIds.includes(id)) render(id);
+  });
 
   render(initial);
 })();
