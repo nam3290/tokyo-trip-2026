@@ -102,6 +102,8 @@ window.TRIP_DATA = {
           after: "d1-3",
           area: "니시신주쿠 · 호텔 도보 10분 이내",
           note: "체크인 직후 짐을 두고 나가는 자리입니다. 21:45 시부야 돈키호테에 맞추려면 21:20에는 나와야 합니다. 장소는 아직 정하지 않았습니다."
+          recommendations: ["r002","r001","r006"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         }
       ],
       spots: [
@@ -411,6 +413,8 @@ window.TRIP_DATA = {
           after: "d2-6",
           area: "아카사카 · 아크힐즈 아크모리빌딩 2~3층",
           note: "13:20~14:40 시장을 먼저 보고 점심. 세 명이 앉을 자리·당일 대기시간은 미확인. 15:25경 하라주쿠로 이동."
+          recommendations: ["r016","r015","r024"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         },
         {
           slot: "카페",
@@ -419,6 +423,8 @@ window.TRIP_DATA = {
           after: "d2-10",
           area: "오모테산도 · 랄프로렌 매장 안팎",
           note: "랄프로렌 매장 주변에서 쉬는 자리. 밀린 일정이 있으면 단축 가능."
+          recommendations: ["r025","r029","r030"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         },
         {
           slot: "저녁",
@@ -427,6 +433,8 @@ window.TRIP_DATA = {
           after: "d2-19",
           area: "신주쿠 · 호텔 도보 10분 이내",
           note: "쇼핑 후 20:50 호텔 복귀를 목표로 한 신주쿠 저녁. 실제 쇼핑 종료에 따라 조정."
+          recommendations: ["r033","r035","r041"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         }
       ],
       spots: [
@@ -646,6 +654,8 @@ window.TRIP_DATA = {
           after: "__start",
           area: "숙소 도보 6분 이내",
           note: "08:20 출발이라 30분 안에 끝내야 합니다. 장소는 아직 정하지 않았습니다."
+          recommendations: ["r045","r044","r043"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         },
         {
           slot: "점심",
@@ -654,6 +664,8 @@ window.TRIP_DATA = {
           after: "d3-5",
           area: "긴자 · 다이코쿠야에서 도보 5분 이내",
           note: "12:30 다이코쿠야 방문 후 점심시간 55분 확보. 14:00 MUJI 쇼핑을 목표로 하며 대기시간에 따라 연기 가능."
+          recommendations: ["r051","r056","r052"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         },
         {
           slot: "카페",
@@ -662,6 +674,8 @@ window.TRIP_DATA = {
           after: "d3-6",
           area: "긴자 4초메 · MUJI에서 도보 5분 이내",
           note: "긴자에서 에비스로 이동하기 전에 쉬는 자리. 15:10경 긴자역 출발을 목표로 합니다."
+          recommendations: ["r063","r062","r064"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         },
         {
           slot: "생일 저녁",
@@ -670,6 +684,8 @@ window.TRIP_DATA = {
           after: "d3-13",
           area: "신주쿠역 주변 · 장소·예약 미정",
           note: "19:30 전후 식사 시작 목표. 예약된 식당은 아직 없습니다. 후보 3곳을 비교하고 식당 위치를 확정한 뒤 롯폰기 출발시간을 역산하세요. 충돌 시 L-Breath는 건너뜁니다."
+          recommendations: ["r117","r120","r121"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         }
       ],
       spots: [
@@ -772,6 +788,8 @@ window.TRIP_DATA = {
           after: "__start",
           area: "숙소 도보 6분 이내",
           note: "10:09 조기편을 이용하는 경우 08:10 이전에 아침을 마치고 09:20~09:40 사이 체크아웃. 장소는 아직 미정."
+          recommendations: ["r045","r044","r046"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         },
         {
           slot: "점심",
@@ -780,6 +798,8 @@ window.TRIP_DATA = {
           after: "d4-4",
           area: "나리타 T2 · 수속 후 접근 가능한 식당",
           note: "면세품 세관 확인·수하물 위탁·보안검색·출국심사를 끝낸 뒤 남는 시간에만 식사. 보안구역 안팎의 식당 위치를 확인하세요."
+          recommendations: ["r075","r079","r077"],
+          reservationStatus: "미예약 · 전화·당일 3인 좌석 확인 필요"
         }
       ],
       spots: []
