@@ -638,7 +638,9 @@
     if (MAP.focus) {
       map.setView([MAP.focus.lat, MAP.focus.lng], 16);
     } else if (allPts.length) {
-      map.fitBounds(allPts, { padding: [26, 26] });
+      // 전체 보기에서는 공항(나리타·하네다)이 화면을 넓혀 시내가 뭉개지므로, 시내 지점만 기준으로 맞춥니다.
+      const cityPts = MAP.day === "all" ? allPts.filter((p) => p[1] < 139.95 && p[1] > 139.5) : allPts;
+      map.fitBounds(cityPts.length > 1 ? cityPts : allPts, { padding: [28, 28], maxZoom: 14 });
     } else {
       map.setView(M.meta.center, 12);
     }
