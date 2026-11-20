@@ -8,7 +8,7 @@ window.TRIP_ROUTE = {
       35.6812,
       139.7671
     ],
-    "note": "좌표는 기존 구글맵 위치 데이터. 시간·명칭·선택 배지는 itinerary.js에서 화면 로딩 시 동기화되며 도보·전철 경로는 분리 표시됩니다. 기존 좌표가 없는 방문지는 지도 마커에 없는 경우가 있습니다."
+    "note": "매장 위치는 기존 지도 데이터와 THE H.W.DOG&CO 공식 사이트의 Google 지도 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다."
   },
   "days": [
     {
@@ -212,6 +212,17 @@ window.TRIP_ROUTE = {
           "n": 10
         },
         {
+          "id": "d2-9",
+          "time": "16:57",
+          "name": "THE H.W. DOG&CO. — 모자 전문점",
+          "jp": "神宮前 3-28-10 ウッズビル 1F",
+          "lat": 35.6721344,
+          "lng": 139.7095819,
+          "map": "https://maps.google.com/?cid=2191060513098770626&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+          "kind": "spot",
+          "n": 11
+        },
+        {
           "id": "d2-10",
           "time": "17:20",
           "name": "Ralph Lauren Omotesando",
@@ -220,7 +231,7 @@ window.TRIP_ROUTE = {
           "lng": 139.707332,
           "map": "https://maps.google.com/?cid=18134942615298900179",
           "kind": "spot",
-          "n": 11
+          "n": 12
         },
         {
           "id": "d2-11",
@@ -231,7 +242,7 @@ window.TRIP_ROUTE = {
           "lng": 139.70441,
           "map": "https://maps.google.com/?cid=3840542123008475986",
           "kind": "spot",
-          "n": 12,
+          "n": 13,
           "priority": "optional"
         },
         {
@@ -243,7 +254,7 @@ window.TRIP_ROUTE = {
           "lng": 139.705218,
           "map": "https://maps.google.com/?cid=15427969971660052394",
           "kind": "spot",
-          "n": 13
+          "n": 14
         },
         {
           "id": "d2-13",
@@ -254,7 +265,7 @@ window.TRIP_ROUTE = {
           "lng": 139.704002,
           "map": "https://maps.google.com/?cid=3286721948833497824",
           "kind": "spot",
-          "n": 14
+          "n": 15
         },
         {
           "id": "d2-14",
@@ -265,7 +276,7 @@ window.TRIP_ROUTE = {
           "lng": 139.703582,
           "map": "https://maps.google.com/?cid=9042211536900144705",
           "kind": "spot",
-          "n": 15
+          "n": 16
         },
         {
           "id": "d2-15",
@@ -276,7 +287,7 @@ window.TRIP_ROUTE = {
           "lng": 139.701827,
           "map": "https://maps.google.com/?cid=14579441227567108828",
           "kind": "spot",
-          "n": 16
+          "n": 17
         },
         {
           "id": "d2-16",
@@ -287,7 +298,7 @@ window.TRIP_ROUTE = {
           "lng": 139.700405,
           "map": "https://maps.google.com/?cid=13016080179487620260",
           "kind": "spot",
-          "n": 17,
+          "n": 18,
           "priority": "optional"
         },
         {
@@ -299,7 +310,7 @@ window.TRIP_ROUTE = {
           "lng": 139.69939,
           "map": "https://maps.google.com/?cid=14088655221653192636",
           "kind": "spot",
-          "n": 18
+          "n": 19
         },
         {
           "id": "d2-18",
@@ -310,7 +321,7 @@ window.TRIP_ROUTE = {
           "lng": 139.701052,
           "map": "https://maps.google.com/?cid=3790135795445788292",
           "kind": "spot",
-          "n": 19
+          "n": 20
         },
         {
           "id": "d2-19",
@@ -321,7 +332,7 @@ window.TRIP_ROUTE = {
           "lng": 139.693276,
           "map": "https://maps.google.com/?cid=6872319874272201570",
           "kind": "spot",
-          "n": 20
+          "n": 21
         }
       ],
       "segments": [
@@ -358,33 +369,33 @@ window.TRIP_ROUTE = {
           "url": "https://www.google.com/maps/dir/?api=1&origin=35.666664,139.740359&destination=35.669384,139.705856&travelmode=transit"
         },
         {
-          "label": "도보 · 16:00 OSHMAN'S 하라주쿠 → 17:55 RAGTAG 하라주쿠",
+          "label": "도보 · 16:00 OSHMAN'S 하라주쿠 → 17:40 Harry Potter Shop Harajuku",
           "from": 9,
           "to": 13,
           "count": 5,
           "mode": "walking",
-          "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.665757,139.705218&travelmode=walking&waypoints=35.671944,139.709053%7C35.66822,139.707332%7C35.668649,139.70441"
+          "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.668649,139.70441&travelmode=walking&waypoints=35.671944,139.709053%7C35.6721344,139.7095819%7C35.66822,139.707332"
         },
         {
-          "label": "도보 · 17:55 RAGTAG 하라주쿠 → 19:18 FREAK'S STORE 시부야",
+          "label": "도보 · 17:40 Harry Potter Shop Harajuku → 19:00 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
           "from": 13,
           "to": 17,
           "count": 5,
           "mode": "walking",
-          "url": "https://www.google.com/maps/dir/?api=1&origin=35.665757,139.705218&destination=35.662956,139.700405&travelmode=walking&waypoints=35.666232,139.704002%7C35.665217,139.703582%7C35.662638,139.701827"
+          "url": "https://www.google.com/maps/dir/?api=1&origin=35.668649,139.70441&destination=35.662638,139.701827&travelmode=walking&waypoints=35.665757,139.705218%7C35.666232,139.704002%7C35.665217,139.703582"
         },
         {
-          "label": "도보 · 19:18 FREAK'S STORE 시부야 → 20:10 2nd STREET 시부야 진난점",
+          "label": "도보 · 19:00 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F) → 20:10 2nd STREET 시부야 진난점",
           "from": 17,
-          "to": 19,
-          "count": 3,
+          "to": 20,
+          "count": 4,
           "mode": "walking",
-          "url": "https://www.google.com/maps/dir/?api=1&origin=35.662956,139.700405&destination=35.661358,139.701052&travelmode=walking&waypoints=35.66303,139.69939"
+          "url": "https://www.google.com/maps/dir/?api=1&origin=35.662638,139.701827&destination=35.661358,139.701052&travelmode=walking&waypoints=35.662956,139.700405%7C35.66303,139.69939"
         },
         {
           "label": "전철/버스 · 20:10 2nd STREET 시부야 진난점 → 20:50 신주쿠 워싱턴 복귀",
-          "from": 19,
-          "to": 20,
+          "from": 20,
+          "to": 21,
           "count": 2,
           "mode": "transit",
           "url": "https://www.google.com/maps/dir/?api=1&origin=35.661358,139.701052&destination=35.686915,139.693276&travelmode=transit"
