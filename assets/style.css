@@ -342,6 +342,10 @@ details.more[open] summary::after{content:"▴"}
 .rgroup-h b{font-size:11px; font-weight:800; color:#8d8579; background:#f2ece1; border-radius:999px; padding:1px 7px}
 
 .rcard{background:#fff; border:1px solid var(--line); border-radius:16px; padding:13px 13px 11px; margin-bottom:10px; box-shadow:var(--shadow)}
+.rimg{position:relative; margin:0 0 10px; border-radius:12px; overflow:hidden; background:#f1ece2; aspect-ratio:16/10}
+.rimg img{display:block; width:100%; height:100%; object-fit:cover; background:#f1ece2}
+.rimg.noimg{display:none}
+.rimg .fig-btn{cursor:zoom-in}
 .rtop{display:flex; align-items:flex-start; gap:8px}
 .rtop h3{margin:0; font-size:15px; font-weight:780; letter-spacing:-.02em; line-height:1.35}
 .rjp{font-size:11px; color:#9a9184; margin-top:2px}

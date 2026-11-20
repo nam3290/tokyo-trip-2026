@@ -329,6 +329,17 @@
     return { day, h };
   }
 
+  /* 식당 카드 사진 — lazy 로딩, 실패하면 조용히 사진 칸만 사라집니다 */
+  function rimgHtml(it) {
+    if (!it.image) return "";
+    const cap = it.name + (it.jp ? " · " + it.jp : "") + " 사진";
+    return `<div class="rimg">
+          <img src="${it.image}" alt="${esc(it.name)} 사진" loading="lazy" decoding="async"
+            onerror="this.parentNode.classList.add('noimg');this.parentNode.removeChild(this);">
+          <button class="fig-btn" type="button" data-zoom="${it.image}" data-cap="${esc(cap)}" aria-label="사진 크게 보기"></button>
+        </div>`;
+  }
+
   function rcardHtml(it) {
     const v = visitHours(it);
     const slots = (it.slots || []).map((s) => `<span class="rchip slot">${esc(slotLabel(s))}</span>`).join("");
@@ -339,6 +350,7 @@
     }).join("");
     return `
       <article class="rcard" data-rid="${it.id}">
+        ${rimgHtml(it)}
         <div class="rtop">
           <div>
             <h3>${esc(it.name)}</h3>
