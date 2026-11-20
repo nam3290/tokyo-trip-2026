@@ -9,7 +9,8 @@ window.RESTAURANTS = {
   "count": 146,
   "sources": "끼니별 가이드 94곳 + 생일 저녁 가이드 57곳 + 생일 해산물 가이드 15곳 → 중복 정리",
   "photoNote": "사진 146곳 모두 구글맵 장소 사진(각 장소 제공) · 600px JPEG 20~55KB · images/restaurants/{id}.jpg",
-  "note": "좌표·구글 평점·전화·영업시간은 2026-11-20 Google Maps 조회값. 11/23은 근로감사의 날로 임시 휴무·시간 변경이 있을 수 있어 예약 전 전화 확인 권장."
+  "note": "영업시간 146곳은 원본에 입력된 2026-11-20 기준 Google Maps 참고값이며 146곳 전부 공식 개별 확인한 데이터는 아닙니다. 날짜·공휴일·임시휴무·예약 가능 여부는 방문 직전 공식 채널에서 확인하세요.",
+  "hoursVerification": "원본 지도참고 정보 · 공식 영업일 검증 미완료"
  },
  "slots": [
   {
@@ -34,19 +35,19 @@ window.RESTAURANTS = {
    "id": "d2-lunch",
    "day": "d2",
    "label": "2일차 점심",
-   "time": "13:05~13:40"
+   "time": "14:40~15:25"
   },
   {
    "id": "d2-cafe",
    "day": "d2",
    "label": "2일차 카페",
-   "time": "16:15경 15분"
+   "time": "17:20경 15분"
   },
   {
    "id": "d2-dinner",
    "day": "d2",
    "label": "2일차 저녁",
-   "time": "20:30~21:30"
+   "time": "21:05~22:00"
   },
   {
    "id": "d3-breakfast",
@@ -58,31 +59,31 @@ window.RESTAURANTS = {
    "id": "d3-lunch",
    "day": "d3",
    "label": "3일차 점심",
-   "time": "12:55~13:35"
+   "time": "13:00~13:55"
   },
   {
    "id": "d3-cafe",
    "day": "d3",
    "label": "3일차 카페",
-   "time": "14:20~14:50"
+   "time": "14:30~15:00"
   },
   {
    "id": "d3-birthday",
    "day": "d3",
    "label": "3일차 생일 저녁",
-   "time": "20:10~21:40"
+   "time": "19:30~21:00 (목표·예약 미정)"
   },
   {
    "id": "d4-breakfast",
    "day": "d4",
    "label": "4일차 아침",
-   "time": "07:40~08:20"
+   "time": "07:30~08:10"
   },
   {
    "id": "d4-lunch",
    "day": "d4",
    "label": "4일차 점심",
-   "time": "12:20~13:10"
+   "time": "12:45~13:15 (수속 후 여유 시)"
   }
  ],
  "bigAreas": [
@@ -144,7 +145,13 @@ window.RESTAURANTS = {
    "lng": 139.6983965,
    "map": "https://maps.google.com/?cid=8049434134546372547",
    "cid": "8049434134546372547",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r002",
@@ -183,7 +190,13 @@ window.RESTAURANTS = {
    "lng": 139.6971039,
    "map": "https://maps.google.com/?cid=10403909404534889484",
    "cid": "10403909404534889484",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r003",
@@ -222,7 +235,13 @@ window.RESTAURANTS = {
    "lng": 139.698164,
    "map": "https://maps.google.com/?cid=11740999548917112354",
    "cid": "11740999548917112354",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r004",
@@ -261,7 +280,13 @@ window.RESTAURANTS = {
    "lng": 139.6986477,
    "map": "https://maps.google.com/?cid=8971049026698303002",
    "cid": "8971049026698303002",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r005",
@@ -301,7 +326,13 @@ window.RESTAURANTS = {
    "lng": 139.704377,
    "map": "https://maps.google.com/?cid=137190596671462639",
    "cid": "137190596671462639",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r006",
@@ -340,7 +371,13 @@ window.RESTAURANTS = {
    "lng": 139.6982172,
    "map": "https://maps.google.com/?cid=7689037245409775572",
    "cid": "7689037245409775572",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r007",
@@ -379,7 +416,13 @@ window.RESTAURANTS = {
    "lng": 139.696655,
    "map": "https://maps.google.com/?cid=7650629044564724124",
    "cid": "7650629044564724124",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r008",
@@ -418,7 +461,13 @@ window.RESTAURANTS = {
    "lng": 139.6967792,
    "map": "https://maps.google.com/?cid=3498904465486226463",
    "cid": "3498904465486226463",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r009",
@@ -453,14 +502,26 @@ window.RESTAURANTS = {
    "phone": "+81 3-3379-5188",
    "walk": "호텔 도보 10분(0.7km)",
    "note": "타베로그 4.07 · The Tabelog Award 2026 Bronze. 신주쿠 내장 꼬치의 정점.",
-   "tip": "코스제, 예약 필수 (03-3354-6206). 생일날(11/23 월)에도 영업이라 후보로 강력.",
+   "tip": "예약·문의 번호 03-3379-5188 (공식 사이트 확인). 3인 예약 가능 여부와 공휴일 영업은 전화 확인 필수.",
    "awards": "Tabelog Award 2026 Bronze",
    "addr": "2 Chome-6-5 Yoyogi Shibuya, Tokyo 151-0053 일본",
    "lat": 35.6879695,
    "lng": 139.698852,
    "map": "https://maps.google.com/?cid=9203701092652979101",
    "cid": "9203701092652979101",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   },
+   "phoneVerification": {
+    "status": "confirmed",
+    "label": "공식/공공자료 확인",
+    "checked": "2026-11-20",
+    "source": "https://torishige-shinjuku.com/ja"
+   }
   },
   {
    "id": "r010",
@@ -499,7 +560,13 @@ window.RESTAURANTS = {
    "lng": 139.6982172,
    "map": "https://maps.google.com/?cid=9106978833430361630",
    "cid": "9106978833430361630",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r011",
@@ -538,7 +605,13 @@ window.RESTAURANTS = {
    "lng": 139.6960173,
    "map": "https://maps.google.com/?cid=16867039336592962851",
    "cid": "16867039336592962851",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r012",
@@ -578,7 +651,13 @@ window.RESTAURANTS = {
    "lng": 139.6981904,
    "map": "https://maps.google.com/?cid=5796466028926882103",
    "cid": "5796466028926882103",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r013",
@@ -617,7 +696,13 @@ window.RESTAURANTS = {
    "lng": 139.6989737,
    "map": "https://maps.google.com/?cid=10806649970888955694",
    "cid": "10806649970888955694",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r014",
@@ -656,7 +741,13 @@ window.RESTAURANTS = {
    "lng": 139.6981907,
    "map": "https://maps.google.com/?cid=15795650760769127751",
    "cid": "15795650760769127751",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r015",
@@ -695,7 +786,13 @@ window.RESTAURANTS = {
    "lng": 139.7400189,
    "map": "https://maps.google.com/?cid=2653783987035612021",
    "cid": "2653783987035612021",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r016",
@@ -734,7 +831,13 @@ window.RESTAURANTS = {
    "lng": 139.7398856,
    "map": "https://maps.google.com/?cid=16677727378243220939",
    "cid": "16677727378243220939",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r017",
@@ -766,14 +869,26 @@ window.RESTAURANTS = {
    "phone": "+81 3-5545-5598",
    "walk": "아크힐즈 도보 15분(1.1km)",
    "note": "평점 4.8. 관광지 물가가 아닌 동네 스시집.",
-   "tip": "런치 세트가 저렴. 일요일 영업 확인. 예약 전화 03-3586-1707.",
+   "tip": "매장 번호 03-5545-5598 (미나토구 공공자료 확인). 11/22 일요일 영업·런치 제공·예약 가능 여부는 별도 확인 필수.",
    "awards": "",
    "addr": "일본 〒107-0052 Tokyo, Minato City, Akasaka, 3 Chome−13−2 赤坂第一ビル 2F 3F",
    "lat": 35.6735657,
    "lng": 139.7375368,
    "map": "https://maps.google.com/?cid=17847152604740398273",
    "cid": "17847152604740398273",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   },
+   "phoneVerification": {
+    "status": "confirmed",
+    "label": "공식/공공자료 확인",
+    "checked": "2026-11-20",
+    "source": "https://www.city.minato.tokyo.jp/documents/94931/hp3_akasaka_01_wa_1231.pdf"
+   }
   },
   {
    "id": "r018",
@@ -812,7 +927,13 @@ window.RESTAURANTS = {
    "lng": 139.7358702,
    "map": "https://maps.google.com/?cid=3425757482066941423",
    "cid": "3425757482066941423",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r019",
@@ -851,7 +972,13 @@ window.RESTAURANTS = {
    "lng": 139.7365164,
    "map": "https://maps.google.com/?cid=1006565916775439393",
    "cid": "1006565916775439393",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r020",
@@ -890,7 +1017,13 @@ window.RESTAURANTS = {
    "lng": 139.7379706,
    "map": "https://maps.google.com/?cid=3330857225177565959",
    "cid": "3330857225177565959",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r021",
@@ -929,7 +1062,13 @@ window.RESTAURANTS = {
    "lng": 139.7365326,
    "map": "https://maps.google.com/?cid=14967072998160824595",
    "cid": "14967072998160824595",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r022",
@@ -968,7 +1107,13 @@ window.RESTAURANTS = {
    "lng": 139.7363929,
    "map": "https://maps.google.com/?cid=5334886150910298336",
    "cid": "5334886150910298336",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r023",
@@ -1007,7 +1152,13 @@ window.RESTAURANTS = {
    "lng": 139.74022,
    "map": "https://maps.google.com/?cid=9485442097079605508",
    "cid": "9485442097079605508",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r024",
@@ -1046,7 +1197,13 @@ window.RESTAURANTS = {
    "lng": 139.740084,
    "map": "https://maps.google.com/?cid=15406698698042196352",
    "cid": "15406698698042196352",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r025",
@@ -1085,7 +1242,13 @@ window.RESTAURANTS = {
    "lng": 139.707277,
    "map": "https://maps.google.com/?cid=13180997183820413679",
    "cid": "13180997183820413679",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r026",
@@ -1124,7 +1287,13 @@ window.RESTAURANTS = {
    "lng": 139.7126189,
    "map": "https://maps.google.com/?cid=5881028304963752426",
    "cid": "5881028304963752426",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r027",
@@ -1163,7 +1332,13 @@ window.RESTAURANTS = {
    "lng": 139.7138799,
    "map": "https://maps.google.com/?cid=5183820147445012076",
    "cid": "5183820147445012076",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r028",
@@ -1202,7 +1377,13 @@ window.RESTAURANTS = {
    "lng": 139.710888,
    "map": "https://maps.google.com/?cid=5064916712424889855",
    "cid": "5064916712424889855",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r029",
@@ -1241,7 +1422,13 @@ window.RESTAURANTS = {
    "lng": 139.7047658,
    "map": "https://maps.google.com/?cid=14377700849968291546",
    "cid": "14377700849968291546",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r030",
@@ -1280,7 +1467,13 @@ window.RESTAURANTS = {
    "lng": 139.7075981,
    "map": "https://maps.google.com/?cid=3694575997661442948",
    "cid": "3694575997661442948",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r031",
@@ -1319,7 +1512,13 @@ window.RESTAURANTS = {
    "lng": 139.7112093,
    "map": "https://maps.google.com/?cid=15858446459667208279",
    "cid": "15858446459667208279",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r032",
@@ -1358,7 +1557,13 @@ window.RESTAURANTS = {
    "lng": 139.6923999,
    "map": "https://maps.google.com/?cid=17164645774726874279",
    "cid": "17164645774726874279",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r033",
@@ -1400,7 +1605,13 @@ window.RESTAURANTS = {
    "lng": 139.6980775,
    "map": "https://maps.google.com/?cid=7102176867648003687",
    "cid": "7102176867648003687",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r034",
@@ -1441,7 +1652,13 @@ window.RESTAURANTS = {
    "lng": 139.7005282,
    "map": "https://maps.google.com/?cid=3032854046184725457",
    "cid": "3032854046184725457",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r035",
@@ -1483,7 +1700,13 @@ window.RESTAURANTS = {
    "lng": 139.7038118,
    "map": "https://maps.google.com/?cid=10259173076433349501",
    "cid": "10259173076433349501",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r036",
@@ -1522,7 +1745,13 @@ window.RESTAURANTS = {
    "lng": 139.7068155,
    "map": "https://maps.google.com/?cid=4996972502994644359",
    "cid": "4996972502994644359",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r037",
@@ -1561,7 +1790,13 @@ window.RESTAURANTS = {
    "lng": 139.6874998,
    "map": "https://maps.google.com/?cid=1049692327983619416",
    "cid": "1049692327983619416",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r038",
@@ -1600,7 +1835,13 @@ window.RESTAURANTS = {
    "lng": 139.7026487,
    "map": "https://maps.google.com/?cid=5633907992513733562",
    "cid": "5633907992513733562",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r039",
@@ -1640,7 +1881,13 @@ window.RESTAURANTS = {
    "lng": 139.7026889,
    "map": "https://maps.google.com/?cid=4923231837354338093",
    "cid": "4923231837354338093",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r040",
@@ -1680,7 +1927,13 @@ window.RESTAURANTS = {
    "lng": 139.7030539,
    "map": "https://maps.google.com/?cid=8121084490993100929",
    "cid": "8121084490993100929",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r041",
@@ -1719,7 +1972,13 @@ window.RESTAURANTS = {
    "lng": 139.6976388,
    "map": "https://maps.google.com/?cid=14215629536858447785",
    "cid": "14215629536858447785",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r042",
@@ -1759,7 +2018,13 @@ window.RESTAURANTS = {
    "lng": 139.6971351,
    "map": "https://maps.google.com/?cid=14023482379824896455",
    "cid": "14023482379824896455",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r043",
@@ -1799,7 +2064,13 @@ window.RESTAURANTS = {
    "lng": 139.6901793,
    "map": "https://maps.google.com/?cid=12587728146073910520",
    "cid": "12587728146073910520",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r044",
@@ -1839,7 +2110,13 @@ window.RESTAURANTS = {
    "lng": 139.6994572,
    "map": "https://maps.google.com/?cid=614562487157913321",
    "cid": "614562487157913321",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r045",
@@ -1879,7 +2156,13 @@ window.RESTAURANTS = {
    "lng": 139.6929721,
    "map": "https://maps.google.com/?cid=13869164142502385547",
    "cid": "13869164142502385547",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r046",
@@ -1919,7 +2202,13 @@ window.RESTAURANTS = {
    "lng": 139.6967929,
    "map": "https://maps.google.com/?cid=4790566364088927087",
    "cid": "4790566364088927087",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r047",
@@ -1959,7 +2248,13 @@ window.RESTAURANTS = {
    "lng": 139.685704,
    "map": "https://maps.google.com/?cid=3733105804330390523",
    "cid": "3733105804330390523",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r048",
@@ -1998,7 +2293,13 @@ window.RESTAURANTS = {
    "lng": 139.7114981,
    "map": "https://maps.google.com/?cid=9595487602040086625",
    "cid": "9595487602040086625",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r049",
@@ -2038,7 +2339,13 @@ window.RESTAURANTS = {
    "lng": 139.6966217,
    "map": "https://maps.google.com/?cid=16651025341470900030",
    "cid": "16651025341470900030",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r050",
@@ -2078,7 +2385,13 @@ window.RESTAURANTS = {
    "lng": 139.6998808,
    "map": "https://maps.google.com/?cid=9400772576609031271",
    "cid": "9400772576609031271",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r051",
@@ -2117,7 +2430,13 @@ window.RESTAURANTS = {
    "lng": 139.7643419,
    "map": "https://maps.google.com/?cid=14057401687032445773",
    "cid": "14057401687032445773",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r052",
@@ -2156,7 +2475,13 @@ window.RESTAURANTS = {
    "lng": 139.7691376,
    "map": "https://maps.google.com/?cid=14087346365638634398",
    "cid": "14087346365638634398",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r053",
@@ -2195,7 +2520,13 @@ window.RESTAURANTS = {
    "lng": 139.7615542,
    "map": "https://maps.google.com/?cid=12892562419540071658",
    "cid": "12892562419540071658",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r054",
@@ -2234,7 +2565,13 @@ window.RESTAURANTS = {
    "lng": 139.7653544,
    "map": "https://maps.google.com/?cid=11425134349324146809",
    "cid": "11425134349324146809",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r055",
@@ -2273,7 +2610,13 @@ window.RESTAURANTS = {
    "lng": 139.7596577,
    "map": "https://maps.google.com/?cid=8679293327778196578",
    "cid": "8679293327778196578",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r056",
@@ -2312,7 +2655,13 @@ window.RESTAURANTS = {
    "lng": 139.7627483,
    "map": "https://maps.google.com/?cid=8684877893208776297",
    "cid": "8684877893208776297",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r057",
@@ -2351,7 +2700,13 @@ window.RESTAURANTS = {
    "lng": 139.7661496,
    "map": "https://maps.google.com/?cid=9940870951959565990",
    "cid": "9940870951959565990",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r058",
@@ -2390,7 +2745,13 @@ window.RESTAURANTS = {
    "lng": 139.7603922,
    "map": "https://maps.google.com/?cid=17626268376939932783",
    "cid": "17626268376939932783",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r059",
@@ -2429,7 +2790,13 @@ window.RESTAURANTS = {
    "lng": 139.7613528,
    "map": "https://maps.google.com/?cid=5637194760360720505",
    "cid": "5637194760360720505",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r060",
@@ -2468,7 +2835,13 @@ window.RESTAURANTS = {
    "lng": 139.7631786,
    "map": "https://maps.google.com/?cid=5826650250164247742",
    "cid": "5826650250164247742",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r061",
@@ -2507,7 +2880,13 @@ window.RESTAURANTS = {
    "lng": 139.7703835,
    "map": "https://maps.google.com/?cid=828281333870840107",
    "cid": "828281333870840107",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r062",
@@ -2546,7 +2925,13 @@ window.RESTAURANTS = {
    "lng": 139.7647701,
    "map": "https://maps.google.com/?cid=4335013421542217133",
    "cid": "4335013421542217133",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r063",
@@ -2585,7 +2970,13 @@ window.RESTAURANTS = {
    "lng": 139.7650596,
    "map": "https://maps.google.com/?cid=10794017147597643205",
    "cid": "10794017147597643205",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r064",
@@ -2624,7 +3015,13 @@ window.RESTAURANTS = {
    "lng": 139.7618337,
    "map": "https://maps.google.com/?cid=8320953175893531484",
    "cid": "8320953175893531484",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r065",
@@ -2663,7 +3060,13 @@ window.RESTAURANTS = {
    "lng": 139.7686589,
    "map": "https://maps.google.com/?cid=5254053800351163798",
    "cid": "5254053800351163798",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r066",
@@ -2702,7 +3105,13 @@ window.RESTAURANTS = {
    "lng": 139.7657382,
    "map": "https://maps.google.com/?cid=2787267370133271000",
    "cid": "2787267370133271000",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r067",
@@ -2742,7 +3151,13 @@ window.RESTAURANTS = {
    "lng": 139.7118057,
    "map": "https://maps.google.com/?cid=8180550300697386920",
    "cid": "8180550300697386920",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r068",
@@ -2782,7 +3197,13 @@ window.RESTAURANTS = {
    "lng": 139.702768,
    "map": "https://maps.google.com/?cid=12701156086639784456",
    "cid": "12701156086639784456",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r069",
@@ -2822,7 +3243,13 @@ window.RESTAURANTS = {
    "lng": 139.7624277,
    "map": "https://maps.google.com/?cid=17595546644543129599",
    "cid": "17595546644543129599",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r070",
@@ -2862,7 +3289,13 @@ window.RESTAURANTS = {
    "lng": 139.7630799,
    "map": "https://maps.google.com/?cid=3596771567629889380",
    "cid": "3596771567629889380",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r071",
@@ -2902,7 +3335,13 @@ window.RESTAURANTS = {
    "lng": 139.7161474,
    "map": "https://maps.google.com/?cid=13486702778845562549",
    "cid": "13486702778845562549",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r072",
@@ -2942,7 +3381,13 @@ window.RESTAURANTS = {
    "lng": 139.7629418,
    "map": "https://maps.google.com/?cid=8310604357826040181",
    "cid": "8310604357826040181",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r073",
@@ -2982,7 +3427,13 @@ window.RESTAURANTS = {
    "lng": 139.7225208,
    "map": "https://maps.google.com/?cid=16303339659505810183",
    "cid": "16303339659505810183",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r074",
@@ -3022,7 +3473,13 @@ window.RESTAURANTS = {
    "lng": 139.7286427,
    "map": "https://maps.google.com/?cid=7795425068181862802",
    "cid": "7795425068181862802",
-   "src": "AB"
+   "src": "AB",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r075",
@@ -3062,7 +3519,13 @@ window.RESTAURANTS = {
    "lng": 140.3898337,
    "map": "https://maps.google.com/?cid=12140851118368643591",
    "cid": "12140851118368643591",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r076",
@@ -3101,7 +3564,13 @@ window.RESTAURANTS = {
    "lng": 140.3891366,
    "map": "https://maps.google.com/?cid=13036892922385083742",
    "cid": "13036892922385083742",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r077",
@@ -3140,7 +3609,13 @@ window.RESTAURANTS = {
    "lng": 140.3879078,
    "map": "https://maps.google.com/?cid=14668969936537797064",
    "cid": "14668969936537797064",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r078",
@@ -3179,7 +3654,13 @@ window.RESTAURANTS = {
    "lng": 140.3869315,
    "map": "https://maps.google.com/?cid=5677103685836143873",
    "cid": "5677103685836143873",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r079",
@@ -3218,7 +3699,13 @@ window.RESTAURANTS = {
    "lng": 140.3890873,
    "map": "https://maps.google.com/?cid=13899954962059047000",
    "cid": "13899954962059047000",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r080",
@@ -3258,7 +3745,13 @@ window.RESTAURANTS = {
    "lng": 140.3880786,
    "map": "https://maps.google.com/?cid=12977278840548396905",
    "cid": "12977278840548396905",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r081",
@@ -3299,7 +3792,13 @@ window.RESTAURANTS = {
    "lng": 140.3878161,
    "map": "https://maps.google.com/?cid=13290064092537213596",
    "cid": "13290064092537213596",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r082",
@@ -3338,7 +3837,13 @@ window.RESTAURANTS = {
    "lng": 140.3883435,
    "map": "https://maps.google.com/?cid=15865182687940203380",
    "cid": "15865182687940203380",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r083",
@@ -3377,7 +3882,13 @@ window.RESTAURANTS = {
    "lng": 140.3880839,
    "map": "https://maps.google.com/?cid=3292048911042751866",
    "cid": "3292048911042751866",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r084",
@@ -3416,7 +3927,13 @@ window.RESTAURANTS = {
    "lng": 140.39274,
    "map": "https://maps.google.com/?cid=10650273215742311319",
    "cid": "10650273215742311319",
-   "src": "A"
+   "src": "A",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r085",
@@ -3456,7 +3973,13 @@ window.RESTAURANTS = {
    "lng": 139.709821,
    "map": "https://maps.google.com/?cid=9065919885433972684",
    "cid": "9065919885433972684",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r086",
@@ -3496,7 +4019,13 @@ window.RESTAURANTS = {
    "lng": 139.710238,
    "map": "https://maps.google.com/?cid=1690689513795744845",
    "cid": "1690689513795744845",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r087",
@@ -3535,7 +4064,13 @@ window.RESTAURANTS = {
    "lng": 139.7071529,
    "map": "https://maps.google.com/?cid=6276790317622982230",
    "cid": "6276790317622982230",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r088",
@@ -3575,7 +4110,13 @@ window.RESTAURANTS = {
    "lng": 139.7064947,
    "map": "https://maps.google.com/?cid=6857709710348716640",
    "cid": "6857709710348716640",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r089",
@@ -3615,7 +4156,13 @@ window.RESTAURANTS = {
    "lng": 139.7081452,
    "map": "https://maps.google.com/?cid=12903542262972806720",
    "cid": "12903542262972806720",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r090",
@@ -3655,7 +4202,13 @@ window.RESTAURANTS = {
    "lng": 139.7103239,
    "map": "https://maps.google.com/?cid=1830549245161587381",
    "cid": "1830549245161587381",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r091",
@@ -3695,7 +4248,13 @@ window.RESTAURANTS = {
    "lng": 139.7093475,
    "map": "https://maps.google.com/?cid=12352184804547249487",
    "cid": "12352184804547249487",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r092",
@@ -3735,7 +4294,13 @@ window.RESTAURANTS = {
    "lng": 139.7074017,
    "map": "https://maps.google.com/?cid=2801985182717088307",
    "cid": "2801985182717088307",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r093",
@@ -3775,7 +4340,13 @@ window.RESTAURANTS = {
    "lng": 139.7056968,
    "map": "https://maps.google.com/?cid=5166015620275975461",
    "cid": "5166015620275975461",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r094",
@@ -3814,7 +4385,13 @@ window.RESTAURANTS = {
    "lng": 139.7156511,
    "map": "https://maps.google.com/?cid=7443664417516472810",
    "cid": "7443664417516472810",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r095",
@@ -3853,7 +4430,13 @@ window.RESTAURANTS = {
    "lng": 139.7145942,
    "map": "https://maps.google.com/?cid=3981500496899525529",
    "cid": "3981500496899525529",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r096",
@@ -3893,7 +4476,13 @@ window.RESTAURANTS = {
    "lng": 139.7074996,
    "map": "https://maps.google.com/?cid=10019464047237873700",
    "cid": "10019464047237873700",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r097",
@@ -3932,7 +4521,13 @@ window.RESTAURANTS = {
    "lng": 139.709323,
    "map": "https://maps.google.com/?cid=6557139725135871859",
    "cid": "6557139725135871859",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r098",
@@ -3972,7 +4567,13 @@ window.RESTAURANTS = {
    "lng": 139.7055372,
    "map": "https://maps.google.com/?cid=16741255293745666387",
    "cid": "16741255293745666387",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r099",
@@ -4012,7 +4613,13 @@ window.RESTAURANTS = {
    "lng": 139.7089183,
    "map": "https://maps.google.com/?cid=16424334939079010396",
    "cid": "16424334939079010396",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r100",
@@ -4052,7 +4659,13 @@ window.RESTAURANTS = {
    "lng": 139.7098363,
    "map": "https://maps.google.com/?cid=801685679027884663",
    "cid": "801685679027884663",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r101",
@@ -4092,7 +4705,13 @@ window.RESTAURANTS = {
    "lng": 139.7111154,
    "map": "https://maps.google.com/?cid=11235737856887368546",
    "cid": "11235737856887368546",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r102",
@@ -4132,7 +4751,13 @@ window.RESTAURANTS = {
    "lng": 139.7407835,
    "map": "https://maps.google.com/?cid=1016898051006815555",
    "cid": "1016898051006815555",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r103",
@@ -4172,7 +4797,13 @@ window.RESTAURANTS = {
    "lng": 139.7367118,
    "map": "https://maps.google.com/?cid=2251034477296878045",
    "cid": "2251034477296878045",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r104",
@@ -4212,7 +4843,13 @@ window.RESTAURANTS = {
    "lng": 139.7302863,
    "map": "https://maps.google.com/?cid=8921490721516026088",
    "cid": "8921490721516026088",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r105",
@@ -4252,7 +4889,13 @@ window.RESTAURANTS = {
    "lng": 139.7314936,
    "map": "https://maps.google.com/?cid=2465314343081201444",
    "cid": "2465314343081201444",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r106",
@@ -4291,7 +4934,13 @@ window.RESTAURANTS = {
    "lng": 139.726066,
    "map": "https://maps.google.com/?cid=10522996068257998883",
    "cid": "10522996068257998883",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r107",
@@ -4331,7 +4980,13 @@ window.RESTAURANTS = {
    "lng": 139.723953,
    "map": "https://maps.google.com/?cid=8700525610995744029",
    "cid": "8700525610995744029",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r108",
@@ -4371,7 +5026,13 @@ window.RESTAURANTS = {
    "lng": 139.7225419,
    "map": "https://maps.google.com/?cid=8324198103009521474",
    "cid": "8324198103009521474",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r109",
@@ -4411,7 +5072,13 @@ window.RESTAURANTS = {
    "lng": 139.723538,
    "map": "https://maps.google.com/?cid=12499820929665565463",
    "cid": "12499820929665565463",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r110",
@@ -4451,7 +5118,13 @@ window.RESTAURANTS = {
    "lng": 139.7367118,
    "map": "https://maps.google.com/?cid=6619516724476168883",
    "cid": "6619516724476168883",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r111",
@@ -4491,7 +5164,13 @@ window.RESTAURANTS = {
    "lng": 139.7336958,
    "map": "https://maps.google.com/?cid=4761861168475462363",
    "cid": "4761861168475462363",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r112",
@@ -4531,7 +5210,13 @@ window.RESTAURANTS = {
    "lng": 139.7305272,
    "map": "https://maps.google.com/?cid=4559157717495076006",
    "cid": "4559157717495076006",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r113",
@@ -4572,7 +5257,13 @@ window.RESTAURANTS = {
    "lng": 139.7235797,
    "map": "https://maps.google.com/?cid=1337614840498094983",
    "cid": "1337614840498094983",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r114",
@@ -4611,7 +5302,13 @@ window.RESTAURANTS = {
    "lng": 139.7329948,
    "map": "https://maps.google.com/?cid=5986398684437807624",
    "cid": "5986398684437807624",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r115",
@@ -4651,7 +5348,13 @@ window.RESTAURANTS = {
    "lng": 139.7433709,
    "map": "https://maps.google.com/?cid=12647547846201370726",
    "cid": "12647547846201370726",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r116",
@@ -4691,7 +5394,13 @@ window.RESTAURANTS = {
    "lng": 139.7328803,
    "map": "https://maps.google.com/?cid=4799624521792605391",
    "cid": "4799624521792605391",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r117",
@@ -4731,7 +5440,13 @@ window.RESTAURANTS = {
    "lng": 139.7024575,
    "map": "https://maps.google.com/?cid=14196660460782766309",
    "cid": "14196660460782766309",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r118",
@@ -4771,7 +5486,13 @@ window.RESTAURANTS = {
    "lng": 139.6985182,
    "map": "https://maps.google.com/?cid=12095632355816303472",
    "cid": "12095632355816303472",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r119",
@@ -4811,7 +5532,13 @@ window.RESTAURANTS = {
    "lng": 139.7027479,
    "map": "https://maps.google.com/?cid=17500119824352499098",
    "cid": "17500119824352499098",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r120",
@@ -4852,7 +5579,13 @@ window.RESTAURANTS = {
    "lng": 139.6980158,
    "map": "https://maps.google.com/?cid=8652472938840183456",
    "cid": "8652472938840183456",
-   "src": "BC"
+   "src": "BC",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r121",
@@ -4892,7 +5625,13 @@ window.RESTAURANTS = {
    "lng": 139.6956065,
    "map": "https://maps.google.com/?cid=10376264615396629459",
    "cid": "10376264615396629459",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r122",
@@ -4932,7 +5671,13 @@ window.RESTAURANTS = {
    "lng": 139.6982313,
    "map": "https://maps.google.com/?cid=16419335787236832445",
    "cid": "16419335787236832445",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r123",
@@ -4971,7 +5716,13 @@ window.RESTAURANTS = {
    "lng": 139.7012389,
    "map": "https://maps.google.com/?cid=5576426787614804085",
    "cid": "5576426787614804085",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r124",
@@ -5010,7 +5761,13 @@ window.RESTAURANTS = {
    "lng": 139.6943219,
    "map": "https://maps.google.com/?cid=11427952401817159185",
    "cid": "11427952401817159185",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r125",
@@ -5050,7 +5807,13 @@ window.RESTAURANTS = {
    "lng": 139.7032702,
    "map": "https://maps.google.com/?cid=3422300916219337735",
    "cid": "3422300916219337735",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r126",
@@ -5089,7 +5852,13 @@ window.RESTAURANTS = {
    "lng": 139.7002777,
    "map": "https://maps.google.com/?cid=4972838303836169959",
    "cid": "4972838303836169959",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r127",
@@ -5129,7 +5898,13 @@ window.RESTAURANTS = {
    "lng": 139.7011402,
    "map": "https://maps.google.com/?cid=3063666126766888522",
    "cid": "3063666126766888522",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r128",
@@ -5169,7 +5944,13 @@ window.RESTAURANTS = {
    "lng": 139.7061556,
    "map": "https://maps.google.com/?cid=5564594255663565175",
    "cid": "5564594255663565175",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r129",
@@ -5208,7 +5989,13 @@ window.RESTAURANTS = {
    "lng": 139.6980802,
    "map": "https://maps.google.com/?cid=6665077902899909859",
    "cid": "6665077902899909859",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r130",
@@ -5248,7 +6035,13 @@ window.RESTAURANTS = {
    "lng": 139.6970479,
    "map": "https://maps.google.com/?cid=6910383267302671245",
    "cid": "6910383267302671245",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r131",
@@ -5288,7 +6081,13 @@ window.RESTAURANTS = {
    "lng": 139.6971447,
    "map": "https://maps.google.com/?cid=14334735506663081780",
    "cid": "14334735506663081780",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r132",
@@ -5328,7 +6127,13 @@ window.RESTAURANTS = {
    "lng": 139.6983048,
    "map": "https://maps.google.com/?cid=15199065111236672036",
    "cid": "15199065111236672036",
-   "src": "B"
+   "src": "B",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r133",
@@ -5369,7 +6174,13 @@ window.RESTAURANTS = {
    "lng": 139.761101,
    "map": "https://maps.google.com/?cid=13824081207128088468",
    "cid": "13824081207128088468",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r134",
@@ -5410,7 +6221,13 @@ window.RESTAURANTS = {
    "lng": 139.7671893,
    "map": "https://maps.google.com/?cid=9657200045435452382",
    "cid": "9657200045435452382",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r135",
@@ -5451,7 +6268,13 @@ window.RESTAURANTS = {
    "lng": 139.7285409,
    "map": "https://maps.google.com/?cid=14623430578247601547",
    "cid": "14623430578247601547",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r136",
@@ -5492,7 +6315,13 @@ window.RESTAURANTS = {
    "lng": 139.7294329,
    "map": "https://maps.google.com/?cid=3204237550771424619",
    "cid": "3204237550771424619",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r137",
@@ -5533,7 +6362,13 @@ window.RESTAURANTS = {
    "lng": 139.7105206,
    "map": "https://maps.google.com/?cid=13786171700231961037",
    "cid": "13786171700231961037",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r138",
@@ -5574,7 +6409,13 @@ window.RESTAURANTS = {
    "lng": 139.7083289,
    "map": "https://maps.google.com/?cid=5289924510864060421",
    "cid": "5289924510864060421",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r139",
@@ -5615,7 +6456,13 @@ window.RESTAURANTS = {
    "lng": 139.703894,
    "map": "https://maps.google.com/?cid=17753790264412763285",
    "cid": "17753790264412763285",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r140",
@@ -5656,7 +6503,13 @@ window.RESTAURANTS = {
    "lng": 139.6941954,
    "map": "https://maps.google.com/?cid=11972321199625134092",
    "cid": "11972321199625134092",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r141",
@@ -5697,7 +6550,13 @@ window.RESTAURANTS = {
    "lng": 139.7052181,
    "map": "https://maps.google.com/?cid=6383118177018281933",
    "cid": "6383118177018281933",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r142",
@@ -5740,7 +6599,13 @@ window.RESTAURANTS = {
    "lng": 139.7250908,
    "map": "https://maps.google.com/?cid=9555323224194961121",
    "cid": "9555323224194961121",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r143",
@@ -5782,7 +6647,13 @@ window.RESTAURANTS = {
    "lng": 139.7022062,
    "map": "https://maps.google.com/?cid=10619478164008146005",
    "cid": "10619478164008146005",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r144",
@@ -5824,7 +6695,13 @@ window.RESTAURANTS = {
    "lng": 139.7023274,
    "map": "https://maps.google.com/?cid=7747013665565663896",
    "cid": "7747013665565663896",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r145",
@@ -5866,7 +6743,13 @@ window.RESTAURANTS = {
    "lng": 139.6989735,
    "map": "https://maps.google.com/?cid=8160063635020594918",
    "cid": "8160063635020594918",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   },
   {
    "id": "r146",
@@ -5907,7 +6790,13 @@ window.RESTAURANTS = {
    "lng": 139.7154516,
    "map": "https://maps.google.com/?cid=13272053166914718907",
    "cid": "13272053166914718907",
-   "src": "C"
+   "src": "C",
+   "hoursVerification": {
+    "status": "unverified",
+    "label": "기존 Google Maps 참고값 · 공식 미검증",
+    "checked": "2026-11-20",
+    "source": "기존 수집 데이터"
+   }
   }
  ]
 };

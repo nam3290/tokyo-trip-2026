@@ -8,7 +8,7 @@ window.TRIP_ROUTE = {
    35.6812,
    139.7671
   ],
-  "note": "좌표는 각 장소 구글맵 기준. 지도는 Leaflet + OpenStreetMap(CARTO) 타일이며, 구글맵 버튼으로 앱 동선이 바로 열립니다."
+  "note": "매장 위치는 기존 지도 데이터와 THE H.W.DOG&CO 공식 사이트의 Google 지도 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다."
  },
  "days": [
   {
@@ -55,7 +55,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d1-5",
-     "time": "22:45",
+     "time": "23:20",
      "name": "숙소 복귀 · 취침",
      "jp": "新宿ワシントンホテル",
      "lat": 35.686915,
@@ -67,11 +67,28 @@ window.TRIP_ROUTE = {
    ],
    "segments": [
     {
-     "label": "17:10 나리타국제공항 제2터미널 도착 → 22:45 숙소 복귀 · 취침",
+     "label": "전철/버스 · 17:10 나리타국제공항 제2터미널 도착 → 20:15 신주쿠 워싱턴 호텔 본관 체크인",
      "from": 1,
+     "to": 2,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.772414,140.38868&destination=35.686915,139.693276&travelmode=transit"
+    },
+    {
+     "label": "전철/버스 · 20:15 신주쿠 워싱턴 호텔 본관 체크인 → 21:45 MEGA 돈키호테 시부야",
+     "from": 2,
+     "to": 3,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.686915,139.693276&destination=35.660387,139.697817&travelmode=transit"
+    },
+    {
+     "label": "전철/버스 · 21:45 MEGA 돈키호테 시부야 → 23:20 숙소 복귀 · 취침",
+     "from": 3,
      "to": 4,
-     "count": 4,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.77241,140.38868&destination=35.68691,139.69328&waypoints=35.68691,139.69328|35.66039,139.69782"
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.660387,139.697817&destination=35.686915,139.693276&travelmode=transit"
     }
    ]
   },
@@ -119,7 +136,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-3",
-     "time": "10:50",
+     "time": "11:07",
      "name": "오카다야 빌딩 — 키디랜드 1~4F · 짱구 5F",
      "jp": "オカダヤビル",
      "lat": 35.692985,
@@ -130,7 +147,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-4",
-     "time": "11:10",
+     "time": "11:32",
      "name": "ARC'TERYX 신주쿠 브랜드 스토어",
      "jp": "アークテリクス 新宿ブランドストア",
      "lat": 35.692557,
@@ -141,7 +158,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-4b",
-     "time": "11:38",
+     "time": "11:55",
      "name": "KOMEHYO 신주쿠 (남성관 · 여성관 · 시계주얼리관)",
      "jp": "コメ兵 新宿店",
      "lat": 35.692626,
@@ -152,7 +169,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-5",
-     "time": "12:18",
+     "time": "12:35",
      "name": "BEAMS 신주쿠 (루미네에스트 B2F)",
      "jp": "ビームス 新宿",
      "lat": 35.691862,
@@ -163,7 +180,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-6",
-     "time": "13:00",
+     "time": "13:20",
      "name": "아카사카 벼룩시장 (아크힐즈 카라얀 광장)",
      "jp": "赤坂蚤の市 · アークヒルズ カラヤン広場",
      "lat": 35.666664,
@@ -174,7 +191,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-7",
-     "time": "14:55",
+     "time": "16:00",
      "name": "OSHMAN'S 하라주쿠",
      "jp": "オッシュマンズ 原宿店",
      "lat": 35.669384,
@@ -185,7 +202,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-8",
-     "time": "15:27",
+     "time": "16:32",
      "name": "Hummingbirds' hill shop",
      "jp": "ハミングバーズヒル ショップ",
      "lat": 35.671944,
@@ -195,137 +212,193 @@ window.TRIP_ROUTE = {
      "n": 10
     },
     {
+     "id": "d2-9",
+     "time": "16:57",
+     "name": "THE H.W. DOG&CO. — 모자 전문점",
+     "jp": "神宮前 3-28-10 ウッズビル 1F",
+     "lat": 35.6721344,
+     "lng": 139.7095819,
+     "map": "https://maps.google.com/?cid=2191060513098770626&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+     "kind": "spot",
+     "n": 11
+    },
+    {
      "id": "d2-10",
-     "time": "16:13",
+     "time": "17:20",
      "name": "Ralph Lauren Omotesando",
      "jp": "ラルフローレン 表参道",
      "lat": 35.66822,
      "lng": 139.707332,
      "map": "https://maps.google.com/?cid=18134942615298900179",
      "kind": "spot",
-     "n": 11
+     "n": 12
     },
     {
      "id": "d2-11",
-     "time": "16:44",
+     "time": "17:40",
      "name": "Harry Potter Shop Harajuku",
      "jp": "ハリー・ポッター ショップ 原宿",
      "lat": 35.668649,
      "lng": 139.70441,
      "map": "https://maps.google.com/?cid=3840542123008475986",
      "kind": "spot",
-     "n": 12
+     "n": 13,
+     "priority": "optional"
     },
     {
      "id": "d2-12",
-     "time": "17:10",
+     "time": "17:55",
      "name": "RAGTAG 하라주쿠",
      "jp": "ラグタグ 原宿",
      "lat": 35.665757,
      "lng": 139.705218,
      "map": "https://maps.google.com/?cid=15427969971660052394",
      "kind": "spot",
-     "n": 13
+     "n": 14
     },
     {
      "id": "d2-13",
-     "time": "17:34",
+     "time": "18:10",
      "name": "DANTON TOKYO",
      "jp": "ダントン 東京",
      "lat": 35.666232,
      "lng": 139.704002,
      "map": "https://maps.google.com/?cid=3286721948833497824",
      "kind": "spot",
-     "n": 14
+     "n": 15
     },
     {
      "id": "d2-14",
-     "time": "17:57",
+     "time": "18:25",
      "name": "Patagonia Tokyo Shibuya",
      "jp": "パタゴニア 東京 渋谷",
      "lat": 35.665217,
      "lng": 139.703582,
      "map": "https://maps.google.com/?cid=9042211536900144705",
      "kind": "spot",
-     "n": 15
+     "n": 16
     },
     {
      "id": "d2-15",
-     "time": "18:25",
+     "time": "19:00",
      "name": "Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
      "jp": "メゾン キツネ 宮下パーク",
      "lat": 35.662638,
      "lng": 139.701827,
      "map": "https://maps.google.com/?cid=14579441227567108828",
      "kind": "spot",
-     "n": 16
+     "n": 17
     },
     {
      "id": "d2-16",
-     "time": "18:46",
+     "time": "19:18",
      "name": "FREAK'S STORE 시부야",
      "jp": "フリークス ストア 渋谷",
      "lat": 35.662956,
      "lng": 139.700405,
      "map": "https://maps.google.com/?cid=13016080179487620260",
      "kind": "spot",
-     "n": 17
+     "n": 18,
+     "priority": "optional"
     },
     {
      "id": "d2-17",
-     "time": "19:07",
+     "time": "19:35",
      "name": "SUN HOUSE 진난",
      "jp": "サンハウス 神南",
      "lat": 35.66303,
      "lng": 139.69939,
      "map": "https://maps.google.com/?cid=14088655221653192636",
      "kind": "spot",
-     "n": 18
+     "n": 19
     },
     {
      "id": "d2-18",
-     "time": "19:29",
+     "time": "20:10",
      "name": "2nd STREET 시부야 진난점",
      "jp": "セカンドストリート 渋谷神南店",
      "lat": 35.661358,
      "lng": 139.701052,
      "map": "https://maps.google.com/?cid=3790135795445788292",
      "kind": "spot",
-     "n": 19
+     "n": 20
     },
     {
      "id": "d2-19",
-     "time": "20:15",
+     "time": "20:50",
      "name": "신주쿠 워싱턴 복귀",
      "jp": "新宿ワシントンホテル",
      "lat": 35.686915,
      "lng": 139.693276,
      "map": "https://maps.google.com/?cid=6872319874272201570",
      "kind": "spot",
-     "n": 20
+     "n": 21
     }
    ],
    "segments": [
     {
-     "label": "08:30 신파치 식당 신주쿠 (しんぱち食堂) → 15:27 Hummingbirds' hill shop",
+     "label": "도보 · 08:30 신파치 식당 신주쿠 (しんぱち食堂) → 11:32 ARC'TERYX 신주쿠 브랜드 스토어",
      "from": 1,
-     "to": 10,
-     "count": 10,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.68903,139.69714&destination=35.67194,139.70905&waypoints=35.68691,139.69328|35.69157,139.70465|35.69299,139.70097|35.69256,139.70138|35.69263,139.70276|35.69186,139.70100|35.66666,139.74036|35.66938,139.70586"
+     "to": 5,
+     "count": 5,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.689029,139.697135&destination=35.692557,139.701382&travelmode=walking&waypoints=35.686915,139.693276%7C35.691574,139.704647%7C35.692985,139.700972"
     },
     {
-     "label": "15:27 Hummingbirds' hill shop → 19:29 2nd STREET 시부야 진난점",
-     "from": 10,
-     "to": 19,
-     "count": 10,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.67194,139.70905&destination=35.66136,139.70105&waypoints=35.66822,139.70733|35.66865,139.70441|35.66576,139.70522|35.66623,139.70400|35.66522,139.70358|35.66264,139.70183|35.66296,139.70040|35.66303,139.69939"
+     "label": "도보 · 11:32 ARC'TERYX 신주쿠 브랜드 스토어 → 12:35 BEAMS 신주쿠 (루미네에스트 B2F)",
+     "from": 5,
+     "to": 7,
+     "count": 3,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.692557,139.701382&destination=35.691862,139.700995&travelmode=walking&waypoints=35.692626,139.702761"
     },
     {
-     "label": "19:29 2nd STREET 시부야 진난점 → 20:15 신주쿠 워싱턴 복귀",
-     "from": 19,
-     "to": 20,
+     "label": "전철/버스 · 12:35 BEAMS 신주쿠 (루미네에스트 B2F) → 13:20 아카사카 벼룩시장 (아크힐즈 카라얀 광장)",
+     "from": 7,
+     "to": 8,
      "count": 2,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.66136,139.70105&destination=35.68691,139.69328"
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.691862,139.700995&destination=35.666664,139.740359&travelmode=transit"
+    },
+    {
+     "label": "전철/버스 · 13:20 아카사카 벼룩시장 (아크힐즈 카라얀 광장) → 16:00 OSHMAN'S 하라주쿠",
+     "from": 8,
+     "to": 9,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.666664,139.740359&destination=35.669384,139.705856&travelmode=transit"
+    },
+    {
+     "label": "도보 · 16:00 OSHMAN'S 하라주쿠 → 17:40 Harry Potter Shop Harajuku",
+     "from": 9,
+     "to": 13,
+     "count": 5,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.668649,139.70441&travelmode=walking&waypoints=35.671944,139.709053%7C35.6721344,139.7095819%7C35.66822,139.707332"
+    },
+    {
+     "label": "도보 · 17:40 Harry Potter Shop Harajuku → 19:00 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
+     "from": 13,
+     "to": 17,
+     "count": 5,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.668649,139.70441&destination=35.662638,139.701827&travelmode=walking&waypoints=35.665757,139.705218%7C35.666232,139.704002%7C35.665217,139.703582"
+    },
+    {
+     "label": "도보 · 19:00 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F) → 20:10 2nd STREET 시부야 진난점",
+     "from": 17,
+     "to": 20,
+     "count": 4,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.662638,139.701827&destination=35.661358,139.701052&travelmode=walking&waypoints=35.662956,139.700405%7C35.66303,139.69939"
+    },
+    {
+     "label": "전철/버스 · 20:10 2nd STREET 시부야 진난점 → 20:50 신주쿠 워싱턴 복귀",
+     "from": 20,
+     "to": 21,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.661358,139.701052&destination=35.686915,139.693276&travelmode=transit"
     }
    ]
   },
@@ -384,7 +457,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-5",
-     "time": "12:20",
+     "time": "12:30",
      "name": "다이코쿠야 긴자점",
      "jp": "大黒屋 銀座店 · PAWN & REUSE BRAND STORE",
      "lat": 35.67161,
@@ -395,7 +468,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-6",
-     "time": "13:40",
+     "time": "14:00",
      "name": "MUJI 긴자 (무인양품)",
      "jp": "無印良品 銀座",
      "lat": 35.673214,
@@ -406,7 +479,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-7",
-     "time": "15:25",
+     "time": "15:45",
      "name": "KAPITAL TOKYO NAKED STORE",
      "jp": "キャピタル 東京ネイキッドストア",
      "lat": 35.643709,
@@ -417,7 +490,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-8",
-     "time": "15:52",
+     "time": "16:07",
      "name": "Duffle with KAPITAL",
      "jp": "ダッフル ウィズ キャピタル",
      "lat": 35.642786,
@@ -428,7 +501,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-9",
-     "time": "16:17",
+     "time": "16:30",
      "name": "KAPITAL Legs Craftsman Store",
      "jp": "キャピタル レッグス クラフツマンストア",
      "lat": 35.642106,
@@ -439,7 +512,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-10",
-     "time": "16:44",
+     "time": "16:55",
      "name": "RECTOHALL (에비스)",
      "jp": "レクトホール",
      "lat": 35.642155,
@@ -450,7 +523,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-11",
-     "time": "17:35",
+     "time": "17:45",
      "name": "롯폰기 힐즈 크리스마스 마켓 (오야네 광장)",
      "jp": "六本木ヒルズ クリスマスマーケット",
      "lat": 35.659932,
@@ -479,23 +552,66 @@ window.TRIP_ROUTE = {
      "lng": 139.702346,
      "map": "https://maps.google.com/?cid=67978450380853922",
      "kind": "spot",
-     "n": 13
+     "n": 13,
+     "priority": "optional"
     }
    ],
    "segments": [
     {
-     "label": "08:20 호텔 출발 → 신주쿠역 → 16:44 RECTOHALL (에비스)",
+     "label": "전철/버스 · 08:20 호텔 출발 → 신주쿠역 → 09:00 오에도 골동품 시장 (도쿄국제포럼 지상광장)",
      "from": 1,
-     "to": 10,
-     "count": 10,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.68961,139.70057&destination=35.64216,139.70887&waypoints=35.67714,139.76426|35.68217,139.76451|35.67565,139.76906|35.67161,139.76299|35.67321,139.76537|35.64371,139.70982|35.64279,139.71017|35.64211,139.70915"
+     "to": 2,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.689607,139.700571&destination=35.677141,139.764262&travelmode=transit"
     },
     {
-     "label": "16:44 RECTOHALL (에비스) → 19:10 L-Breath 신주쿠",
-     "from": 10,
-     "to": 13,
+     "label": "도보 · 09:00 오에도 골동품 시장 (도쿄국제포럼 지상광장) → 14:00 MUJI 긴자 (무인양품)",
+     "from": 2,
+     "to": 6,
+     "count": 5,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.677141,139.764262&destination=35.673214,139.765368&travelmode=walking&waypoints=35.682174,139.764507%7C35.675655,139.769057%7C35.67161,139.76299"
+    },
+    {
+     "label": "전철/버스 · 14:00 MUJI 긴자 (무인양품) → 15:45 KAPITAL TOKYO NAKED STORE",
+     "from": 6,
+     "to": 7,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.673214,139.765368&destination=35.643709,139.709824&travelmode=transit"
+    },
+    {
+     "label": "도보 · 15:45 KAPITAL TOKYO NAKED STORE → 16:55 RECTOHALL (에비스)",
+     "from": 7,
+     "to": 10,
      "count": 4,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.64216,139.70887&destination=35.68921,139.70235&waypoints=35.65993,139.72948|35.65925,139.72994"
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.643709,139.709824&destination=35.642155,139.708874&travelmode=walking&waypoints=35.642786,139.710166%7C35.642106,139.709148"
+    },
+    {
+     "label": "전철/버스 · 16:55 RECTOHALL (에비스) → 17:45 롯폰기 힐즈 크리스마스 마켓 (오야네 광장)",
+     "from": 10,
+     "to": 11,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.642155,139.708874&destination=35.659932,139.729478&travelmode=transit"
+    },
+    {
+     "label": "도보 · 17:45 롯폰기 힐즈 크리스마스 마켓 (오야네 광장) → 18:25 게야키자카 일루미네이션",
+     "from": 11,
+     "to": 12,
+     "count": 2,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.659932,139.729478&destination=35.659247,139.729942&travelmode=walking"
+    },
+    {
+     "label": "전철/버스 · 18:25 게야키자카 일루미네이션 → 19:10 L-Breath 신주쿠",
+     "from": 12,
+     "to": 13,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.659247,139.729942&destination=35.689212,139.702346&travelmode=transit"
     }
    ]
   },
@@ -510,7 +626,7 @@ window.TRIP_ROUTE = {
    "stops": [
     {
      "id": "d4-2",
-     "time": "10:05",
+     "time": "09:30",
      "name": "체크아웃 → 신주쿠역",
      "jp": "新宿駅 へ",
      "lat": 35.686915,
@@ -521,8 +637,8 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d4-3",
-     "time": "10:38",
-     "name": "N'EX 19호 탑승 (4·5호차)",
+     "time": "10:09 (조기편 권장)",
+     "name": "N'EX 10:09 권장 (기존 지정석 10:38 유지)",
      "jp": "成田エクスプレス 19号",
      "lat": 35.689607,
      "lng": 139.700571,
@@ -532,8 +648,8 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d4-4",
-     "time": "11:53",
-     "name": "나리타국제공항 제2터미널 · 체크인",
+     "time": "11:23 (조기편 기준)",
+     "name": "나리타 T2 · 면세 세관 확인 → 위탁수하물",
      "jp": "成田空港 第2ターミナル",
      "lat": 35.772414,
      "lng": 140.38868,
@@ -544,11 +660,20 @@ window.TRIP_ROUTE = {
    ],
    "segments": [
     {
-     "label": "10:05 체크아웃 → 신주쿠역 → 11:53 나리타국제공항 제2터미널 · 체크인",
+     "label": "전철/버스 · 09:30 체크아웃 → 신주쿠역 → 10:09 (조기편 권장) N'EX 10:09 권장 (기존 지정석 10:38 유지)",
      "from": 1,
+     "to": 2,
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.686915,139.693276&destination=35.689607,139.700571&travelmode=transit"
+    },
+    {
+     "label": "전철/버스 · 10:09 (조기편 권장) N'EX 10:09 권장 (기존 지정석 10:38 유지) → 11:23 (조기편 기준) 나리타 T2 · 면세 세관 확인 → 위탁수하물",
+     "from": 2,
      "to": 3,
-     "count": 3,
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.68691,139.69328&destination=35.77241,140.38868&waypoints=35.68961,139.70057"
+     "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.689607,139.700571&destination=35.772414,140.38868&travelmode=transit"
     }
    ]
   }

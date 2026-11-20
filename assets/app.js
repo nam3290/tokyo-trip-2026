@@ -8,6 +8,40 @@
   const view = document.getElementById("view");
   const tabsEl = document.getElementById("tabs");
   const heroEl = document.getElementById("hero");
+  // 방문 진행상태는 해당 기기 브라우저에서만 저장됩니다.
+  const VISIT_KEY = "tokyo-trip-visits-2026-v1";
+  let visitState = {};
+  try { visitState = JSON.parse(localStorage.getItem(VISIT_KEY) || "{}"); } catch (_) {}
+  const getVisit = (id) => visitState[id] || "";
+  function setVisit(id, status) {
+    visitState[id] = getVisit(id) === status ? "" : status;
+    try { localStorage.setItem(VISIT_KEY, JSON.stringify(visitState)); } catch (_) {}
+  }
+  function tokyoClock() {
+    const pieces = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit",
+      day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+    }).formatToParts(new Date());
+    const part = (type) => pieces.find((p) => p.type === type)?.value || "00";
+    return { date: part("year") + "-" + part("month") + "-" + part("day"),
+      hhmm: part("hour") + ":" + part("minute") };
+  }
+  function nextVisitHtml() {
+    const now = tokyoClock();
+    const day = D.days.find((x) => x.iso === now.date);
+    if (!day) return "";
+    const next = day.items.find((x) => /^\d\d:\d\d/.test(x.time) &&
+      x.time.slice(0, 5) >= now.hhmm && getVisit(x.id) !== "skip" && getVisit(x.id) !== "done");
+    if (!next) return '<div class="next-visit"><b>오늘 남은 예정 방문지 없음</b><span>완료/건너뛰기 상태를 확인하세요.</span></div>';
+    return '<div class="next-visit"><div><small>🇯🇵 도쿄 현지시간 ' + esc(now.hhmm) +
+      ' · 다음 방문지</small><b>' + esc(next.time) + ' · ' + esc(next.title) +
+      '</b></div>' + (next.map ? '<a href="' + esc(next.map) +
+      '" target="_blank" rel="noopener">🧭 길찾기</a>' : '') + '</div>';
+  }
+  function updateNextVisit() {
+    const target = document.getElementById("next-visit");
+    if (target) target.innerHTML = nextVisitHtml();
+  }
 
   /* ── 날짜 유틸 ── */
   const pad = (n) => String(n).padStart(2, "0");
@@ -41,7 +75,8 @@
       <span class="chip">🍽️ 식당 ${esc(R ? R.meta.count : "")}곳</span>
       <span class="chip">🗺️ 동선 지도</span>
     </div>
-    <div class="notice">${esc(D.meta.notice)}</div>`;
+    <div class="notice">${esc(D.meta.notice)}</div><div id="next-visit"></div>`;
+  updateNextVisit();
 
   /* ── 탭 ── */
   const dayTabs = [{ id: "all", label: "전체" }]
@@ -73,6 +108,12 @@
 
   function itemHtml(it) {
     const img = it.img ? photoCard(it.img, it.title + " 사진") : "";
+    const priority = it.priority === "optional" ? "선택" : "필수";
+    const state = getVisit(it.id);
+    const visitBtns = '<div class="visit-actions" role="group" aria-label="방문 상태"><button type="button" data-visit="done" data-v-id="' +
+      esc(it.id) + '" aria-pressed="' + (state === "done") + '">✓ 방문완료</button>' +
+      '<button type="button" data-visit="skip" data-v-id="' + esc(it.id) +
+      '" aria-pressed="' + (state === "skip") + '">↷ 건너뛰기</button></div>';
     const map = it.map
       ? `<a class="btn" href="${it.map}" target="_blank" rel="noopener">📍 구글맵 열기</a>`
       : "";
@@ -81,9 +122,9 @@
       : "";
     return `
       <span class="node" aria-hidden="true"></span>
-      <article class="card">
+      <article class="card" data-visit-card="${esc(it.id)}" data-status="${esc(state)}">
         <div class="card-head">
-          <span class="timechip">${esc(it.time)}</span>
+          <span class="timechip">${esc(it.time)}</span><span class="priority-badge ${it.priority === 'optional' ? 'optional' : 'essential'}">${priority}</span>
           <h3>${esc(it.title)}</h3>
           ${it.jp ? `<div class="jp">${esc(it.jp)}</div>` : ""}
         </div>
@@ -93,6 +134,8 @@
         </div>
         ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
         ${map || map2 ? `<div class="actions">${map}${map2}</div>` : ""}
+        ${it.source?.url ? `<div class="source-foot">📎 <a href="${esc(it.source.url)}" target="_blank" rel="noopener">${esc(it.source.label || "공식 출처")}</a> · 확인 ${esc(it.source.checked || "날짜 미기재")}</div>` : ""}
+        ${visitBtns}
       </article>`;
   }
 
@@ -138,16 +181,26 @@
 
   /* 식사 자리를 아직 정하지 않은 슬롯 — 카드 대신 조용한 안내만 남깁니다. */
   function pendingHtml(p, dayId) {
+    const picks = (p.recommendations || []).map((id) => R?.items.find((x) => x.id === id)).filter(Boolean);
     return `
       <div class="meal-pend">
         <div class="mp-top">
           <span class="mp-badge">${esc(p.icon || "🍽️")} ${esc(p.slot)}</span>
           <span class="mp-time">${esc(p.time || "")}</span>
-          <span class="mp-tag">미정</span>
+          <span class="mp-tag">미정 · 미예약</span>
         </div>
         ${p.area ? `<div class="mp-area">${esc(p.area)}</div>` : ""}
         ${p.note ? `<p class="mp-note">${esc(p.note)}</p>` : ""}
-        ${R ? `<div class="mp-foot"><button class="mini-btn" type="button" data-gofood="${esc(p.slot)}" data-gday="${esc(dayId || "")}">🍴 이 자리 식당추천 보기</button></div>` : ""}
+        ${picks.length ? `<div class="pending-recs">
+          <b>동선 기반 후보 ${picks.length}곳 · 자리/영업 확인 필요</b>
+          ${picks.map((it, i) => `<div class="pending-rec">
+            <span class="rec-rank">${i === 0 ? "1순위" : "대안 " + i}</span>
+            <div><strong>${esc(it.name)}</strong><small>${esc(it.genre || "")} · ${esc(it.budget || "가격 확인 필요")}<span> · 3인석·예약 및 공휴일 영업 미확인</span></small></div>
+            <a href="${esc(it.map)}" target="_blank" rel="noopener">지도</a>
+          </div>`).join("")}
+          ${p.reservationStatus ? `<p class="rec-warning">${esc(p.reservationStatus)}</p>` : ""}
+        </div>` : ""}
+        ${R ? `<div class="mp-foot"><button class="mini-btn" type="button" data-gofood="${esc(p.slot)}" data-gday="${esc(dayId || "")}">🍴 이 자리 전체 식당추천 보기</button></div>` : ""}
       </div>`;
   }
 
@@ -360,13 +413,15 @@
         </div>
         <div class="rchips">
           ${v ? `<span class="rchip vh">${esc(DAY_NAME[v.day] || "")} ${esc(v.h)}</span>` : ""}
+          <span class="rchip unverified">영업시간 공식 미검증</span>
           ${slots}${tags}
         </div>
+        <p class="rverify">🕒 ${esc(it.hoursVerification?.label || "영업시간 미확인")} · 자료일 ${esc(it.hoursVerification?.checked || "미상")} · 방문 전 공식 영업 확인</p>
         <dl class="rdl">
           ${it.genre ? `<dt>장르</dt><dd>${esc(it.genre_full || it.genre)}</dd>` : ""}
           ${it.area ? `<dt>권역</dt><dd>${esc(it.area)}${it.walk ? ` · ${esc(it.walk)}` : ""}</dd>` : ""}
           ${it.budget ? `<dt>예산</dt><dd>${esc(it.budget)}</dd>` : ""}
-          ${it.phone ? `<dt>전화</dt><dd>${esc(it.phone)}</dd>` : ""}
+          ${it.phone ? `<dt>전화</dt><dd>${esc(it.phone)}${it.phoneVerification?.status === "confirmed" ? ` <a href="${esc(it.phoneVerification.source)}" target="_blank" rel="noopener">번호 출처</a>` : ""}</dd>` : ""}
         </dl>
         <div class="rscores">${scoreHtml(it)}</div>
         ${it.tip ? `<p class="rtip"><b>팁</b> · ${esc(it.tip)}</p>` : ""}
@@ -508,18 +563,52 @@
   const MAP = { day: "all", food: false, focus: null };
   let leaflet = null;
 
-  const MAP_DAYS = () => (M ? M.days : []);
+  const MAP_DAYS = () => {
+    if (!M) return [];
+    return M.days.map((old) => {
+      const actual = D.days.find((day) => day.id === old.id);
+      if (!actual) return old;
+      const byId = new Map(actual.items.map((it) => [it.id, it]));
+      const railOrBus = new Set(["d1-2","d1-3","d1-4","d2-5","d2-6","d2-18","d3-1","d3-6","d3-10","d3-12","d4-2","d4-3"]);
+      const stops = old.stops.map((stop) => {
+        const it = byId.get(stop.id);
+        return it ? { ...stop, time: it.time, name: it.title, priority: it.priority } : stop;
+      });
+      // 장소의 좌표는 route.js에서 사용하되, 일정·시각·우선순위는 itinerary.js를 단일 진실원으로 사용.
+      const pieces = [];
+      for (let j = 0; j < stops.length - 1; j++) {
+        const from = stops[j], to = stops[j+1], current = byId.get(from.id);
+        let mode = railOrBus.has(from.id) || current?.leg?.type === "bus" || current?.leg?.type === "train" ? "transit" : "walking";
+        if (from.id === "d4-3") mode = "transit"; // N'EX 본구간
+        if (from.id === "d1-2") mode = "transit"; // 공항 리무진
+        const last = pieces[pieces.length - 1];
+        if (mode === "walking" && last?.mode === "walking" && last.points.length < 5) {
+          last.points.push(to);
+        } else {
+          pieces.push({ mode, points: [from, to] });
+        }
+      }
+      const segments = pieces.map((group) => ({
+        mode: group.mode,
+        from: group.points[0].name,
+        to: group.points[group.points.length - 1].name,
+        points: group.points,
+        url: googleDir(group.points, group.mode)
+      }));
+      return { ...old, stops: stops.map((p, i) => ({...p, n:i+1})), segments };
+    });
+  };
 
   function stopsFor(dayId) {
     return MAP_DAYS().filter((d) => dayId === "all" || d.id === dayId);
   }
 
-  function googleDir(points) {
+  function googleDir(points, travelmode = "walking") {
     if (!points || points.length < 2) return "";
     const a = points[0], b = points[points.length - 1];
     const mid = points.slice(1, -1);
-    let u = `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}`;
-    if (mid.length) u += "&waypoints=" + mid.map((p) => `${p.lat},${p.lng}`).join("%7C");
+    let u = `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}&travelmode=${travelmode}`;
+    if (mid.length && travelmode === "walking") u += "&waypoints=" + mid.map((p) => `${p.lat},${p.lng}`).join("%7C");
     return u;
   }
 
@@ -531,7 +620,7 @@
       <div class="mapwrap">
         <div class="maphead">
           <h2>동선 지도</h2>
-          <p class="lead">번호는 그날의 방문 순서입니다. 마커를 누르면 구글맵으로 열 수 있고, 아래 버튼으로 구간 경유지 경로가 구글맵 앱에서 바로 열립니다.</p>
+          <p class="lead">방문 순서와 시각은 일정 데이터와 자동 동기화됩니다. 아래 전철/버스 구간과 도보 쇼핑 구간을 나누어 열 수 있습니다. 정확한 열차시각은 현장 확인이 필요합니다.</p>
         </div>
         <div class="mapchips">
           <button class="fchip ${day === "all" ? "on" : ""}" type="button" data-mday="all">전체</button>
@@ -548,14 +637,14 @@
             <h3 class="mday-h" style="--c:${d.color}"><i></i>${esc(d.label)} <span>${esc(d.title)}</span></h3>
             <div class="mseg">
               ${(d.segments || []).map((s, i) => `
-                <a class="btn" href="${s.url}" target="_blank" rel="noopener">🧭 구글맵 경로 ${d.segments.length > 1 ? `${i + 1}/${d.segments.length}` : ""} · ${s.from}→${s.to}</a>`).join("")}
+                <a class="btn" href="${s.url}" target="_blank" rel="noopener">${s.mode === "transit" ? "🚆 전철·버스" : "🚶 도보"} 경로 ${d.segments.length > 1 ? `${i + 1}/${d.segments.length}` : ""} · ${esc(s.from)}→${esc(s.to)}</a>`).join("")}
             </div>
             <ol class="mstops">
               ${d.stops.map((s) => `
                 <li data-stop="${esc(s.id)}">
                   <span class="mnum" style="--c:${d.color}">${s.n}</span>
                   <div class="mstop-body">
-                    <div class="mrow"><span class="mtime">${esc(s.time)}</span><b>${esc(s.name)}</b>${s.kind === "meal" ? '<span class="mkind">식사</span>' : ""}${s.kind === "hotel" ? '<span class="mkind">숙소</span>' : ""}</div>
+                    <div class="mrow"><span class="mtime">${esc(s.time)}</span><b>${esc(s.name)}</b>${s.kind === "meal" ? '<span class="mkind">식사</span>' : ""}${s.kind === "hotel" ? '<span class="mkind">숙소</span>' : ""}${s.priority === "optional" ? '<span class="mkind">선택</span>' : ""}</div>
                     ${s.jp ? `<div class="mjp">${esc(s.jp)}</div>` : ""}
                     <div class="mlinks">
                       <a href="${s.map}" target="_blank" rel="noopener">구글맵</a>
@@ -734,6 +823,19 @@
   });
 
   view.addEventListener("click", (e) => {
+    const v = e.target.closest("[data-visit]");
+    if (v) {
+      const id = v.dataset.vId;
+      setVisit(id, v.dataset.visit);
+      const card = v.closest("[data-visit-card]");
+      if (card) {
+        const status = getVisit(id);
+        card.dataset.status = status;
+        card.querySelectorAll("[data-visit]").forEach((btn) => btn.setAttribute("aria-pressed", String(btn.dataset.visit === status)));
+      }
+      updateNextVisit();
+      return;
+    }
     const z = e.target.closest("[data-zoom]");
     if (z) { openModal(z.dataset.zoom, z.dataset.cap); return; }
     const j = e.target.closest("[data-jump]");
@@ -815,6 +917,8 @@
     });
   }
 
+  setInterval(updateNextVisit, 60000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) updateNextVisit(); });
   window.addEventListener("hashchange", () => {
     const id = location.hash.slice(1);
     if (id && allIds.includes(id)) render(id);
