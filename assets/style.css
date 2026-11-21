@@ -462,5 +462,6 @@ details.more[open] summary::after{content:"▴"}
 .pending-rec a{color:#2b5b83;font-size:11.5px;font-weight:700;text-decoration:none;padding:4px}
 .rec-warning{font-size:10.5px;color:#8b6246;margin:3px 0 0}
 .rchip.unverified{background:#fff5e3;color:#8c6525;border:1px solid #ead5a7}
+.rchip.verified{background:#e9f4ec;color:#2f6f4a;border:1px solid #b9ddc6}
 .rverify{margin:0 13px 8px;font-size:11px;color:#755f3f;background:#fff9ee;border-radius:8px;padding:7px 9px;line-height:1.55}
 @media(max-width:380px){.next-visit{align-items:flex-start;flex-direction:column}.next-visit a{align-self:flex-end}}

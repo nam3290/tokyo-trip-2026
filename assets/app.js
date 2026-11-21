@@ -413,7 +413,7 @@
         </div>
         <div class="rchips">
           ${v ? `<span class="rchip vh">${esc(DAY_NAME[v.day] || "")} ${esc(v.h)}</span>` : ""}
-          <span class="rchip unverified">영업시간 공식 미검증</span>
+          ${it.hoursVerification?.status === "confirmed" ? `<span class="rchip verified">공식·타베로그 대조</span>` : `<span class="rchip unverified">영업시간 공식 미검증</span>`}
           ${slots}${tags}
         </div>
         <p class="rverify">🕒 ${esc(it.hoursVerification?.label || "영업시간 미확인")} · 자료일 ${esc(it.hoursVerification?.checked || "미상")} · 방문 전 공식 영업 확인</p>
