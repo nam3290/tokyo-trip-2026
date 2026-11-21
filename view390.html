@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>390x844 검증</title>
+<style>
+  html,body{margin:0;background:#222}
+  iframe{width:390px;height:844px;border:0;display:block;background:#fff}
+</style>
+</head>
+<body>
+<iframe id="f" src="./index.html#d2" width="390" height="844"></iframe>
+<script>
+  if (location.hash.length > 1) document.getElementById("f").src = "./index.html" + location.hash;
+</script>
+</body>
+</html>
