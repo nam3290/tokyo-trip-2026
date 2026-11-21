@@ -478,6 +478,17 @@ window.TRIP_ROUTE = {
      "n": 6
     },
     {
+     "id": "d3-6b",
+     "time": "14:50",
+     "name": "팡 메종 긴자점 (소금빵)",
+     "jp": "塩パン屋 pain・maison 銀座店",
+     "lat": 35.6715607,
+     "lng": 139.7705344,
+     "map": "https://maps.google.com/?cid=17159700221412295500",
+     "kind": "spot",
+     "n": 7
+    },
+    {
      "id": "d3-7",
      "time": "15:45",
      "name": "KAPITAL TOKYO NAKED STORE",
@@ -486,7 +497,7 @@ window.TRIP_ROUTE = {
      "lng": 139.709824,
      "map": "https://maps.google.com/?cid=3504688113222414750",
      "kind": "spot",
-     "n": 7
+     "n": 8
     },
     {
      "id": "d3-8",
@@ -497,7 +508,7 @@ window.TRIP_ROUTE = {
      "lng": 139.710166,
      "map": "https://maps.google.com/?cid=4955929520084932929",
      "kind": "spot",
-     "n": 8
+     "n": 9
     },
     {
      "id": "d3-9",
@@ -508,7 +519,7 @@ window.TRIP_ROUTE = {
      "lng": 139.709148,
      "map": "https://maps.google.com/?cid=8243935970920433661",
      "kind": "spot",
-     "n": 9
+     "n": 10
     },
     {
      "id": "d3-10",
@@ -519,7 +530,7 @@ window.TRIP_ROUTE = {
      "lng": 139.708874,
      "map": "https://maps.google.com/?cid=16254508638521557928",
      "kind": "spot",
-     "n": 10
+     "n": 11
     },
     {
      "id": "d3-11",
@@ -530,7 +541,7 @@ window.TRIP_ROUTE = {
      "lng": 139.729478,
      "map": "https://maps.google.com/?cid=8309528121310561895",
      "kind": "spot",
-     "n": 11
+     "n": 12
     },
     {
      "id": "d3-12",
@@ -541,7 +552,7 @@ window.TRIP_ROUTE = {
      "lng": 139.729942,
      "map": "https://maps.google.com/?cid=12063536569698439509",
      "kind": "spot",
-     "n": 12
+     "n": 13
     },
     {
      "id": "d3-13",
@@ -552,7 +563,7 @@ window.TRIP_ROUTE = {
      "lng": 139.702346,
      "map": "https://maps.google.com/?cid=67978450380853922",
      "kind": "spot",
-     "n": 13,
+     "n": 14,
      "priority": "optional"
     }
    ],
@@ -574,41 +585,49 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.677141,139.764262&destination=35.673214,139.765368&travelmode=walking&waypoints=35.682174,139.764507%7C35.675655,139.769057%7C35.67161,139.76299"
     },
     {
-     "label": "전철/버스 · 14:00 MUJI 긴자 (무인양품) → 15:45 KAPITAL TOKYO NAKED STORE",
+     "label": "도보 · 14:00 MUJI 긴자 (무인양품) → 14:50 팡 메종 긴자점 (소금빵)",
      "from": 6,
      "to": 7,
      "count": 2,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.673214,139.765368&destination=35.6715607,139.7705344&travelmode=walking"
+    },
+    {
+     "label": "전철/버스 · 14:50 팡 메종 긴자점 (소금빵) → 15:45 KAPITAL TOKYO NAKED STORE",
+     "from": 7,
+     "to": 8,
+     "count": 2,
      "mode": "transit",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.673214,139.765368&destination=35.643709,139.709824&travelmode=transit"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6715607,139.7705344&destination=35.643709,139.709824&travelmode=transit"
     },
     {
      "label": "도보 · 15:45 KAPITAL TOKYO NAKED STORE → 16:55 RECTOHALL (에비스)",
-     "from": 7,
-     "to": 10,
+     "from": 8,
+     "to": 11,
      "count": 4,
      "mode": "walking",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.643709,139.709824&destination=35.642155,139.708874&travelmode=walking&waypoints=35.642786,139.710166%7C35.642106,139.709148"
     },
     {
      "label": "전철/버스 · 16:55 RECTOHALL (에비스) → 17:45 롯폰기 힐즈 크리스마스 마켓 (오야네 광장)",
-     "from": 10,
-     "to": 11,
+     "from": 11,
+     "to": 12,
      "count": 2,
      "mode": "transit",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.642155,139.708874&destination=35.659932,139.729478&travelmode=transit"
     },
     {
      "label": "도보 · 17:45 롯폰기 힐즈 크리스마스 마켓 (오야네 광장) → 18:25 게야키자카 일루미네이션",
-     "from": 11,
-     "to": 12,
+     "from": 12,
+     "to": 13,
      "count": 2,
      "mode": "walking",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.659932,139.729478&destination=35.659247,139.729942&travelmode=walking"
     },
     {
      "label": "전철/버스 · 18:25 게야키자카 일루미네이션 → 19:10 L-Breath 신주쿠",
-     "from": 12,
-     "to": 13,
+     "from": 13,
+     "to": 14,
      "count": 2,
      "mode": "transit",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.659247,139.729942&destination=35.689212,139.702346&travelmode=transit"
