@@ -98,7 +98,7 @@ window.TRIP_ROUTE = {
    "tab": "2일차 (일)",
    "date": "11/22",
    "weekday": "일",
-   "title": "신주쿠 → 아카사카 → 하라주쿠 → 시부야",
+   "title": "신주쿠 → 아카사카 → 하라주쿠 → 시부야 → 가부키초",
    "color": "#2f6f5e",
    "stops": [
     {
@@ -324,15 +324,26 @@ window.TRIP_ROUTE = {
      "n": 20
     },
     {
+     "id": "d2-meal-저녁",
+     "time": "20:55",
+     "name": "노다핀 (居酒屋 のだぴん) — 가부키초 저녁",
+     "jp": "居酒屋 のだぴん",
+     "lat": 35.6969674,
+     "lng": 139.700469,
+     "map": "https://maps.google.com/?cid=16059258653864779665",
+     "kind": "meal",
+     "n": 21
+    },
+    {
      "id": "d2-19",
-     "time": "20:50",
+     "time": "22:30",
      "name": "신주쿠 워싱턴 복귀",
      "jp": "新宿ワシントンホテル",
      "lat": 35.686915,
      "lng": 139.693276,
      "map": "https://maps.google.com/?cid=6872319874272201570",
      "kind": "spot",
-     "n": 21
+     "n": 22
     }
    ],
    "segments": [
@@ -393,12 +404,20 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.662638,139.701827&destination=35.661358,139.701052&travelmode=walking&waypoints=35.662956,139.700405%7C35.66303,139.69939"
     },
     {
-     "label": "전철/버스 · 20:10 2nd STREET 시부야 진난점 → 20:50 신주쿠 워싱턴 복귀",
+     "label": "전철/버스 · 20:10 2nd STREET 시부야 진난점 → 20:55 노다핀 (居酒屋 のだぴん)",
      "from": 20,
      "to": 21,
      "count": 2,
      "mode": "transit",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.661358,139.701052&destination=35.686915,139.693276&travelmode=transit"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.661358,139.701052&destination=35.6969674,139.700469&travelmode=transit"
+    },
+    {
+     "label": "도보 · 22:10 노다핀 (居酒屋 のだぴん) → 22:30 신주쿠 워싱턴 복귀",
+     "from": 21,
+     "to": 22,
+     "count": 2,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6969674,139.700469&destination=35.686915,139.693276&travelmode=walking"
     }
    ]
   },
