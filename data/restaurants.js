@@ -869,7 +869,7 @@ window.RESTAURANTS = {
    "phone": "+81 3-5545-5598",
    "walk": "아크힐즈 도보 15분(1.1km)",
    "note": "평점 4.8. 관광지 물가가 아닌 동네 스시집.",
-   "tip": "매장 번호 03-5545-5598 (미나토구 공공자료 확인). 11/22 일요일 영업·런치 제공·예약 가능 여부는 별도 확인 필수.",
+   "tip": "매장 번호 03-5545-5598 (구글맵·타베로그 확인). 11/22 일요일 영업·런치 제공·예약 가능 여부는 별도 확인 필수.",
    "awards": "",
    "addr": "일본 〒107-0052 Tokyo, Minato City, Akasaka, 3 Chome−13−2 赤坂第一ビル 2F 3F",
    "lat": 35.6735657,
@@ -887,7 +887,7 @@ window.RESTAURANTS = {
     "status": "confirmed",
     "label": "공식/공공자료 확인",
     "checked": "2026-11-20",
-    "source": "https://www.city.minato.tokyo.jp/documents/94931/hp3_akasaka_01_wa_1231.pdf"
+    "source": "https://tabelog.com/tokyo/A1308/A130801/13309724/"
    }
   },
   {

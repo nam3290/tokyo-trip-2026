@@ -3,7 +3,7 @@
  */
 window.TRIP_ROUTE = {
  "meta": {
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "center": [
    35.6812,
    139.7671
