@@ -125,7 +125,7 @@
           <span class="near-meta">🚶 도보 ${n.w}분 · ${esc(r.genre || "")}</span>
           <span class="near-why">${esc(n.why || r.note || "")}</span>
         </span>
-        <span class="near-go" aria-hidden="true">📍</span>
+        <span class="near-go" aria-hidden="true">›</span>
       </a>`;
     }).join("");
     if (!rows) return "";
