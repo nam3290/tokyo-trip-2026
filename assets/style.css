@@ -142,6 +142,29 @@ a{color:inherit}
 .btn.ghost{background:#fff; color:var(--ink-soft); border-color:var(--line)}
 .btn:active{transform:translateY(1px)}
 
+/* ── 근처 맛집 메모 (일정 카드 안) ── */
+.near{margin:0 14px 12px; padding-top:10px; border-top:1px dashed var(--line)}
+.near-h{display:flex; align-items:baseline; gap:5px; flex-wrap:wrap; font-size:11.5px; color:#6b6154; margin-bottom:7px}
+.near-h b{font-size:12px; color:var(--ink); font-weight:750}
+.near-sub{font-size:10.8px; color:var(--muted)}
+.near-strip{display:flex; gap:8px; overflow-x:auto; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; padding-bottom:2px}
+.near-strip::-webkit-scrollbar{display:none}
+.near-card{
+  flex:0 0 calc(50% - 4px); min-width:0; scroll-snap-align:start;
+  display:flex; gap:7px; align-items:flex-start; padding:7px;
+  border:1px solid var(--line); border-radius:12px; background:#fffdf9;
+  text-decoration:none; color:inherit;
+}
+.near-card:active{transform:translateY(1px)}
+.near-photo{flex:0 0 44px; width:44px; height:44px; border-radius:9px; overflow:hidden; background:#ece6db}
+.near-photo.noimg{display:none}
+.near-photo img{width:100%; height:100%; object-fit:cover; display:block}
+.near-body{min-width:0; flex:1; display:flex; flex-direction:column; gap:2px}
+.near-name{font-size:11.8px; font-weight:750; line-height:1.3; letter-spacing:-.01em; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.near-meta{font-size:10.5px; color:#7d6f5d; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.near-why{font-size:10.8px; color:#5b6470; line-height:1.4; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.near-go{flex:0 0 auto; font-size:10.5px; opacity:.6; align-self:center}
+
 /* ── legs (이동) ── */
 .leg{position:relative; margin:0 0 10px 26px; padding:9px 12px 9px 12px; border-radius:12px;
   background:#f6f1e8; border:1px dashed #ddd3c2; display:flex; gap:9px; align-items:flex-start}

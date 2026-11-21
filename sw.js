@@ -3,7 +3,7 @@
  * · 이미지·아이콘 = cache-first (용량이 커서 한 번 받으면 재사용)
  * 실패해도 페이지 동작에는 영향이 없습니다.
  */
-const CACHE = "tokyo-trip-v24";
+const CACHE = "tokyo-trip-v25";
 const ASSETS = [
  "./",
  "./index.html",
@@ -13,6 +13,7 @@ const ASSETS = [
  "./data/itinerary.js",
  "./data/restaurants.js",
  "./data/route.js",
+ "./data/nearby.js",
  "./icons/apple-touch-icon.png",
  "./icons/icon-192.png",
  "./icons/icon-512.png",
@@ -50,6 +51,13 @@ const ASSETS = [
  "./images/patagonia.jpg",
  "./images/r-shimpachi.jpg",
  "./images/restaurants/r160.jpg",
+ "./images/restaurants/r161.jpg",
+ "./images/restaurants/r162.jpg",
+ "./images/restaurants/r163.jpg",
+ "./images/restaurants/r164.jpg",
+ "./images/restaurants/r165.jpg",
+ "./images/restaurants/r166.jpg",
+ "./images/restaurants/r167.jpg",
  "./images/ragtag.jpg",
  "./images/ralph-lauren.jpg",
  "./images/rectohall.jpg",

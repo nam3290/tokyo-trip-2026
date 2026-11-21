@@ -5,6 +5,7 @@
   const D = window.TRIP_DATA;
   const R = window.RESTAURANTS;
   const M = window.TRIP_ROUTE;
+  const N = window.NEARBY;
   const view = document.getElementById("view");
   const tabsEl = document.getElementById("tabs");
   const heroEl = document.getElementById("hero");
@@ -106,6 +107,37 @@
       <button class="fig-btn" type="button" data-zoom="${src}" data-cap="${esc(alt)}" aria-label="사진 크게 보기"></button></figure>`;
   }
 
+  /* 일정 방문지마다 반경 450m 안의 식당을 '근처 맛집 메모'로 붙입니다 (data/nearby.js). */
+  function nearbyHtml(it) {
+    const list = N && N.spots ? N.spots[it.id] : null;
+    if (!list || !list.length || !R) return "";
+    const rows = list.map((n) => {
+      const r = R.items.find((x) => x.id === n.id);
+      if (!r) return "";
+      const thumb = r.image
+        ? `<img src="${esc(r.image)}" alt="${esc(r.name)} 사진" loading="lazy" decoding="async"
+            onerror="this.parentNode.classList.add('noimg');this.parentNode.removeChild(this);">`
+        : "";
+      return `<a class="near-card" href="${esc(r.map)}" target="_blank" rel="noopener" aria-label="${esc(r.name)} 구글맵 열기">
+        <span class="near-photo">${thumb}</span>
+        <span class="near-body">
+          <span class="near-name">${esc(r.name)}</span>
+          <span class="near-meta">🚶 도보 ${n.w}분 · ${esc(r.genre || "")}</span>
+          <span class="near-why">${esc(n.why || r.note || "")}</span>
+        </span>
+        <span class="near-go" aria-hidden="true">📍</span>
+      </a>`;
+    }).join("");
+    if (!rows) return "";
+    const ws = list.map((n) => n.w);
+    const lo = Math.min(...ws), hi = Math.max(...ws);
+    const walk = lo === hi ? `도보 ${lo}분` : `도보 ${lo}~${hi}분`;
+    return `<div class="near">
+      <div class="near-h"><span aria-hidden="true">🍽️</span> <b>근처 맛집 메모</b> <span class="near-sub">${list.length}곳 · ${walk}</span></div>
+      <div class="near-strip">${rows}</div>
+    </div>`;
+  }
+
   function itemHtml(it) {
     const img = it.img ? photoCard(it.img, it.title + " 사진") : "";
     const priority = it.priority === "optional" ? "선택" : "필수";
@@ -134,6 +166,7 @@
         </div>
         ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
         ${map || map2 ? `<div class="actions">${map}${map2}</div>` : ""}
+        ${nearbyHtml(it)}
         ${it.source?.url ? `<div class="source-foot">📎 <a href="${esc(it.source.url)}" target="_blank" rel="noopener">${esc(it.source.label || "공식 출처")}</a> · 확인 ${esc(it.source.checked || "날짜 미기재")}</div>` : ""}
         ${visitBtns}
       </article>`;
