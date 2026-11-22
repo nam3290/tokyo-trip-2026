@@ -8,7 +8,7 @@ window.TRIP_ROUTE = {
    35.6812,
    139.7671
   ],
-  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-22 2일차에 셀린느 오모테산도(원 오모테산도 1F, 35.6658348, 139.7118407)를 랄프로렌 다음에 넣고, 뒤따르는 하라주쿠·시부야 구간의 도보 시간과 체류 시간을 구글 도보 경로 기준으로 다시 계산했습니다."
+  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-22 14:45 아크힐즈 출발 기준으로 2일차 오후를 다시 짰습니다 — 허밍버즈힐(35.671944,139.709053)·THE H.W. DOG&CO.(35.6721344,139.7095819)·FREAK'S STORE(35.662956,139.700405)를 지점에서 빼고, 만석인 노다핀 대신 2nd STREET 뒤를 미정 저녁으로 비웠습니다. 하라주쿠 15:20 OSHMAN'S → 랄프로렌 15:50 → 셀린느 16:23 → RAGTAG 16:55 → DANTON 17:23 → 파타고니아 17:46 → 메종 키츠네 18:24 → SUN HOUSE 18:57 → 2nd STREET 19:26 → 22:00 숙소."
  },
  "days": [
   {
@@ -92,13 +92,13 @@ window.TRIP_ROUTE = {
     }
    ]
   },
-  {
+    {
    "id": "d2",
    "label": "2일차 · 11/22(일)",
    "tab": "2일차 (일)",
    "date": "11/22",
    "weekday": "일",
-   "title": "신주쿠 → 아카사카 → 하라주쿠 → 오모테산도 → 시부야 → 가부키초",
+   "title": "신주쿠 → 아카사카 → 하라주쿠 → 오모테산도 → 시부야 → 신주쿠",
    "color": "#2f6f5e",
    "stops": [
     {
@@ -191,7 +191,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-7",
-     "time": "16:00",
+     "time": "15:20",
      "name": "OSHMAN'S 하라주쿠",
      "jp": "オッシュマンズ 原宿店",
      "lat": 35.669384,
@@ -201,148 +201,103 @@ window.TRIP_ROUTE = {
      "n": 9
     },
     {
-     "id": "d2-8",
-     "time": "16:32",
-     "name": "Hummingbirds' hill shop",
-     "jp": "ハミングバーズヒル ショップ",
-     "lat": 35.671944,
-     "lng": 139.709053,
-     "map": "https://maps.google.com/?cid=1374394553814675223",
-     "kind": "spot",
-     "n": 10
-    },
-    {
-     "id": "d2-9",
-     "time": "16:57",
-     "name": "THE H.W. DOG&CO. — 모자 전문점",
-     "jp": "神宮前 3-28-10 ウッズビル 1F",
-     "lat": 35.6721344,
-     "lng": 139.7095819,
-     "map": "https://maps.google.com/?cid=2191060513098770626&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
-     "kind": "spot",
-     "n": 11
-    },
-    {
      "id": "d2-10",
-     "time": "17:20",
+     "time": "15:50",
      "name": "Ralph Lauren Omotesando",
      "jp": "ラルフローレン 表参道",
      "lat": 35.66822,
      "lng": 139.707332,
      "map": "https://maps.google.com/?cid=18134942615298900179",
      "kind": "spot",
-     "n": 12
+     "n": 10
     },
     {
      "id": "d2-10b",
-     "time": "17:48",
+     "time": "16:23",
      "name": "CELINE 오모테산도 (セリーヌ 表参道)",
      "jp": "セリーヌ 表参道",
      "lat": 35.6658348,
      "lng": 139.7118407,
      "map": "https://maps.google.com/?cid=17684372626634111342",
      "kind": "spot",
-     "n": 13
+     "n": 11
     },
     {
      "id": "d2-12",
-     "time": "18:10",
+     "time": "16:55",
      "name": "RAGTAG 하라주쿠",
      "jp": "ラグタグ 原宿",
      "lat": 35.665757,
      "lng": 139.705218,
      "map": "https://maps.google.com/?cid=15427969971660052394",
      "kind": "spot",
-     "n": 14
+     "n": 12
     },
     {
      "id": "d2-13",
-     "time": "18:28",
+     "time": "17:23",
      "name": "DANTON TOKYO",
      "jp": "ダントン 東京",
      "lat": 35.666232,
      "lng": 139.704002,
      "map": "https://maps.google.com/?cid=3286721948833497824",
      "kind": "spot",
-     "n": 15
+     "n": 13
     },
     {
      "id": "d2-14",
-     "time": "18:41",
+     "time": "17:46",
      "name": "Patagonia Tokyo Shibuya",
      "jp": "パタゴニア 東京 渋谷",
      "lat": 35.665217,
      "lng": 139.703582,
      "map": "https://maps.google.com/?cid=9042211536900144705",
      "kind": "spot",
-     "n": 16
+     "n": 14
     },
     {
      "id": "d2-15",
-     "time": "19:10",
+     "time": "18:24",
      "name": "Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
      "jp": "メゾン キツネ 宮下パーク",
      "lat": 35.662638,
      "lng": 139.701827,
      "map": "https://maps.google.com/?cid=14579441227567108828",
      "kind": "spot",
-     "n": 17
-    },
-    {
-     "id": "d2-16",
-     "time": "19:31",
-     "name": "FREAK'S STORE 시부야",
-     "jp": "フリークス ストア 渋谷",
-     "lat": 35.662956,
-     "lng": 139.700405,
-     "map": "https://maps.google.com/?cid=13016080179487620260",
-     "kind": "spot",
-     "n": 18,
-     "priority": "optional"
+     "n": 15
     },
     {
      "id": "d2-17",
-     "time": "19:45",
+     "time": "18:57",
      "name": "SUN HOUSE 진난",
      "jp": "サンハウス 神南",
      "lat": 35.66303,
      "lng": 139.69939,
      "map": "https://maps.google.com/?cid=14088655221653192636",
      "kind": "spot",
-     "n": 19
+     "n": 16
     },
     {
      "id": "d2-18",
-     "time": "20:12",
+     "time": "19:26",
      "name": "2nd STREET 시부야 진난점",
      "jp": "セカンドストリート 渋谷神南店",
      "lat": 35.661358,
      "lng": 139.701052,
      "map": "https://maps.google.com/?cid=3790135795445788292",
      "kind": "spot",
-     "n": 20
-    },
-    {
-     "id": "d2-meal-저녁",
-     "time": "20:55",
-     "name": "노다핀 (居酒屋 のだぴん) — 가부키초 저녁",
-     "jp": "居酒屋 のだぴん",
-     "lat": 35.6969674,
-     "lng": 139.700469,
-     "map": "https://maps.google.com/?cid=16059258653864779665",
-     "kind": "meal",
-     "n": 21
+     "n": 17
     },
     {
      "id": "d2-19",
-     "time": "22:30",
+     "time": "22:00",
      "name": "신주쿠 워싱턴 복귀",
      "jp": "新宿ワシントンホテル",
      "lat": 35.686915,
      "lng": 139.693276,
      "map": "https://maps.google.com/?cid=6872319874272201570",
      "kind": "spot",
-     "n": 22
+     "n": 18
     }
    ],
    "segments": [
@@ -371,7 +326,7 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.691862,139.700995&destination=35.666664,139.740359&travelmode=transit"
     },
     {
-     "label": "전철/버스 · 13:20 아카사카 벼룩시장 (아크힐즈 카라얀 광장) → 16:00 OSHMAN'S 하라주쿠",
+     "label": "전철/버스 · 13:20 아카사카 벼룩시장 (아크힐즈 카라얀 광장) → 15:20 OSHMAN'S 하라주쿠",
      "from": 8,
      "to": 9,
      "count": 2,
@@ -379,44 +334,28 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.666664,139.740359&destination=35.669384,139.705856&travelmode=transit"
     },
     {
-     "label": "도보 · 16:00 OSHMAN'S 하라주쿠 → 17:48 CELINE 오모테산도 (セリーヌ 表参道)",
+     "label": "도보 · 15:20 OSHMAN'S 하라주쿠 → 17:23 DANTON TOKYO",
      "from": 9,
      "to": 13,
      "count": 5,
      "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.6658348,139.7118407&travelmode=walking&waypoints=35.671944,139.709053%7C35.6721344,139.7095819%7C35.66822,139.707332"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.666232,139.704002&travelmode=walking&waypoints=35.66822,139.707332%7C35.6658348,139.7118407%7C35.665757,139.705218"
     },
     {
-     "label": "도보 · 17:48 CELINE 오모테산도 (セリーヌ 表参道) → 19:10 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
+     "label": "도보 · 17:23 DANTON TOKYO → 19:26 2nd STREET 시부야 진난점",
      "from": 13,
      "to": 17,
      "count": 5,
      "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6658348,139.7118407&destination=35.662638,139.701827&travelmode=walking&waypoints=35.665757,139.705218%7C35.666232,139.704002%7C35.665217,139.703582"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.666232,139.704002&destination=35.661358,139.701052&travelmode=walking&waypoints=35.665217,139.703582%7C35.662638,139.701827%7C35.66303,139.69939"
     },
     {
-     "label": "도보 · 19:10 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F) → 20:12 2nd STREET 시부야 진난점",
+     "label": "전철/버스 · 19:26 2nd STREET 시부야 진난점 → 22:00 신주쿠 워싱턴 복귀",
      "from": 17,
-     "to": 20,
-     "count": 4,
-     "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.662638,139.701827&destination=35.661358,139.701052&travelmode=walking&waypoints=35.662956,139.700405%7C35.66303,139.69939"
-    },
-    {
-     "label": "전철/버스 · 20:12 2nd STREET 시부야 진난점 → 20:55 노다핀 (居酒屋 のだぴん)",
-     "from": 20,
-     "to": 21,
+     "to": 18,
      "count": 2,
      "mode": "transit",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.661358,139.701052&destination=35.6969674,139.700469&travelmode=transit"
-    },
-    {
-     "label": "도보 · 22:10 노다핀 (居酒屋 のだぴん) → 22:30 신주쿠 워싱턴 복귀",
-     "from": 21,
-     "to": 22,
-     "count": 2,
-     "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6969674,139.700469&destination=35.686915,139.693276&travelmode=walking"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.661358,139.701052&destination=35.686915,139.693276&travelmode=transit"
     }
    ]
   },
