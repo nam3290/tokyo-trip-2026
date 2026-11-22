@@ -3,12 +3,12 @@
  */
 window.TRIP_ROUTE = {
  "meta": {
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "center": [
    35.6812,
    139.7671
   ],
-  "note": "매장 위치는 기존 지도 데이터와 THE H.W.DOG&CO 공식 사이트의 Google 지도 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다."
+  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-22 2일차에 셀린느 오모테산도(원 오모테산도 1F, 35.6658348, 139.7118407)를 랄프로렌 다음에 넣고, 뒤따르는 하라주쿠·시부야 구간의 도보 시간과 체류 시간을 구글 도보 경로 기준으로 다시 계산했습니다."
  },
  "days": [
   {
@@ -98,7 +98,7 @@ window.TRIP_ROUTE = {
    "tab": "2일차 (일)",
    "date": "11/22",
    "weekday": "일",
-   "title": "신주쿠 → 아카사카 → 하라주쿠 → 시부야 → 가부키초",
+   "title": "신주쿠 → 아카사카 → 하라주쿠 → 오모테산도 → 시부야 → 가부키초",
    "color": "#2f6f5e",
    "stops": [
     {
@@ -234,20 +234,19 @@ window.TRIP_ROUTE = {
      "n": 12
     },
     {
-     "id": "d2-11",
-     "time": "17:40",
-     "name": "Harry Potter Shop Harajuku",
-     "jp": "ハリー・ポッター ショップ 原宿",
-     "lat": 35.668649,
-     "lng": 139.70441,
-     "map": "https://maps.google.com/?cid=3840542123008475986",
+     "id": "d2-10b",
+     "time": "17:48",
+     "name": "CELINE 오모테산도 (セリーヌ 表参道)",
+     "jp": "セリーヌ 表参道",
+     "lat": 35.6658348,
+     "lng": 139.7118407,
+     "map": "https://maps.google.com/?cid=17684372626634111342",
      "kind": "spot",
-     "n": 13,
-     "priority": "optional"
+     "n": 13
     },
     {
      "id": "d2-12",
-     "time": "17:55",
+     "time": "18:10",
      "name": "RAGTAG 하라주쿠",
      "jp": "ラグタグ 原宿",
      "lat": 35.665757,
@@ -258,7 +257,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-13",
-     "time": "18:10",
+     "time": "18:28",
      "name": "DANTON TOKYO",
      "jp": "ダントン 東京",
      "lat": 35.666232,
@@ -269,7 +268,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-14",
-     "time": "18:25",
+     "time": "18:41",
      "name": "Patagonia Tokyo Shibuya",
      "jp": "パタゴニア 東京 渋谷",
      "lat": 35.665217,
@@ -280,7 +279,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-15",
-     "time": "19:00",
+     "time": "19:10",
      "name": "Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
      "jp": "メゾン キツネ 宮下パーク",
      "lat": 35.662638,
@@ -291,7 +290,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-16",
-     "time": "19:18",
+     "time": "19:31",
      "name": "FREAK'S STORE 시부야",
      "jp": "フリークス ストア 渋谷",
      "lat": 35.662956,
@@ -303,7 +302,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-17",
-     "time": "19:35",
+     "time": "19:45",
      "name": "SUN HOUSE 진난",
      "jp": "サンハウス 神南",
      "lat": 35.66303,
@@ -314,7 +313,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d2-18",
-     "time": "20:10",
+     "time": "20:12",
      "name": "2nd STREET 시부야 진난점",
      "jp": "セカンドストリート 渋谷神南店",
      "lat": 35.661358,
@@ -380,23 +379,23 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.666664,139.740359&destination=35.669384,139.705856&travelmode=transit"
     },
     {
-     "label": "도보 · 16:00 OSHMAN'S 하라주쿠 → 17:40 Harry Potter Shop Harajuku",
+     "label": "도보 · 16:00 OSHMAN'S 하라주쿠 → 17:48 CELINE 오모테산도 (セリーヌ 表参道)",
      "from": 9,
      "to": 13,
      "count": 5,
      "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.668649,139.70441&travelmode=walking&waypoints=35.671944,139.709053%7C35.6721344,139.7095819%7C35.66822,139.707332"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.669384,139.705856&destination=35.6658348,139.7118407&travelmode=walking&waypoints=35.671944,139.709053%7C35.6721344,139.7095819%7C35.66822,139.707332"
     },
     {
-     "label": "도보 · 17:40 Harry Potter Shop Harajuku → 19:00 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
+     "label": "도보 · 17:48 CELINE 오모테산도 (セリーヌ 表参道) → 19:10 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F)",
      "from": 13,
      "to": 17,
      "count": 5,
      "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.668649,139.70441&destination=35.662638,139.701827&travelmode=walking&waypoints=35.665757,139.705218%7C35.666232,139.704002%7C35.665217,139.703582"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6658348,139.7118407&destination=35.662638,139.701827&travelmode=walking&waypoints=35.665757,139.705218%7C35.666232,139.704002%7C35.665217,139.703582"
     },
     {
-     "label": "도보 · 19:00 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F) → 20:10 2nd STREET 시부야 진난점",
+     "label": "도보 · 19:10 Maison Kitsuné 미야시타파크 (RAYARD NORTH 2F) → 20:12 2nd STREET 시부야 진난점",
      "from": 17,
      "to": 20,
      "count": 4,
@@ -404,7 +403,7 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.662638,139.701827&destination=35.661358,139.701052&travelmode=walking&waypoints=35.662956,139.700405%7C35.66303,139.69939"
     },
     {
-     "label": "전철/버스 · 20:10 2nd STREET 시부야 진난점 → 20:55 노다핀 (居酒屋 のだぴん)",
+     "label": "전철/버스 · 20:12 2nd STREET 시부야 진난점 → 20:55 노다핀 (居酒屋 のだぴん)",
      "from": 20,
      "to": 21,
      "count": 2,

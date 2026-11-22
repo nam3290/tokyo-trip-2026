@@ -3,7 +3,7 @@
  * · 이미지·아이콘 = cache-first (용량이 커서 한 번 받으면 재사용)
  * 실패해도 페이지 동작에는 영향이 없습니다.
  */
-const CACHE = "tokyo-trip-v27";
+const CACHE = "tokyo-trip-v28";
 const ASSETS = [
  "./",
  "./index.html",
@@ -20,6 +20,7 @@ const ASSETS = [
  "./images/akasaka-market.jpg",
  "./images/arcteryx.jpg",
  "./images/beams.jpg",
+ "./images/celine.jpg",
  "./images/daikokuya-ginza.jpg",
  "./images/danton.jpg",
  "./images/duffle-kapital.jpg",
