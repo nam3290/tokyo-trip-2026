@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>다낭 3박 5일 · 2026.11.25–29</title>
+<meta name="description" content="다낭 3박 5일(2026.11.25~29) 일정·맛집·마사지 추천·일차별 동선 지도. 부산(김해) 출발, 윈덤 다낭 골든 베이 3박.">
+<meta name="theme-color" content="#0b1c1f">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
+
+<!-- 아이폰 홈 화면 앱 -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="다낭여행">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+
+<!-- 지도(Leaflet + OpenStreetMap 타일) -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="./assets/style.css?v=20261123a">
+</head>
+<body>
+<div class="page">
+  <header class="hero" id="hero"></header>
+  <nav class="tabbar" id="tabs" aria-label="화면 선택"></nav>
+  <main id="view" role="tabpanel" aria-live="polite"></main>
+  <footer class="foot">
+    <b>다낭 3박 5일</b> · 2026.11.25(수)–11.29(일) · 부산(김해) 출발 · 대한항공 직항<br>
+    패키지 일정과 직접 짠 자유시간을 합친 페이지입니다. 영업시간·요금·입국 규정은 방문 전에 한 번 더 확인하세요.<br>
+    예약번호·연락처 같은 개인 정보는 담지 않았습니다.<br><br>
+    사진 출처: Google Maps 장소 사진(각 장소 제공) · 지도: OpenStreetMap · 좌표·평점·영업시간: 2026-11-23 Google Maps 조회값 · 입국 정보: 주베트남 대한민국 대사관 FAQ(2026-09)
+    <div class="home-hint" id="home-hint">
+      <span>📲</span>
+      <span>아이폰 사파리에서 <b>공유 → 홈 화면에 추가</b>를 누르면 앱처럼 열리고, 데이터가 없어도 일정과 사진이 보입니다.</span>
+      <button type="button" aria-label="안내 닫기">×</button>
+    </div>
+  </footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+  <button class="close" type="button" aria-label="닫기">×</button>
+  <div>
+    <img id="modal-img" alt="">
+    <div class="cap" id="modal-cap"></div>
+  </div>
+</div>
+
+<script>
+/* 화면 점검용: 스크립트 오류가 있으면 html[data-err]에 남깁니다. */
+window.addEventListener("error", function (e) {
+  var el = document.documentElement;
+  el.setAttribute("data-err", (el.getAttribute("data-err") || "") + " | " + (e.message || "error") + " @" + (e.filename || "").split("/").pop() + ":" + (e.lineno || 0));
+});
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="./data/itinerary.js?v=20261123a"></script>
+<script src="./data/places.js?v=20261123a"></script>
+<script src="./assets/app.js?v=20261123a"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+:root{
+  --ink:#151a20;
+  --ink-soft:#2a323c;
+  --cream:#faf7f2;
+  --paper:#ffffff;
+  --line:#e7dfd2;
+  --muted:#6f7783;
+  --accent:#0f766e;
+  --meal:#fffaf1;
+  --meal-line:#e6d2b4;
+  --radius:18px;
+  --shadow:0 2px 10px rgba(24,20,14,.05), 0 12px 30px rgba(24,20,14,.04);
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  color:var(--ink);
+  background:#efe9de;
+  line-height:1.55;
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+.page{
+  max-width:520px; margin:0 auto; background:var(--cream);
+  min-height:100vh; position:relative;
+  box-shadow:0 0 60px rgba(40,30,20,.08);
+}
+
+/* ── hero ── */
+.hero{
+  background:
+    radial-gradient(120% 80% at 88% -12%, rgba(13,148,136,.42), transparent 62%),
+    radial-gradient(95% 75% at 0% 0%, rgba(234,88,12,.26), transparent 58%),
+    #12161c;
+  color:#f6f2ea; padding:24px 18px 20px;
+  padding-top:calc(24px + env(safe-area-inset-top));
+}
+.hero-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px}
+.hero h1{margin:0; font-size:26px; letter-spacing:-.03em; line-height:1.2; font-weight:800}
+.hero .dates{margin-top:4px; font-size:13px; color:#c9c3b8; letter-spacing:.01em}
+.dday{
+  flex:0 0 auto; border:1px solid rgba(255,255,255,.25); border-radius:999px;
+  padding:5px 10px; font-size:11.5px; font-weight:700; color:#fff;
+  background:rgba(255,255,255,.07); white-space:nowrap;
+}
+.hero .party{margin-top:14px; font-size:12.5px; color:#b9b3a8}
+.hero .chips{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px}
+.chip{
+  font-size:11.5px; padding:5px 9px; border-radius:8px;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); color:#e8e2d8;
+}
+.chip b{color:#fff; font-weight:600}
+.hero .notice{
+  margin-top:14px; font-size:11px; line-height:1.5; color:#9b968c;
+  border-top:1px solid rgba(255,255,255,.1); padding-top:10px;
+}
+
+/* ── tabs ── */
+.tabbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:30;
+  display:flex; gap:6px; overflow-x:auto; scrollbar-width:none;
+  padding:9px 12px; background:rgba(250,247,242,.94);
+  backdrop-filter:saturate(140%) blur(12px);
+  -webkit-backdrop-filter:saturate(140%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.tabbar::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto; border:1px solid var(--line); background:#fff; color:var(--muted);
+  border-radius:999px; padding:7px 12px; font-size:12.5px; font-weight:650;
+  font-family:inherit; cursor:pointer; display:flex; align-items:center; gap:5px;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.tab[aria-selected="true"]{background:var(--ink); color:#fff; border-color:var(--ink)}
+.tab[data-day][aria-selected="true"]{background:var(--tab-accent,var(--ink)); border-color:var(--tab-accent,var(--ink))}
+.tab .now{width:5px; height:5px; border-radius:50%; background:currentColor; opacity:.85}
+.tab[aria-selected="true"] .now{background:#fff}
+
+/* ── day header ── */
+.day-head{padding:20px 16px 6px}
+.day-kicker{display:flex; align-items:center; gap:8px; font-size:11.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase}
+.day-kicker .bar{width:22px; height:3px; border-radius:2px; background:var(--accent)}
+.day-head h2{margin:8px 0 4px; font-size:21px; letter-spacing:-.02em; line-height:1.3; font-weight:800}
+.day-head .summary{margin:0; font-size:13px; color:#525a66}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:14px}
+.stat{background:#fff; border:1px solid var(--line); border-radius:12px; padding:9px 10px}
+.stat .k{font-size:10.5px; color:var(--muted); letter-spacing:.02em}
+.stat .v{font-size:12.5px; font-weight:700; margin-top:2px; letter-spacing:-.01em}
+
+/* ── timeline ── */
+.tl{position:relative; padding:14px 14px 8px 14px}
+.tl::before{
+  content:""; position:absolute; left:25px; top:26px; bottom:34px;
+  border-left:2px dashed #ded6c7;
+}
+.node{
+  position:absolute; left:19px; width:14px; height:14px; margin-top:23px;
+  border-radius:50%; background:#fff; border:3px solid var(--accent);
+  box-shadow:0 0 0 4px var(--cream); z-index:1;
+}
+.node.leg-node{width:10px; height:10px; left:21px; margin-top:19px; border:2px solid #cfc6b6; background:var(--cream); box-shadow:none}
+
+.card{
+  position:relative; margin:0 0 10px 26px; background:var(--paper);
+  border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.card-head{padding:13px 14px 0}
+.timechip{
+  display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:.02em;
+  color:var(--accent); background:#e9f6f4; border:1px solid #c4e4df;
+  background:color-mix(in srgb, var(--accent) 12%, #fff);
+  border:1px solid color-mix(in srgb, var(--accent) 22%, #fff);
+  padding:3px 8px; border-radius:7px; font-variant-numeric:tabular-nums;
+}
+.card h3{margin:8px 0 1px; font-size:16.5px; letter-spacing:-.02em; line-height:1.35; font-weight:750}
+.card .jp{font-size:11.5px; color:#8d8579; letter-spacing:.01em}
+.card figure, .opt figure{margin:11px 0 0; position:relative; background:#ece6db}
+.opt figure{margin:9px 0 0}
+.card figure img{width:100%; aspect-ratio:3/2; object-fit:cover}
+.card figure::after, .opt figure::after{
+  content:"⤢"; position:absolute; right:8px; bottom:8px; width:24px; height:24px;
+  display:grid; place-items:center; border-radius:8px; font-size:12px;
+  background:rgba(15,18,22,.55); color:#fff; pointer-events:none;
+}
+.fig-btn{position:absolute; inset:0; border:0; background:transparent; cursor:zoom-in; padding:0}
+.meta{padding:10px 14px 0; display:flex; flex-direction:column; gap:5px}
+.meta-row{display:flex; gap:7px; font-size:12px; color:#4a5260; line-height:1.5}
+.meta-row .ico{flex:0 0 14px; opacity:.75}
+.note{padding:8px 14px 12px; font-size:13.2px; line-height:1.68; color:#3d4552}
+.note b{color:var(--ink)}
+.actions{display:flex; gap:7px; padding:0 14px 13px; flex-wrap:wrap}
+.btn{
+  display:inline-flex; align-items:center; gap:5px; text-decoration:none;
+  font-size:12.5px; font-weight:700; padding:8px 12px; border-radius:10px;
+  background:var(--ink); color:#fff; border:1px solid var(--ink);
+}
+.btn.ghost{background:#fff; color:var(--ink-soft); border-color:var(--line)}
+.btn:active{transform:translateY(1px)}
+
+/* ── 근처 맛집 메모 (일정 카드 안) ── */
+.near{margin:0 14px 12px; padding-top:10px; border-top:1px dashed var(--line)}
+.near-h{display:flex; align-items:baseline; gap:5px; flex-wrap:wrap; font-size:11.5px; color:#6b6154; margin-bottom:7px}
+.near-h b{font-size:12px; color:var(--ink); font-weight:750}
+.near-sub{font-size:10.8px; color:var(--muted)}
+.near-strip{display:flex; flex-direction:column; gap:6px}
+.near-card{
+  display:flex; gap:9px; align-items:center; padding:7px 9px;
+  border:1px solid var(--line); border-radius:11px; background:#fffdf9;
+  text-decoration:none; color:inherit;
+}
+.near-card:active{transform:translateY(1px); background:#fff7ea}
+.near-photo{flex:0 0 46px; width:46px; height:46px; border-radius:9px; overflow:hidden; background:#ece6db}
+.near-photo.noimg{display:none}
+.near-photo img{width:100%; height:100%; object-fit:cover; display:block}
+.near-body{min-width:0; flex:1; display:flex; flex-direction:column; gap:1px}
+.near-name{font-size:12.2px; font-weight:750; line-height:1.3; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.near-meta{font-size:10.6px; color:#7d6f5d; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.near-why{font-size:11px; color:#5b6470; line-height:1.4; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.near-go{flex:0 0 auto; font-size:15px; color:#b6ab99; align-self:center; line-height:1}
+
+/* ── legs (이동) ── */
+.leg{position:relative; margin:0 0 10px 26px; padding:9px 12px 9px 12px; border-radius:12px;
+  background:#f6f1e8; border:1px dashed #ddd3c2; display:flex; gap:9px; align-items:flex-start}
+.leg-thumb{flex:0 0 48px; width:48px; height:48px; border-radius:10px; object-fit:cover; background:#e7dfd2}
+.leg-body{flex:1; min-width:0}
+.leg-head{display:flex; align-items:baseline; gap:7px; flex-wrap:wrap}
+.leg-type{font-size:10.5px; font-weight:800; letter-spacing:.04em; color:#7c7365; text-transform:uppercase}
+.leg-label{font-size:12.5px; font-weight:750; color:#232a33}
+.leg-detail{font-size:11.5px; color:#6a7280; line-height:1.55; margin-top:3px}
+.leg-alt{font-size:11px; color:#948b7d; margin-top:4px; line-height:1.5}
+.leg-alt b{color:#7d7466}
+
+/* ── meal ── */
+.meal{
+  position:relative; margin:0 0 12px 26px; border-radius:var(--radius);
+  background:linear-gradient(#fffaf0,#fffdf9 60%);
+  border:1px solid var(--meal-line); box-shadow:var(--shadow); overflow:hidden;
+}
+.meal-top{padding:13px 14px 0; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.meal-badge{font-size:11px; font-weight:800; color:#8a6421; background:#f8ecd4; border:1px solid #ecd9b4;
+  padding:3px 8px; border-radius:999px; letter-spacing:.02em}
+.meal-time{font-size:11.5px; font-weight:750; color:#8a6421; font-variant-numeric:tabular-nums}
+.meal h3{margin:7px 0 2px; padding:0 14px; font-size:16px; font-weight:780; letter-spacing:-.02em}
+.meal-area{padding:0 14px; font-size:11.5px; color:#8b8173}
+.meal-why{padding:9px 14px 0; font-size:12.5px; color:#5b5348; line-height:1.6}
+.opt{padding:12px 14px; border-top:1px solid #f2e6d3; margin-top:11px}
+.opt:first-of-type{border-top:1px solid #f2e6d3}
+.opt-name{font-size:14.5px; font-weight:750; letter-spacing:-.01em}
+.opt-chips{display:flex; gap:5px; flex-wrap:wrap; margin-top:5px}
+.rate{font-size:10.5px; font-weight:700; padding:2px 7px; border-radius:6px; background:#f2efe8; color:#5f5748}
+.rate.google{background:#eef4ff; color:#33518e}
+.rate.tabelog{background:#fff1e3; color:#a2561f}
+.opt img{border-radius:11px; margin-top:9px; aspect-ratio:3/1.85; object-fit:cover; width:100%}
+.opt dl{margin:9px 0 0; display:grid; grid-template-columns:auto 1fr; gap:3px 9px; font-size:12px; line-height:1.55}
+.opt dt{color:#9a9184; font-weight:650; white-space:nowrap}
+.opt dd{margin:0; color:#3e464f}
+.opt-tip{margin:8px 0 0; font-size:12px; color:#6b6255; line-height:1.55; background:#fdf6e8; border-radius:8px; padding:7px 9px}
+.opt-foot{display:flex; align-items:center; gap:8px; margin-top:9px; flex-wrap:wrap}
+.opt-foot .walk{font-size:11.5px; color:#8a8174}
+.opt-foot .btn{padding:6px 10px; font-size:11.5px; border-radius:8px}
+details.more{margin:10px 14px 0}
+details.more summary{
+  cursor:pointer; font-size:12px; font-weight:700; color:#8a6421; list-style:none;
+  padding:9px 11px; border-radius:10px; background:#f9efdb; border:1px solid #efdcba;
+  display:flex; justify-content:space-between; align-items:center;
+}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"▾"; font-size:11px; opacity:.7}
+details.more[open] summary::after{content:"▴"}
+.meal-foot{padding:11px 14px 13px; font-size:11.5px; color:#8d7f6a; line-height:1.55}
+.meal-foot b{color:#6d5b3f}
+
+/* ── meal (아직 안 정한 자리) ── */
+.meal-pend{
+  position:relative; margin:0 0 12px 26px; padding:11px 14px 12px;
+  border-radius:var(--radius); background:#fbfaf7; border:1px dashed #ddd3c2;
+}
+.mp-top{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.mp-badge{font-size:11px; font-weight:800; color:#8b8173; background:#f2ede4; border:1px solid #e3dacb;
+  padding:3px 8px; border-radius:999px; letter-spacing:.02em}
+.mp-time{font-size:11.5px; font-weight:750; color:#8b8173; font-variant-numeric:tabular-nums}
+.mp-tag{font-size:10.5px; font-weight:800; color:#9a9184; border:1px dashed #cfc6b6; padding:1px 7px; border-radius:999px}
+.mp-area{margin-top:6px; font-size:12.5px; font-weight:750; color:#5b5348; letter-spacing:-.01em}
+.mp-note{margin:4px 0 0; font-size:11.5px; color:#8b8173; line-height:1.55}
+
+/* ── spots ── */
+.spots{padding:12px 14px 4px}
+.spots h4{margin:6px 0 8px; font-size:13px; letter-spacing:-.01em; display:flex; align-items:center; gap:7px}
+.spots h4 .sub{font-size:10.5px; font-weight:600; color:var(--muted)}
+.spot-row{display:flex; gap:9px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; scrollbar-width:none}
+.spot-row::-webkit-scrollbar{display:none}
+.spot{
+  flex:0 0 232px; scroll-snap-align:start; background:#fff; border:1px solid var(--line);
+  border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+}
+.spot img{aspect-ratio:16/9; object-fit:cover}
+.spot-body{padding:10px 11px 12px}
+.spot-badge{display:inline-block; font-size:9.5px; font-weight:800; letter-spacing:.03em; color:#5a6b7f;
+  border:1px solid #cfd9e4; background:#f4f8fc; border-radius:5px; padding:1px 5px}
+.spot-name{font-size:13px; font-weight:750; margin-top:5px; line-height:1.35}
+.spot-meta{font-size:10.8px; color:#7b8390; margin-top:3px; line-height:1.45}
+.spot-note{font-size:11px; color:#5c6472; margin-top:5px; line-height:1.5}
+.spot-links{display:flex; gap:6px; margin-top:7px}
+.spot-links a{font-size:10.5px; font-weight:700; text-decoration:none; border:1px solid var(--line);
+  border-radius:7px; padding:3px 7px; color:#3d4652; background:#fff}
+
+/* ── all view ── */
+.jump{display:flex; gap:6px; padding:12px 14px 0; overflow-x:auto; scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:0 0 auto; font-size:11.5px; font-weight:700; text-decoration:none; padding:6px 10px;
+  border-radius:999px; border:1px solid var(--line); background:#fff; color:#4a5260}
+.day-sep{margin:26px 14px 0; border:0; border-top:1px solid var(--line)}
+
+/* ── tips & checklist ── */
+.tips-wrap{padding:16px 14px 30px}
+.tips-wrap h2{margin:0 0 4px; font-size:21px; letter-spacing:-.02em}
+.tips-wrap .lead{margin:0 0 16px; font-size:12.5px; color:var(--muted)}
+.progress{display:flex; align-items:center; gap:9px; margin:4px 0 12px}
+.progress .bar{flex:1; height:7px; border-radius:99px; background:#e8e1d4; overflow:hidden}
+.progress .bar i{display:block; height:100%; width:0%; background:linear-gradient(90deg,#0f766e,#e0a83a); transition:width .25s}
+.progress span{font-size:11.5px; font-weight:750; color:#6d7480; font-variant-numeric:tabular-nums}
+.check{background:#fff; border:1px solid var(--line); border-radius:16px; padding:6px 12px; box-shadow:var(--shadow)}
+.check label{display:flex; gap:10px; align-items:flex-start; padding:9px 2px; border-bottom:1px dashed #eee7db; font-size:13px; cursor:pointer}
+.check label:last-child{border-bottom:0}
+.check input{margin:2px 0 0; width:17px; height:17px; accent-color:#0f766e; flex:0 0 auto}
+.check input:checked + span{color:#a8a092; text-decoration:line-through}
+.tip{background:#fff; border:1px solid var(--line); border-radius:14px; margin-top:9px; overflow:hidden; box-shadow:var(--shadow)}
+.tip summary{cursor:pointer; list-style:none; padding:13px 14px; display:flex; align-items:center; gap:9px; font-size:14px; font-weight:750}
+.tip summary::-webkit-details-marker{display:none}
+.tip summary .chev{margin-left:auto; color:#b3aa9c; font-size:11px}
+.tip[open] summary{border-bottom:1px solid #f1eadf}
+.tip .body{padding:10px 14px 14px}
+.tip ul{margin:0; padding-left:16px}
+.tip li{font-size:12.5px; line-height:1.62; color:#454d58; margin:4px 0}
+.tip .links{display:flex; gap:6px; flex-wrap:wrap; margin-top:9px}
+.tip .links a{font-size:11.5px; font-weight:700; text-decoration:none; padding:5px 9px; border-radius:8px;
+  background:#f4efe6; border:1px solid #e7ded0; color:#4c5460}
+
+/* ── footer ── */
+.foot{padding:22px 16px 40px; padding-bottom:calc(40px + env(safe-area-inset-bottom)); font-size:11px; color:#948b7d; line-height:1.6; border-top:1px solid var(--line); margin-top:10px}
+.foot b{color:#6d7480}
+.foot .home-hint{margin-top:10px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:11px 12px; font-size:11.5px; color:#555d68; display:flex; gap:9px; align-items:flex-start}
+.foot .home-hint button{margin-left:auto; border:0; background:none; color:#a29a8c; font-size:15px; line-height:1; cursor:pointer; padding:0 2px}
+
+/* ── modal ── */
+.modal{position:fixed; inset:0; z-index:100; display:none; place-items:center; background:rgba(8,10,13,.94); padding:16px; padding-top:calc(16px + env(safe-area-inset-top))}
+.modal.open{display:grid}
+.modal img{max-width:100%; max-height:78vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal .cap{color:#e9e4da; font-size:12.5px; text-align:center; margin-top:12px; line-height:1.5}
+.modal .close{position:absolute; top:calc(10px + env(safe-area-inset-top)); right:12px; width:38px; height:38px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); color:#fff; font-size:18px; cursor:pointer}
+
+@media (min-width:560px){
+  .page{border-radius:0}
+  .card h3{font-size:17.5px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+
+/* ── 탭 2단 구성 ── */
+.tabbar{display:block; padding:8px 10px 7px}
+.tabrow{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tabrow-days{padding-bottom:6px}
+.tabrow-tools{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px}
+.tab.tool{justify-content:center; padding:7px 2px; font-size:12px; background:#f4efe6; border-color:#e3dacb; color:#4d5560}
+.tab.tool[aria-selected="true"]{background:var(--ink); color:#fff; border-color:var(--ink)}
+@media (max-width: 400px){
+  .tab{padding:6px 10px; font-size:12px}
+  .tab.tool{font-size:11px; padding:7px 0}
+}
+
+/* ── day head 버튼 ── */
+.day-actions{display:flex; gap:6px; margin-top:11px; flex-wrap:wrap}
+.mini-btn{
+  font-family:inherit; font-size:11.5px; font-weight:700; color:#3d4652; background:#fff;
+  border:1px solid var(--line); border-radius:9px; padding:6px 10px; cursor:pointer;
+}
+.mini-btn:active{transform:translateY(1px)}
+.meal-pend .mp-foot{margin-top:8px}
+
+/* ── 식당추천 ── */
+.foodwrap{padding:16px 14px 34px}
+.foodhead h2{margin:0; font-size:21px; letter-spacing:-.02em; display:flex; align-items:baseline; gap:8px}
+.foodhead h2 .cnt{font-size:12px; font-weight:700; color:#8d8579; background:#f2ece1; border-radius:999px; padding:2px 9px}
+.foodhead .lead{margin:6px 0 14px; font-size:12.5px; color:var(--muted); line-height:1.6}
+
+.searchbox{display:flex; align-items:center; gap:7px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:8px 10px; box-shadow:var(--shadow)}
+.searchbox span{font-size:13px; opacity:.6}
+.searchbox input{flex:1; border:0; outline:0; font-family:inherit; font-size:13px; color:var(--ink); background:transparent; min-width:0}
+.searchbox input::-webkit-search-cancel-button{display:none}
+.searchbox button{border:0; background:#f2ece1; color:#7d7466; width:22px; height:22px; border-radius:50%; font-size:14px; line-height:1; cursor:pointer}
+
+.filters{margin-top:12px}
+.fg-label{font-size:10.5px; font-weight:800; letter-spacing:.06em; color:#9a9184; margin:9px 0 5px; text-transform:uppercase}
+.frow{display:flex; gap:5px; overflow-x:auto; scrollbar-width:none; padding-bottom:2px}
+.frow::-webkit-scrollbar{display:none}
+.fchip{
+  flex:0 0 auto; font-family:inherit; font-size:11.5px; font-weight:650; color:#4f5763;
+  background:#fff; border:1px solid var(--line); border-radius:999px; padding:6px 10px; cursor:pointer; white-space:nowrap;
+}
+.fchip.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+.fchip.dchip.on{background:var(--c); border-color:var(--c)}
+.fchip.foodpin.on{background:#b0741e; border-color:#b0741e}
+
+.fmore{margin-top:8px; background:#fff; border:1px solid var(--line); border-radius:11px; padding:0 10px}
+.fmore summary{cursor:pointer; list-style:none; font-size:11.5px; font-weight:700; color:#5a626e; padding:9px 0; display:flex; align-items:center; gap:7px}
+.fmore summary::-webkit-details-marker{display:none}
+.fmore summary::after{content:"▾"; margin-left:auto; color:#a29a8c; font-size:11px}
+.fmore[open] summary::after{content:"▴"}
+.fmore summary b{font-size:10.5px; font-weight:800; color:#8a6421; background:#fbf1e0; border-radius:5px; padding:1px 6px}
+.fmore .fg-label:first-of-type{margin-top:2px}
+.fmeta{display:flex; align-items:center; justify-content:space-between; margin:14px 0 8px; font-size:12px; color:#6f7783}
+.fmeta button{border:1px solid var(--line); background:#fff; border-radius:8px; font-family:inherit; font-size:11.5px; font-weight:650; color:#5a626e; padding:5px 9px; cursor:pointer}
+
+.rgroup{margin-bottom:6px}
+.rgroup-h{margin:16px 0 8px; font-size:13.5px; letter-spacing:-.01em; display:flex; align-items:baseline; gap:7px; flex-wrap:wrap}
+.rgroup-h span{font-size:11px; font-weight:600; color:#9a9184}
+.rgroup-h b{font-size:11px; font-weight:800; color:#8d8579; background:#f2ece1; border-radius:999px; padding:1px 7px}
+
+.rcard{background:#fff; border:1px solid var(--line); border-radius:16px; padding:13px 13px 11px; margin-bottom:10px; box-shadow:var(--shadow)}
+.rimg{position:relative; margin:0 0 10px; border-radius:12px; overflow:hidden; background:#f1ece2; aspect-ratio:16/10}
+.rimg img{display:block; width:100%; height:100%; object-fit:cover; background:#f1ece2}
+.rimg.noimg{display:none}
+.rimg .fig-btn{cursor:zoom-in}
+.rtop{display:flex; align-items:flex-start; gap:8px}
+.rtop h3{margin:0; font-size:15px; font-weight:780; letter-spacing:-.02em; line-height:1.35}
+.rjp{font-size:11px; color:#9a9184; margin-top:2px}
+.rscore{flex:0 0 auto; text-align:center; line-height:1.1; background:#eef4ff; color:#33518e; border-radius:10px; padding:5px 8px; min-width:44px}
+.rscore b{display:block; font-size:14px; font-weight:800}
+.rscore span{font-size:9px; font-weight:700; opacity:.75}
+.rscore.none{background:#f3f0ea; color:#9a9184}
+.rscore.none b{font-size:13px}
+
+.rchips{display:flex; gap:4px; flex-wrap:wrap; margin-top:8px}
+.rchip{font-size:10.5px; font-weight:700; border-radius:6px; padding:2px 6px; background:#f4f1ea; color:#6b6357}
+.rchip.vh{background:#eef3ff; color:#33518e}
+.rchip.slot{background:#fbf1e0; color:#8a6421}
+.rchip.tag{background:#f2f7f3; color:#3f6b54}
+
+.rdl{margin:9px 0 0; display:grid; grid-template-columns:auto 1fr; gap:3px 9px; font-size:12px; line-height:1.55}
+.rdl dt{color:#a29a8c; font-weight:650; white-space:nowrap}
+.rdl dd{margin:0; color:#3e464f}
+.rscores{display:flex; gap:5px; flex-wrap:wrap; margin-top:9px}
+.rtip{margin:8px 0 0; font-size:12px; color:#6b6255; line-height:1.55; background:#fdf6e8; border-radius:8px; padding:7px 9px}
+.rtip b{color:#8a6421}
+.rmore{margin-top:8px; font-size:12px; color:#4a5260}
+.rmore summary{cursor:pointer; color:#6b7480; font-weight:650; font-size:11.5px}
+.rmore p{margin:6px 0 0; line-height:1.6; color:#4d5560}
+.rmore .award{margin-top:6px; font-size:11px; color:#8a6421}
+.rhours{margin-top:7px; font-size:11.5px; color:#4a5260}
+.rhours summary{cursor:pointer; color:#6b7480; font-weight:650}
+.rhours ul{list-style:none; margin:7px 0 0; padding:0; display:grid; gap:3px}
+.rhours li{display:flex; gap:9px; font-size:11.5px; color:#3e464f}
+.rhours li b{flex:0 0 78px; color:#8d8579; font-weight:700}
+.rhours li span{font-variant-numeric:tabular-nums}
+
+.racts{display:flex; gap:6px; margin-top:10px; flex-wrap:wrap}
+.racts .btn{padding:7px 10px; font-size:12px; border-radius:9px}
+.empty{text-align:center; font-size:13px; color:#8d8579; padding:28px 10px; background:#fff; border:1px dashed #ddd3c2; border-radius:14px}
+.foodnote{margin:18px 0 0; font-size:10.5px; color:#a29a8c; line-height:1.6}
+
+/* ── 동선 지도 ── */
+.mapwrap{padding:16px 14px 34px}
+.maphead h2{margin:0; font-size:21px; letter-spacing:-.02em}
+.maphead .lead{margin:6px 0 12px; font-size:12.5px; color:var(--muted); line-height:1.6}
+.mapchips{display:flex; gap:5px; overflow-x:auto; scrollbar-width:none; margin-bottom:9px}
+.mapchips::-webkit-scrollbar{display:none}
+.map{height:min(58vh,430px); min-height:320px; border-radius:16px; border:1px solid var(--line); overflow:hidden; background:#e9e4da; box-shadow:var(--shadow); z-index:0}
+.mapfallback{margin-top:9px; font-size:12px; color:#8a6421; background:#fdf3e0; border:1px solid #f0dcb8; border-radius:10px; padding:9px 11px; line-height:1.55}
+.maplegend{display:flex; gap:10px; flex-wrap:wrap; margin-top:9px; font-size:11px; color:#6f7783}
+.maplegend span{display:inline-flex; align-items:center; gap:4px}
+.maplegend i{width:9px; height:9px; border-radius:3px; display:inline-block}
+.maplegend i.dot{background:#e8b34b; border-radius:50%}
+
+.leaflet-container{font-family:inherit}
+.maphint{margin:0 0 8px; font-size:11px; color:#8d8579}
+.mpin.sm{font-size:9.5px; border-width:2px}
+.mpin{display:grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--c); color:#fff;
+  font-size:11.5px; font-weight:800; border:2.5px solid #fff; box-shadow:0 2px 6px rgba(20,25,30,.35); font-variant-numeric:tabular-nums}
+.mpop{font-size:12.5px; line-height:1.45; min-width:180px}
+.mpop-t{display:flex; gap:6px; align-items:baseline}
+.mpop-t b{font-size:13px; letter-spacing:-.01em}
+.mpop-n{display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; background:var(--c,#555); color:#fff; font-size:10px; font-weight:800; flex:0 0 auto}
+.mpop-jp{font-size:11px; color:#8d8579; margin-top:2px}
+.mpop-time{font-size:11.5px; color:#5a626e; margin-top:2px}
+.mpop-a{display:flex; gap:6px; margin-top:8px}
+.mpop-a a, .mpop-a button{font-size:11.5px; font-weight:700; text-decoration:none; color:#1f2a37; border:1px solid #dcd4c6; border-radius:7px; padding:4px 8px; background:#fff}
+
+.mday{margin-top:16px}
+.mday-h{margin:0 0 8px; font-size:14px; letter-spacing:-.01em; display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+.mday-h i{width:9px; height:9px; border-radius:3px; background:var(--c); flex:0 0 auto}
+.mday-h span{font-size:11px; font-weight:600; color:#9a9184}
+.mseg{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:9px}
+.mseg .btn{padding:7px 10px; font-size:11.5px; border-radius:9px; line-height:1.3}
+.mstops{list-style:none; margin:0; padding:0; border-left:2px dashed #ded6c7; margin-left:11px}
+.mstops li{position:relative; display:flex; gap:9px; padding:7px 0 7px 13px}
+.mnum{flex:0 0 auto; display:grid; place-items:center; width:22px; height:22px; margin-left:-25px; border-radius:50%;
+  background:var(--c); color:#fff; font-size:10.5px; font-weight:800; border:2px solid var(--cream); box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+.mstop-body{min-width:0; flex:1}
+.mrow{display:flex; align-items:baseline; gap:6px; flex-wrap:wrap; font-size:13px; line-height:1.4}
+.mtime{font-size:11px; font-weight:800; color:#8d8579; font-variant-numeric:tabular-nums}
+.mrow b{font-weight:750; letter-spacing:-.01em}
+.mkind{font-size:9.5px; font-weight:800; color:#8a6421; background:#fbf1e0; border-radius:5px; padding:1px 5px}
+.mjp{font-size:10.8px; color:#a29a8c; margin-top:1px}
+.mlinks{display:flex; gap:5px; margin-top:5px; flex-wrap:wrap}
+.mlinks a, .mlinks button{font-size:10.5px; font-weight:700; text-decoration:none; color:#4d5560; background:#fff;
+  border:1px solid var(--line); border-radius:7px; padding:3px 7px; font-family:inherit; cursor:pointer}
+
+@media (min-width:560px){ .map{height:440px} }
+
+
+/* 선택된 여행 수정: 동선 상태·다음 방문지·식당 후보 (2026-11-20) */
+.next-visit{margin-top:14px;padding:13px 14px;border-radius:13px;background:#f5ede0;color:#23303c;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.next-visit div{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.next-visit small{color:#586373;font-size:11px;font-weight:650}
+.next-visit b{font-size:14px;line-height:1.35}
+.next-visit span{font-size:11px;color:#73777d}
+.next-visit a{white-space:nowrap;background:#26374c;color:#fff;text-decoration:none;font-size:12px;font-weight:700;border-radius:9px;padding:8px 10px}
+.priority-badge{display:inline-block;vertical-align:middle;margin-left:6px;font-size:10.5px;font-weight:750;padding:3px 8px;border-radius:999px;background:#e5f3eb;color:#24744c;border:1px solid #b2d7bf}
+.priority-badge.optional{background:#fff5e0;color:#90601f;border-color:#ead4a6}
+.visit-actions{padding:0 14px 13px;display:flex;flex-wrap:wrap;gap:7px}
+.visit-actions button{border-radius:8px;border:1px solid #d9dce1;background:#f6f7f8;color:#485261;font-family:inherit;font-weight:600;font-size:11.5px;line-height:1.3;padding:7px 10px;cursor:pointer}
+.visit-actions button[aria-pressed="true"]{background:#294f3c;color:#fff;border-color:#294f3c}
+.visit-actions button[data-visit="skip"][aria-pressed="true"]{background:#795d38;border-color:#795d38}
+.card[data-status="done"]{border-color:#8cbfa1}
+.card[data-status="skip"]{opacity:.72}
+.card[data-status="skip"] h3{text-decoration:line-through;text-decoration-color:#947e62}
+.source-foot{font-size:11px;margin:0 14px 10px;color:#576476}
+.source-foot a{color:#2c6291;text-decoration:underline;text-underline-offset:2px}
+.pending-recs{margin:12px 14px;border:1px solid #efdfc2;background:#fffdfa;border-radius:12px;padding:10px 11px}
+.pending-recs>b{font-size:12px;color:#745528}
+.pending-rec{border-top:1px solid #efe8dc;padding:10px 0;display:flex;gap:8px;align-items:flex-start}
+.pending-rec:first-of-type{margin-top:8px}
+.rec-rank{border-radius:6px;background:#f4e7d1;color:#7e5528;font-size:10px;font-weight:750;padding:3px 5px;white-space:nowrap}
+.pending-rec>div{flex:1;min-width:0}
+.pending-rec strong{display:block;font-size:12.5px}
+.pending-rec small{display:block;color:#6c7177;font-size:11px;line-height:1.5;margin-top:3px}
+.pending-rec a{color:#2b5b83;font-size:11.5px;font-weight:700;text-decoration:none;padding:4px}
+.rec-warning{font-size:10.5px;color:#8b6246;margin:3px 0 0}
+.rchip.unverified{background:#fff5e3;color:#8c6525;border:1px solid #ead5a7}
+.rchip.verified{background:#e9f4ec;color:#2f6f4a;border:1px solid #b9ddc6}
+.rverify{margin:0 13px 8px;font-size:11px;color:#755f3f;background:#fff9ee;border-radius:8px;padding:7px 9px;line-height:1.55}
+@media(max-width:380px){.next-visit{align-items:flex-start;flex-direction:column}.next-visit a{align-self:flex-end}}
+
+
+/* ══════════ 다낭 사이트 추가 스타일 ══════════ */
+/* 오전 자유·야간 자유 일정 카드 */
+.card.free{border-style:dashed;border-color:#cfe0dd;background:linear-gradient(#fbfffe,#ffffff 70%)}
+.card.free .timechip{background:#e9f6f4;border-color:#c4e4df;color:#0f766e}
+.card[data-kind="meal"]{background:#fffdf8}
+.card[data-kind="hotel"]{border-color:#cfe4dd}
+
+/* 후보 목록 (근처 맛집 스트립 재사용 + 조정) */
+.cands{margin:10px 14px 12px;padding-top:9px;border-top:1px dashed var(--line)}
+.cands-h{display:flex;align-items:baseline;gap:5px;font-size:11.5px;color:#6b6154;margin-bottom:7px}
+.cands-h b{font-size:12px;color:var(--ink);font-weight:750}
+.cands-h .sub{font-size:10.8px;color:var(--muted)}
+.cands .near-card{background:#fbfefd}
+
+/* 일정 카드 → 추천 탭 이동 버튼 */
+.food-jump{display:inline-flex;align-items:center;gap:5px;margin:0 14px 12px;font-family:inherit;
+  font-size:11.5px;font-weight:700;color:#0f766e;background:#eaf7f4;border:1px solid #c8e6df;
+  border-radius:8px;padding:6px 10px;cursor:pointer}
+
+/* 추천 카드 그룹 */
+.rgroup-lead{margin:-2px 0 9px;font-size:12px;color:#6f7783;line-height:1.55}
+.rloc{font-size:11px;color:#8d8579;margin-top:3px;line-height:1.45}
+.rprice{font-size:11.5px;color:#0f766e;background:#eaf7f4;border-radius:7px;padding:6px 8px;margin-top:7px;line-height:1.5}
+.rg-count{font-size:10.5px;color:#8d8579;font-weight:700}
+
+/* 지도 마커 색 대비 */
+.mpin{border-color:#fff}
+
+/* 하루 요약 라인 */
+.sum-note{font-size:11.5px;color:#7b7365;margin-top:8px;line-height:1.5}
+
+/* 선택한 추천 카드 강조 */
+.rcard.focus{outline:2px solid #0f766e; outline-offset:2px}
+@media (max-width:380px){ .daily-note{font-size:11px} }
