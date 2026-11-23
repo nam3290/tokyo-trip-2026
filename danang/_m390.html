@@ -14,6 +14,7 @@
   .side b{color:#fff}
   .side a{color:#8fd0ff}
   .side ul{padding-left:16px;margin:6px 0}
+  .side code{color:#ffd18a}
 </style>
 </head>
 <body>
@@ -23,27 +24,41 @@
     <p><b>390×844 검증용 임시 페이지</b> (확인 후 삭제)</p>
     <ul>
       <li><a href="./index.html" target="_blank" rel="noopener">사이트 새 창으로</a></li>
+      <li>보기: <code id="v">—</code> · 스크롤: <code id="y">—</code></li>
       <li>탭: <span id="tablist">—</span></li>
       <li>오류: <span id="err">—</span></li>
-      <li>카드 수: <span id="cards">—</span></li>
+      <li>카드 / 장소카드: <span id="cards">—</span></li>
+      <li>지도 캔버스: <span id="mapok">—</span></li>
       <li>스크롤 높이: <span id="h">—</span></li>
     </ul>
-    <p>아이프레임이 로드되면 위 값을 채웁니다.</p>
+    <p>주소에 <code>?v=food|map|tips|all|d1..d5&amp;y=숫자</code>를 붙이면 그 화면·스크롤 위치로 엽니다.</p>
   </div>
 </div>
 <script>
+const qs = new URLSearchParams(location.search);
+const v = qs.get('v') || 'all';
+const y = parseInt(qs.get('y') || '0', 10);
 const f = document.getElementById('f');
+f.src = './index.html' + (v ? '#' + v : '');
+document.getElementById('v').textContent = v;
+document.getElementById('y').textContent = y;
 f.addEventListener('load', () => {
-  const check = () => {
+  setTimeout(() => {
     let d;
     try { d = f.contentDocument; } catch (e) { document.getElementById('err').textContent = 'cross-origin'; return; }
     if (!d) return;
-    document.getElementById('err').textContent = d.documentElement.getAttribute('data-err') || '없음';
-    document.getElementById('cards').textContent = d.querySelectorAll('.card').length;
-    document.getElementById('tablist').textContent = [...d.querySelectorAll('.tab')].map(t => t.textContent.trim()).join(' / ');
-    document.getElementById('h').textContent = d.documentElement.scrollHeight + 'px';
-  };
-  setTimeout(check, 1200);
+    if (y > 0) f.contentWindow.scrollTo(0, y);
+    const check = () => {
+      document.getElementById('err').textContent = d.documentElement.getAttribute('data-err') || '없음';
+      document.getElementById('cards').textContent = d.querySelectorAll('.card').length + ' / ' + d.querySelectorAll('.rcard').length;
+      document.getElementById('tablist').textContent = [...d.querySelectorAll('.tab[aria-selected="true"]')].map(t => t.textContent.trim()).join(',');
+      document.getElementById('h').textContent = d.documentElement.scrollHeight + 'px';
+      const mc = d.querySelector('#mapcanvas .leaflet-container, #mapcanvas .leaflet-pane');
+      document.getElementById('mapok').textContent = mc ? '표시됨' : (d.querySelector('#mapcanvas') ? '없음' : '해당 없음');
+    };
+    check();
+    setTimeout(check, 1500);
+  }, 700);
 });
 </script>
 </body>
