@@ -3,12 +3,12 @@
  */
 window.TRIP_ROUTE = {
  "meta": {
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "center": [
    35.6812,
    139.7671
   ],
-  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-22 14:45 아크힐즈 출발 기준으로 2일차 오후를 다시 짰습니다 — 허밍버즈힐(35.671944,139.709053)·THE H.W. DOG&CO.(35.6721344,139.7095819)·FREAK'S STORE(35.662956,139.700405)를 지점에서 빼고, 만석인 노다핀 대신 2nd STREET 뒤를 미정 저녁으로 비웠습니다. 하라주쿠 15:20 OSHMAN'S → 랄프로렌 15:50 → 셀린느 16:23 → RAGTAG 16:55 → DANTON 17:23 → 파타고니아 17:46 → 메종 키츠네 18:24 → SUN HOUSE 18:57 → 2nd STREET 19:26 → 22:00 숙소."
+  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-23 오후 3일차를 14:15 노스페이스 마루노우치 출발 기준으로 다시 짰습니다 — MUJI 긴자·팡 메종 긴자점 2곳을 빼고, 몽벨 교바시 14:40 → 다이코쿠야 긴자 15:25 → 카피탈 에비스 16:30 → RECTOHALL 17:30 → 롯폰기 크리스마스 마켓 18:10 → 게야키자카 18:40 → L-Breath 19:30 → 생일 저녁 海栗屋 新宿店(우니야 신주쿠점) 20:00."
  },
  "days": [
   {
@@ -92,7 +92,7 @@ window.TRIP_ROUTE = {
     }
    ]
   },
-    {
+  {
    "id": "d2",
    "label": "2일차 · 11/22(일)",
    "tab": "2일차 (일)",
@@ -403,7 +403,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-4",
-     "time": "11:45",
+     "time": "14:40",
      "name": "mont-bell 도쿄 교바시점",
      "jp": "モンベル 東京京橋店",
      "lat": 35.675655,
@@ -414,7 +414,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-5",
-     "time": "12:30",
+     "time": "15:25",
      "name": "다이코쿠야 긴자점",
      "jp": "大黒屋 銀座店 · PAWN & REUSE BRAND STORE",
      "lat": 35.67161,
@@ -424,109 +424,98 @@ window.TRIP_ROUTE = {
      "n": 5
     },
     {
-     "id": "d3-6",
-     "time": "14:00",
-     "name": "MUJI 긴자 (무인양품)",
-     "jp": "無印良品 銀座",
-     "lat": 35.673214,
-     "lng": 139.765368,
-     "map": "https://maps.google.com/?cid=771702428473144825",
-     "kind": "spot",
-     "n": 6
-    },
-    {
-     "id": "d3-6b",
-     "time": "14:50",
-     "name": "팡 메종 긴자점 (소금빵)",
-     "jp": "塩パン屋 pain・maison 銀座店",
-     "lat": 35.6715607,
-     "lng": 139.7705344,
-     "map": "https://maps.google.com/?cid=17159700221412295500",
-     "kind": "spot",
-     "n": 7
-    },
-    {
      "id": "d3-7",
-     "time": "15:45",
+     "time": "16:30",
      "name": "KAPITAL TOKYO NAKED STORE",
      "jp": "キャピタル 東京ネイキッドストア",
      "lat": 35.643709,
      "lng": 139.709824,
      "map": "https://maps.google.com/?cid=3504688113222414750",
      "kind": "spot",
-     "n": 8
+     "n": 6
     },
     {
      "id": "d3-8",
-     "time": "16:07",
+     "time": "16:50",
      "name": "Duffle with KAPITAL",
      "jp": "ダッフル ウィズ キャピタル",
      "lat": 35.642786,
      "lng": 139.710166,
      "map": "https://maps.google.com/?cid=4955929520084932929",
      "kind": "spot",
-     "n": 9
+     "n": 7
     },
     {
      "id": "d3-9",
-     "time": "16:30",
+     "time": "17:10",
      "name": "KAPITAL Legs Craftsman Store",
      "jp": "キャピタル レッグス クラフツマンストア",
      "lat": 35.642106,
      "lng": 139.709148,
      "map": "https://maps.google.com/?cid=8243935970920433661",
      "kind": "spot",
-     "n": 10
+     "n": 8
     },
     {
      "id": "d3-10",
-     "time": "16:55",
+     "time": "17:30",
      "name": "RECTOHALL (에비스)",
      "jp": "レクトホール",
      "lat": 35.642155,
      "lng": 139.708874,
      "map": "https://maps.google.com/?cid=16254508638521557928",
      "kind": "spot",
-     "n": 11
+     "n": 9
     },
     {
      "id": "d3-11",
-     "time": "17:45",
+     "time": "18:10",
      "name": "롯폰기 힐즈 크리스마스 마켓 (오야네 광장)",
      "jp": "六本木ヒルズ クリスマスマーケット",
      "lat": 35.659932,
      "lng": 139.729478,
      "map": "https://maps.google.com/?cid=8309528121310561895",
      "kind": "spot",
-     "n": 12
+     "n": 10
     },
     {
      "id": "d3-12",
-     "time": "18:25",
+     "time": "18:40",
      "name": "게야키자카 일루미네이션",
      "jp": "けやき坂イルミネーション",
      "lat": 35.659247,
      "lng": 139.729942,
      "map": "https://maps.google.com/?cid=12063536569698439509",
      "kind": "spot",
-     "n": 13
+     "n": 11
     },
     {
      "id": "d3-13",
-     "time": "19:10",
+     "time": "19:30",
      "name": "L-Breath 신주쿠",
      "jp": "エルブレス 新宿",
      "lat": 35.689212,
      "lng": 139.702346,
      "map": "https://maps.google.com/?cid=67978450380853922",
      "kind": "spot",
-     "n": 14,
+     "n": 12,
      "priority": "optional"
+    },
+    {
+     "id": "d3-14",
+     "time": "20:00",
+     "name": "海栗屋 新宿店 (우니야 신주쿠점·생일 저녁)",
+     "jp": "海栗屋 新宿店",
+     "lat": 35.6921273,
+     "lng": 139.708209,
+     "map": "https://maps.google.com/?cid=5870550396404838475",
+     "kind": "meal",
+     "n": 13
     }
    ],
    "segments": [
     {
-     "label": "전철/버스 · 08:20 호텔 출발 → 신주쿠역 → 09:00 오에도 골동품 시장 (도쿄국제포럼 지상광장)",
+     "label": "전철/버스 · 08:20 호텔 출발 → 신주쿠역 → 09:00 오에도 골동품 시장",
      "from": 1,
      "to": 2,
      "count": 2,
@@ -534,60 +523,60 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.689607,139.700571&destination=35.677141,139.764262&travelmode=transit"
     },
     {
-     "label": "도보 · 09:00 오에도 골동품 시장 (도쿄국제포럼 지상광장) → 14:00 MUJI 긴자 (무인양품)",
+     "label": "도보 · 09:00 오에도 골동품 시장 → 15:25 다이코쿠야 긴자점",
      "from": 2,
+     "to": 5,
+     "count": 4,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.677141,139.764262&destination=35.67161,139.76299&travelmode=walking&waypoints=35.682174,139.764507%7C35.675655,139.769057"
+    },
+    {
+     "label": "전철/버스 · 15:25 다이코쿠야 긴자점 → 16:30 KAPITAL TOKYO NAKED STORE",
+     "from": 5,
      "to": 6,
-     "count": 5,
-     "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.677141,139.764262&destination=35.673214,139.765368&travelmode=walking&waypoints=35.682174,139.764507%7C35.675655,139.769057%7C35.67161,139.76299"
-    },
-    {
-     "label": "도보 · 14:00 MUJI 긴자 (무인양품) → 14:50 팡 메종 긴자점 (소금빵)",
-     "from": 6,
-     "to": 7,
-     "count": 2,
-     "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.673214,139.765368&destination=35.6715607,139.7705344&travelmode=walking"
-    },
-    {
-     "label": "전철/버스 · 14:50 팡 메종 긴자점 (소금빵) → 15:45 KAPITAL TOKYO NAKED STORE",
-     "from": 7,
-     "to": 8,
      "count": 2,
      "mode": "transit",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6715607,139.7705344&destination=35.643709,139.709824&travelmode=transit"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.67161,139.76299&destination=35.643709,139.709824&travelmode=transit"
     },
     {
-     "label": "도보 · 15:45 KAPITAL TOKYO NAKED STORE → 16:55 RECTOHALL (에비스)",
-     "from": 8,
-     "to": 11,
+     "label": "도보 · 16:30 KAPITAL TOKYO NAKED STORE → 17:30 RECTOHALL",
+     "from": 6,
+     "to": 9,
      "count": 4,
      "mode": "walking",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.643709,139.709824&destination=35.642155,139.708874&travelmode=walking&waypoints=35.642786,139.710166%7C35.642106,139.709148"
     },
     {
-     "label": "전철/버스 · 16:55 RECTOHALL (에비스) → 17:45 롯폰기 힐즈 크리스마스 마켓 (오야네 광장)",
-     "from": 11,
-     "to": 12,
+     "label": "전철/버스 · 17:30 RECTOHALL → 18:10 롯폰기 힐즈 크리스마스 마켓",
+     "from": 9,
+     "to": 10,
      "count": 2,
      "mode": "transit",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.642155,139.708874&destination=35.659932,139.729478&travelmode=transit"
     },
     {
-     "label": "도보 · 17:45 롯폰기 힐즈 크리스마스 마켓 (오야네 광장) → 18:25 게야키자카 일루미네이션",
-     "from": 12,
-     "to": 13,
+     "label": "도보 · 18:10 롯폰기 힐즈 크리스마스 마켓 → 18:40 게야키자카 일루미네이션",
+     "from": 10,
+     "to": 11,
      "count": 2,
      "mode": "walking",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.659932,139.729478&destination=35.659247,139.729942&travelmode=walking"
     },
     {
-     "label": "전철/버스 · 18:25 게야키자카 일루미네이션 → 19:10 L-Breath 신주쿠",
-     "from": 13,
-     "to": 14,
+     "label": "전철/버스 · 18:40 게야키자카 일루미네이션 → 19:30 L-Breath 신주쿠",
+     "from": 11,
+     "to": 12,
      "count": 2,
      "mode": "transit",
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.659247,139.729942&destination=35.689212,139.702346&travelmode=transit"
+    },
+    {
+     "label": "도보 · 19:30 L-Breath 신주쿠 → 20:00 海栗屋 新宿店",
+     "from": 12,
+     "to": 13,
+     "count": 2,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.689212,139.702346&destination=35.6921273,139.708209&travelmode=walking"
     }
    ]
   },

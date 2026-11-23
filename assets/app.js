@@ -208,6 +208,7 @@
         <div class="opt-foot">
           <span class="walk">${total === 1 ? "확정" : first === 0 ? "1순위" : ""}</span>
           ${o.map ? `<a class="btn ghost" href="${o.map}" target="_blank" rel="noopener">지도</a>` : ""}
+          ${o.link ? `<a class="btn" href="${esc(o.link)}" target="_blank" rel="noopener">${esc(o.linkLabel || "예약")}</a>` : ""}
         </div>
       </div>`;
   }
@@ -602,7 +603,7 @@
       const actual = D.days.find((day) => day.id === old.id);
       if (!actual) return old;
       const byId = new Map(actual.items.map((it) => [it.id, it]));
-      const railOrBus = new Set(["d1-2","d1-3","d1-4","d2-5","d2-6","d2-18","d3-1","d3-6b","d3-10","d3-12","d4-2","d4-3"]);
+      const railOrBus = new Set(["d1-2","d1-3","d1-4","d2-5","d2-6","d2-18","d3-1","d3-5","d3-10","d3-12","d4-2","d4-3"]);
       const stops = old.stops.map((stop) => {
         const it = byId.get(stop.id);
         return it ? { ...stop, time: it.time, name: it.title, priority: it.priority } : stop;
