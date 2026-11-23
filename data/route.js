@@ -8,7 +8,7 @@ window.TRIP_ROUTE = {
    35.6812,
    139.7671
   ],
-  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-23 오후 3일차를 14:15 노스페이스 마루노우치 출발 기준으로 다시 짰습니다 — MUJI 긴자·팡 메종 긴자점 2곳을 빼고, 몽벨 교바시 14:40 → 다이코쿠야 긴자 15:25 → 카피탈 에비스 16:30 → RECTOHALL 17:30 → 롯폰기 크리스마스 마켓 18:10 → 게야키자카 18:40 → L-Breath 19:30 → 생일 저녁 海栗屋 新宿店(우니야 신주쿠점) 20:00."
+  "note": "매장 위치는 기존 지도 데이터와 각 매장 공식·구글맵 좌표를 참고. 각 방문지의 시간·이름·우선순위는 itinerary.js와 동기화되며 전철·도보 링크를 구분합니다. 2026-11-23 저녁 생일 저녁을 롯폰기 UNIHOLIC(우니홀릭) 18:30으로 바꾸고, 식사 뒤 신주쿠 쇼핑·야식 4곳(L-Breath 20:40 → 유니클로 본점 21:25 → 돈키호테 동남구 22:00 → 이치란 22:35)을 넣었습니다."
  },
  "days": [
   {
@@ -480,7 +480,7 @@ window.TRIP_ROUTE = {
     },
     {
      "id": "d3-12",
-     "time": "18:40",
+     "time": "18:18",
      "name": "게야키자카 일루미네이션",
      "jp": "けやき坂イルミネーション",
      "lat": 35.659247,
@@ -490,27 +490,70 @@ window.TRIP_ROUTE = {
      "n": 11
     },
     {
+     "id": "d3-12b",
+     "time": "18:30",
+     "name": "UNIHOLIC (우니홀릭·생일 저녁)",
+     "jp": "UNIHOLIC ウニホリック",
+     "lat": 35.663674,
+     "lng": 139.7315256,
+     "map": "https://maps.google.com/?cid=11220950397888311820",
+     "kind": "meal",
+     "n": 12
+    },
+    {
      "id": "d3-13",
-     "time": "19:30",
-     "name": "L-Breath 신주쿠",
-     "jp": "エルブレス 新宿",
+     "time": "20:40",
+     "name": "L-Breath 신주쿠 (엘브레스 신주쿠)",
+     "jp": "エルブレス 新宿店",
      "lat": 35.689212,
      "lng": 139.702346,
      "map": "https://maps.google.com/?cid=67978450380853922",
      "kind": "spot",
-     "n": 12,
-     "priority": "optional"
+     "n": 13
     },
     {
      "id": "d3-14",
-     "time": "20:00",
-     "name": "海栗屋 新宿店 (우니야 신주쿠점·생일 저녁)",
-     "jp": "海栗屋 新宿店",
-     "lat": 35.6921273,
-     "lng": 139.708209,
-     "map": "https://maps.google.com/?cid=5870550396404838475",
-     "kind": "meal",
-     "n": 13
+     "time": "21:25",
+     "name": "유니클로 신주쿠 본점",
+     "jp": "ユニクロ 新宿本店",
+     "lat": 35.6913489,
+     "lng": 139.7030056,
+     "map": "https://maps.google.com/?cid=15177219783377858648",
+     "kind": "spot",
+     "n": 14
+    },
+    {
+     "id": "d3-15",
+     "time": "22:00",
+     "name": "돈키호테 신주쿠 동남구점",
+     "jp": "ドン・キホーテ 新宿東南口店",
+     "lat": 35.6900987,
+     "lng": 139.7019999,
+     "map": "https://maps.google.com/?cid=15508147815392580529",
+     "kind": "spot",
+     "n": 15
+    },
+    {
+     "id": "d3-16",
+     "time": "22:35",
+     "name": "이치란 라멘 신주쿠 중앙동쪽출구점",
+     "jp": "一蘭 新宿中央東口店",
+     "lat": 35.6905859,
+     "lng": 139.7028052,
+     "map": "https://maps.google.com/?cid=4141491719837936982",
+     "kind": "spot",
+     "n": 16
+    },
+    {
+     "id": "d3-17",
+     "time": "23:35",
+     "name": "신주쿠 워싱턴 복귀",
+     "jp": "新宿ワシントンホテル 本館",
+     "lat": 35.686915,
+     "lng": 139.693276,
+     "map": "https://maps.google.com/?cid=6872319874272201570",
+     "kind": "hotel",
+     "n": 17
     }
    ],
    "segments": [
@@ -555,28 +598,36 @@ window.TRIP_ROUTE = {
      "url": "https://www.google.com/maps/dir/?api=1&origin=35.642155,139.708874&destination=35.659932,139.729478&travelmode=transit"
     },
     {
-     "label": "도보 · 18:10 롯폰기 힐즈 크리스마스 마켓 → 18:40 게야키자카 일루미네이션",
+     "label": "도보 · 18:10 롯폰기 힐즈 크리스마스 마켓 → 18:18 게야키자카 일루미네이션 → 18:30 UNIHOLIC",
      "from": 10,
-     "to": 11,
-     "count": 2,
-     "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.659932,139.729478&destination=35.659247,139.729942&travelmode=walking"
-    },
-    {
-     "label": "전철/버스 · 18:40 게야키자카 일루미네이션 → 19:30 L-Breath 신주쿠",
-     "from": 11,
      "to": 12,
-     "count": 2,
-     "mode": "transit",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.659247,139.729942&destination=35.689212,139.702346&travelmode=transit"
+     "count": 3,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.659932,139.729478&destination=35.663674,139.7315256&travelmode=walking&waypoints=35.659247,139.729942"
     },
     {
-     "label": "도보 · 19:30 L-Breath 신주쿠 → 20:00 海栗屋 新宿店",
+     "label": "전철/버스 · 20:15 UNIHOLIC → 20:40 L-Breath 신주쿠",
      "from": 12,
      "to": 13,
      "count": 2,
+     "mode": "transit",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.663674,139.7315256&destination=35.689212,139.702346&travelmode=transit"
+    },
+    {
+     "label": "도보 · 20:40 L-Breath → 21:25 유니클로 신주쿠 본점 → 22:00 돈키호테 동남구점 → 22:35 이치란 라멘",
+     "from": 13,
+     "to": 16,
+     "count": 4,
      "mode": "walking",
-     "url": "https://www.google.com/maps/dir/?api=1&origin=35.689212,139.702346&destination=35.6921273,139.708209&travelmode=walking"
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.689212,139.702346&destination=35.6905859,139.7028052&travelmode=walking&waypoints=35.6913489,139.7030056%7C35.6900987,139.7019999"
+    },
+    {
+     "label": "도보 · 23:20 이치란 라멘 → 23:35 신주쿠 워싱턴 복귀",
+     "from": 16,
+     "to": 17,
+     "count": 2,
+     "mode": "walking",
+     "url": "https://www.google.com/maps/dir/?api=1&origin=35.6905859,139.7028052&destination=35.686915,139.693276&travelmode=walking"
     }
    ]
   },
