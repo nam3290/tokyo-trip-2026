@@ -327,16 +327,16 @@ window.PLACES = {
       id: "love-bridge", group: "spot", name: "사랑의 부두·용다리", local: "Cầu Tình Yêu · Cầu Rồng",
       rating: 4.6, reviews: 824, area: "다낭 한강",
       address: "Trần Hưng Đạo, An Hải, Đà Nẵng",
-      hours: "부두 08:00–21:00 · 용다리 상시", openLate: false,
+      hours: "부두 08:00–21:00 · 용다리 상시 · 불·물 쇼 금·토·일 21:00", openLate: false,
       lat: 16.0629967, lng: 108.2298146, img: "./images/love-bridge.jpg",
-      tip: "용다리 불·물 분수 쇼는 토·일 21시. 야경 조명은 매일 켜집니다.",
+      tip: "용다리 불·물 쇼는 금·토·일 21시(5~15분). 쇼 시간에는 다리 차량이 통제되고 물보라가 멀리 날아옵니다.",
       tags: ["야경", "한강"], map: "https://www.google.com/maps/search/?api=1&query=Love+Bridge+Da+Nang"
     },
     {
       id: "hoian-oldtown", group: "spot", name: "호이안 구시가지", local: "Phố Cổ Hội An",
       rating: 4.8, reviews: 939, area: "호이안",
       address: "Hoi An, Da Nang",
-      hours: "상시 (입장권은 패키지 포함)", openLate: true,
+      hours: "상시 (입장권은 현장 확인)", openLate: true,
       lat: 15.8786082, lng: 108.3326924, img: "./images/hoian-oldtown.jpg",
       tip: "내원교·광조회관·턴키의집·풍흥의집 코스. 오래된 집은 신발을 벗고 들어갑니다.",
       tags: ["구시가지", "호이안"], map: "https://www.google.com/maps/search/?api=1&query=Hoi+An+Ancient+Town"
@@ -345,10 +345,10 @@ window.PLACES = {
       id: "dragon-bridge", group: "spot", name: "용다리", local: "Cầu Rồng · Dragon Bridge",
       rating: 4.5, reviews: 10186, area: "다낭 한강",
       address: "Cầu Rồng, An Hải, Đà Nẵng",
-      hours: "상시 · 불·물 분수쇼 토·일 21:00", openLate: true,
+      hours: "상시 · 불·물 쇼 금·토·일 21:00", openLate: true,
       lat: 16.0611042, lng: 108.2276926, img: "./images/dragon-bridge.jpg",
-      tip: "주말 21시 불꽃·물 분수쇼. 11/27(금)에는 쇼가 없고 조명만 켜집니다.",
-      tags: ["야경", "주말 쇼"], map: "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang"
+      tip: "금·토·일 21시 불·물 쇼. 11/27(금)에도 쇼가 있어요. 다리 위는 사람이 많고 물에 젖으니 강변에서 보세요.",
+      tags: ["야경", "금·토·일 쇼"], map: "https://www.google.com/maps/search/?api=1&query=Dragon+Bridge+Da+Nang"
     },
     {
       id: "ba-na-hills", group: "spot", name: "바나힐 테마파크", local: "Sun World Ba Na Hills",
