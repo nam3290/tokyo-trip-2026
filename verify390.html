@@ -3,4 +3,17 @@
 <style>html,body{margin:0;background:#ddd}iframe{width:390px;height:844px;border:0;display:block;margin:0 auto}</style>
 </head><body>
 <iframe id="f" src="./?v=20261123a#d3"></iframe>
+<script>
+/* 검증용: 해시에 y=숫자 를 주면 그만큼 안쪽 페이지를 스크롤합니다. */
+var f=document.getElementById('f');
+f.addEventListener('load', function(){
+  setTimeout(function(){
+    var m=new URLSearchParams(location.search).get('y');
+    var doc=f.contentDocument;
+    if(!doc) return;
+    if(m==='meal'){ var el=doc.querySelector('.meal'); if(el) f.contentWindow.scrollTo(0, el.getBoundingClientRect().top+f.contentWindow.scrollY-60); }
+    else if(m) f.contentWindow.scrollTo(0, parseInt(m,10)||0);
+  }, 900);
+});
+</script>
 </body></html>
