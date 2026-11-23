@@ -216,11 +216,23 @@
   }
 
   /* ══════════════════ 추천 탭 ══════════════════ */
-  const FOOD = { g: "", q: "", focus: "" };
+  const FOOD = { g: "", q: "", focus: "", day: "", ids: null };
+
+  function dayPlaceIds(dayId) {
+    const d = D.days.find((x) => x.id === dayId);
+    if (!d) return null;
+    const ids = new Set();
+    d.items.forEach((it) => {
+      if (it.food) ids.add(it.food);
+      (it.candidates || []).forEach((c) => ids.add(c.id));
+    });
+    return ids;
+  }
 
   function foodFiltered() {
     const q = FOOD.q.trim().toLowerCase();
     return P.items.filter((it) => {
+      if (FOOD.ids && !FOOD.ids.has(it.id)) return false;
       if (FOOD.g && it.group !== FOOD.g) return false;
       if (q) {
         const hay = [it.name, it.local, it.area, it.address, it.tip, (it.tags || []).join(" ")].join(" ").toLowerCase();
@@ -286,12 +298,14 @@
   }
 
   function foodHtml() {
+    const dayLabel = FOOD.day ? (D.days.find((d) => d.id === FOOD.day) || {}).tab : "";
     return `
       <div class="foodwrap">
         <div class="foodhead">
           <h2>맛집 · 마사지 추천 <span class="cnt">${P.items.length}곳</span></h2>
           <p class="lead">미케비치 해산물, 술자리, 마사지, 패키지 식당을 한곳에 모았습니다. 평점·영업시간은 2026-11-23 구글맵 조회값이고, 방문 전에 한 번 더 확인하세요.</p>
         </div>
+        ${FOOD.day ? `<div class="fmeta" style="margin:0 0 10px"><span>${esc(dayLabel)} 일정에 나온 장소만 보는 중</span><button type="button" id="fdayclear">전체 보기</button></div>` : ""}
         <div class="searchbox">
           <span aria-hidden="true">🔎</span>
           <input id="fq" type="search" inputmode="search" autocomplete="off" placeholder="가게명 · 지역 검색 (예: 해산물, 마사지, 호이안)" value="${esc(FOOD.q)}">
@@ -342,7 +356,13 @@
       FOOD.q = ""; input.value = ""; redraw(); input.focus();
     });
     document.getElementById("freset").addEventListener("click", () => {
-      FOOD.g = FOOD.q = FOOD.focus = "";
+      FOOD.g = FOOD.q = FOOD.focus = FOOD.day = "";
+      FOOD.ids = null;
+      render("food");
+    });
+    const dayClear = document.getElementById("fdayclear");
+    if (dayClear) dayClear.addEventListener("click", () => {
+      FOOD.day = ""; FOOD.ids = null;
       render("food");
     });
     wrap.addEventListener("click", (e) => {
@@ -369,19 +389,30 @@
           .map((it) => ({
             id: it.id, time: it.time, name: it.title, lat: it.lat, lng: it.lng,
             kind: it.kind, priority: it.priority, map: it.map || `https://www.google.com/maps/search/?api=1&query=${it.lat},${it.lng}`,
-            mode: LEG_MODE[it.leg?.type] || "walking"
+            legType: it.leg?.type || ""
           }));
         const segments = [];
         for (let i = 0; i < stops.length - 1; i++) {
           const a = stops[i], b = stops[i + 1];
+          // 이동 수단: 일정에 적힌 이동 정보를 우선, 없으면 직선거리 1.5km 기준으로 판단
+          const km = distanceKm(a, b);
+          const type = b.legType || (km >= 1.5 ? "car" : b.legType || "walk");
+          const mode = LEG_MODE[type] || (km >= 1.5 ? "driving" : "walking");
           segments.push({
-            from: a.name, to: b.name, mode: b.mode,
-            url: `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}&travelmode=${b.mode}`
+            from: a.name, to: b.name, mode, km,
+            url: `https://www.google.com/maps/dir/?api=1&origin=${a.lat},${a.lng}&destination=${b.lat},${b.lng}&travelmode=${mode}`
           });
         }
         return { id: d.id, label: `${d.date} ${d.weekday} · ${d.tab}`, title: d.title, color: d.accent, stops, segments };
       })
       .filter((d) => d.stops.length);
+  }
+
+  function distanceKm(a, b) {
+    const R = 6371, toRad = (x) => x * Math.PI / 180;
+    const dLat = toRad(b.lat - a.lat), dLng = toRad(b.lng - a.lng);
+    const s = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(s));
   }
 
   function mapHtml() {
@@ -398,7 +429,7 @@
           ${stopsFor("all").length ? D.days.map((d) => `<button class="fchip dchip ${MAP.day === d.id ? "on" : ""}" type="button" data-mday="${d.id}" style="--c:${d.accent}">${esc(d.tab)}</button>`).join("") : ""}
           <button class="fchip foodpin ${MAP.places ? "on" : ""}" type="button" id="placepin">📍 추천 장소</button>
         </div>
-        <p class="maphint">일차를 고르면 그날 순서만 크게 보입니다 · 마커를 누르면 구글맵</p>
+        <p class="maphint">일차를 고르면 그날 순서만 크게 보입니다 · 실선 도보 / 점선 차량 · 마커를 누르면 구글맵</p>
         <div id="mapcanvas" class="map" role="application" aria-label="일차별 동선 지도"></div>
         <div class="mapfallback" id="mapfallback" hidden>지도를 불러오지 못했습니다(오프라인일 수 있습니다). 아래 목록과 구글맵 버튼은 그대로 쓸 수 있습니다.</div>
         <div class="maplegend">${days.map((d) => `<span><i style="background:${d.color}"></i>${esc(d.label)}</span>`).join("")}${MAP.places ? `<span><i class="dot"></i>추천 장소</span>` : ""}</div>
@@ -407,7 +438,7 @@
           <section class="mday">
             <h3 class="mday-h" style="--c:${d.color}"><i></i>${esc(d.label)} <span>${esc(d.title)}</span></h3>
             <div class="mseg">
-              ${d.segments.map((s, i) => `<a class="btn" href="${s.url}" target="_blank" rel="noopener">${s.mode === "driving" ? "🚗 차량" : "🚶 도보"} ${d.segments.length > 1 ? `${i + 1}/${d.segments.length}` : ""} · ${esc(s.from)}→${esc(s.to)}</a>`).join("")}
+              ${d.segments.map((s, i) => `<a class="btn" href="${s.url}" target="_blank" rel="noopener">${s.mode === "driving" ? "🚗 차량" : "🚶 도보"} ${d.segments.length > 1 ? `${i + 1}/${d.segments.length}` : ""} · ${esc(s.from)}→${esc(s.to)} <span style="opacity:.7">${s.km >= 1 ? ` ${s.km.toFixed(1)}km` : ` ${Math.round(s.km * 1000)}m`}</span></a>`).join("")}
             </div>
             <ol class="mstops">
               ${d.stops.map((s, i) => `
@@ -454,14 +485,15 @@
 
     const all = [];
     days.forEach((d) => {
-      const pts = d.stops.map((s) => [s.lat, s.lng]);
-      if (pts.length > 1) {
-        L.polyline(pts, {
-          color: d.color, weight: 3, opacity: 0.85,
-          dashArray: d.stops.some((s) => s.mode === "driving") ? "6 7" : null,
-          lineCap: "round"
+      // 구간별로 따로 그립니다: 도보는 실선, 차량은 점선
+      (d.segments || []).forEach((seg, i) => {
+        const a = d.stops[i], b = d.stops[i + 1];
+        if (!a || !b) return;
+        L.polyline([[a.lat, a.lng], [b.lat, b.lng]], {
+          color: d.color, weight: 3, opacity: 0.8,
+          dashArray: seg.mode === "driving" ? "5 6" : null, lineCap: "round"
         }).addTo(map);
-      }
+      });
       d.stops.forEach((s, i) => {
         const m = L.marker([s.lat, s.lng], { icon: markerIcon(i + 1, d.color, MAP.day === "all"), title: s.name, riseOnHover: true }).addTo(map);
         m.bindPopup(`<div class="mpop">
@@ -630,7 +662,10 @@
     }
     const goDayFood = e.target.closest("[data-godayfood]");
     if (goDayFood) {
-      FOOD.g = ""; FOOD.q = "";
+      const dayId = goDayFood.dataset.godayfood;
+      FOOD.g = ""; FOOD.q = ""; FOOD.focus = "";
+      FOOD.day = dayId;
+      FOOD.ids = dayPlaceIds(dayId);
       history.replaceState(null, "", "#food");
       render("food");
       return;
@@ -641,6 +676,8 @@
       FOOD.g = p ? p.group : "";
       FOOD.q = "";
       FOOD.focus = p ? p.id : "";
+      FOOD.day = "";
+      FOOD.ids = null;
       history.replaceState(null, "", "#food");
       render("food");
       return;

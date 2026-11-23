@@ -3,7 +3,7 @@
  * · 이미지·아이콘 = cache-first
  * 실패해도 페이지 동작에는 영향이 없습니다.
  */
-const CACHE = "danang-trip-v1";
+const CACHE = "danang-trip-v2";
 const ASSETS = [
   "./",
   "./index.html",
