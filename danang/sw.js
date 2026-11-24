@@ -3,7 +3,7 @@
  * · 이미지·아이콘 = cache-first
  * 실패해도 페이지 동작에는 영향이 없습니다.
  */
-const CACHE = "danang-trip-v3";
+const CACHE = "danang-trip-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -107,6 +107,7 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+  // 외부 도메인(방문 카운터 countapi 등)은 서비스워커가 가로채지 않고 브라우저가 직접 요청합니다.
   if (url.origin !== self.location.origin) return;
   // 이 사이트 범위(/danang/) 밖 요청은 그대로 둡니다.
   if (!url.pathname.includes("/danang/")) return;

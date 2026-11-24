@@ -62,5 +62,18 @@ window.addEventListener("error", function (e) {
 <script src="./data/itinerary.js?v=20261123c"></script>
 <script src="./data/places.js?v=20261123c"></script>
 <script src="./assets/app.js?v=20261123c"></script>
+<script>
+/* 방문 카운터 — 페이지를 열 때 1회만 조용히 기록합니다. 화면에는 표시하지 않고,
+   오프라인·차단·네트워크 오류는 모두 무시하므로 페이지 동작에 영향이 없습니다. */
+(function () {
+  try {
+    fetch("https://countapi.mileshilliard.com/api/v1/hit/nam3290_danang_2026_v1_9k4m", {
+      mode: "cors",
+      cache: "no-store",
+      credentials: "omit"
+    }).catch(function () {});
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
