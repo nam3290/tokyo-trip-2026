@@ -133,10 +133,30 @@ th.on .ar{opacity:1;color:var(--green)}
 .tfoot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);padding:8px 2px 0}
 
 /* pnl */
-.pnl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
-.field{display:grid;grid-template-columns:1fr 112px;gap:8px;align-items:center;margin-bottom:7px;font-size:12.5px}
-.field label{color:#3f5854}
-.field input{text-align:right;padding:6px 8px;font-size:13px;font-weight:700;width:100%}
+.opbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:10px}
+.seg.op button{padding:8px 13px}
+.pnl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,318px);gap:16px;align-items:start}
+.pnl-form{display:grid;gap:0}
+.pgroup{font-size:10px;font-weight:800;letter-spacing:1.4px;color:var(--muted);margin:12px 0 2px;text-transform:uppercase}
+.prow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dashed #eef3f1}
+.prow label{font-size:12.5px;color:#35514c;line-height:1.35}
+.prow label small{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
+.pctl{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;flex:0 0 auto}
+.pctl input{width:72px;border:0;text-align:right;padding:9px 4px;font-size:13px;font-weight:700;background:transparent;min-width:0}
+.pctl input::-webkit-outer-spin-button,.pctl input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.pctl input[type=number]{-moz-appearance:textfield;appearance:textfield}
+.stp{width:34px;height:38px;border:0;background:#f2f7f5;color:#33504b;font-size:17px;font-weight:700;line-height:1;display:grid;place-items:center;padding:0}
+.stp:active{background:#dcece6}
+.stp.minus{border-right:1px solid var(--line)}
+.stp.plus{border-left:1px solid var(--line)}
+.royalty-mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-left:6px;vertical-align:middle}
+.royalty-mode button{border:0;background:#fff;font-size:10.5px;font-weight:800;color:#68807d;padding:2px 7px}
+.royalty-mode button[aria-pressed="true"]{background:var(--green);color:#fff}
+.basis{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px}
+.basis th,.basis td{padding:6px 8px;border-bottom:1px solid #eef3f1;text-align:left;vertical-align:top;white-space:normal}
+.basis th{background:#f7faf9;font-size:10.5px;color:#5d736f;font-weight:800;white-space:nowrap}
+.basis td.v{font-weight:800;white-space:nowrap}
+.basis tr:last-child td{border-bottom:0}
 .out{background:var(--green-d);color:#fff;border-radius:12px;padding:16px}
 .out .big{font-size:clamp(22px,3.4vw,30px);font-weight:800;letter-spacing:-1px;line-height:1.2}
 .out .big small{font-size:13px;font-weight:600;color:#a9cfc5;letter-spacing:0}
@@ -194,6 +214,8 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
   .kpi .lead{grid-column:1/-1;margin-top:4px}
   .kpi .meta{grid-column:1/-1}
   .pnl,.mgrid{grid-template-columns:1fr}
+  .pctl input{width:62px}
+  .stp{width:38px;height:40px}
   .bar-row{grid-template-columns:1fr 78px;grid-template-areas:"name val" "track track";gap:3px 8px}
   .bar-name{grid-area:name}
   .bar-track{grid-area:track}
@@ -302,26 +324,28 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
   </section>
 
   <section id="sec-pnl">
-    <div class="shead"><div><span class="snum">05 / Unit economics</span><h2 style="margin-top:2px">창업 손익 계산기</h2></div><div class="sub">침산동 검토 점포 월세 200만원 기본값</div></div>
+    <div class="shead"><div><span class="snum">05 / Unit economics</span><h2 style="margin-top:2px">창업 손익 계산기</h2></div><div class="sub">15평 복층 점포 · 침산동 월세 200만원 기본값</div></div>
     <div class="card" style="padding:16px">
-      <div class="addbox">
-        <select id="pnlBrand" aria-label="브랜드 매출 불러오기" style="flex:1 1 220px"></select>
-        <button class="mini" id="pnlLoad" type="button">매출 불러오기</button>
-        <button class="mini" id="pnlAvg" type="button">권역 가중평균 넣기</button>
+      <div class="opbar">
+        <div class="seg op" id="opTabs" role="group" aria-label="운영 형태">
+          <button type="button" data-op="owner" aria-pressed="true">👤 사장 직접 운영</button>
+          <button type="button" data-op="auto" aria-pressed="false">🤖 오토 운영</button>
+        </div>
+        <div class="addbox" style="margin:0">
+          <select id="pnlBrand" aria-label="브랜드 매출 불러오기" style="flex:1 1 190px"></select>
+          <button class="mini" id="pnlLoad" type="button">매출 불러오기</button>
+          <button class="mini" id="pnlAvg" type="button">권역 평균</button>
+        </div>
       </div>
       <div class="pnl">
-        <div>
-          <div class="field"><label for="pSales">월 매출 (만원)</label><input id="pSales" type="number" inputmode="numeric" step="10" value="2840"></div>
-          <div class="field"><label for="pRent">월 임대료 (만원)</label><input id="pRent" type="number" inputmode="numeric" step="10" value="200"></div>
-          <div class="field"><label for="pLabor">월 인건비 (만원)</label><input id="pLabor" type="number" inputmode="numeric" step="10" value="220"></div>
-          <div class="field"><label for="pMat">재료비율 (%)</label><input id="pMat" type="number" inputmode="decimal" step="0.5" value="35"></div>
-          <div class="field"><label for="pFee">결제·로열티·배달 (%)</label><input id="pFee" type="number" inputmode="decimal" step="0.5" value="13"></div>
-          <div class="field"><label for="pEtc">기타 운영비 (만원)</label><input id="pEtc" type="number" inputmode="numeric" step="10" value="80"></div>
-          <div class="field"><label for="pDays">월 영업일 (일)</label><input id="pDays" type="number" inputmode="numeric" step="1" value="26"></div>
-        </div>
+        <div class="pnl-form" id="pnlForm"></div>
         <div class="out" id="pnlOut"></div>
       </div>
-      <div class="tfoot"><span>가정 기반 추정입니다. 부가세 정산, 소득세, 감가상각, 대출이자, 점주 인건비는 반영하지 않았습니다.</span></div>
+      <div class="tfoot"><span>가정 기반 추정입니다. 부가세·소득세·대출이자·점주 인건비는 별도입니다. 실제 가맹점 수익률이 아닙니다.</span></div>
+    </div>
+    <div class="card" style="padding:16px;margin-top:12px">
+      <div class="shead" style="margin-bottom:4px"><div><span class="snum">05-1 / Basis</span><h2 style="font-size:16px;margin-top:2px">기본값 산출 근거</h2></div><div class="sub">15평 복층 · 2026년 요율</div></div>
+      <div style="overflow-x:auto"><table class="basis" id="pnlBasis"></table></div>
     </div>
   </section>
 
@@ -764,54 +788,184 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !docume
 
 /* ---------- P&L ---------- */
 var pnlSel = null;
+var opMode = 'owner';
+var royMode = 'fixed';
+
+var LABOR = {
+  owner: {cost:215, note:'점주 급여 0(세전 점주수익) + 파트타임 주 36시간'},
+  auto:  {cost:505, note:'점장 1명 + 파트타임 주 36시간 커버'}
+};
+
+var PNL_FIELDS = [
+  {g:'매출(넣어오는 값)'},
+  {id:'pSales', l:'월 매출', s:'가맹점 월평균을 불러올 수 있습니다', u:'만원', step:10, v:2840},
+  {g:'고정비'},
+  {id:'pRent', l:'월 임대료', s:'침산동 검토 점포', u:'만원', step:5, v:200},
+  {id:'pMgmt', l:'관리비·공용', s:'건물 관리비', u:'만원', step:1, v:20},
+  {id:'pElec', l:'전기', s:'복층 1·2층 냉난방', u:'만원', step:5, v:70},
+  {id:'pWater', l:'수도·가스', s:'', u:'만원', step:1, v:18},
+  {id:'pRoyal', l:'로열티', s:'', u:'만원', step:1, v:22, royal:true},
+  {id:'pAd', l:'광고·판촉 분담금', s:'본사 광고비 가맹점 분담', u:'만원', step:1, v:3},
+  {id:'pLabor', l:'인건비', s:'', u:'만원', step:5, v:215, labor:true},
+  {id:'pEtc', l:'기타 부대비', s:'세무·POS·렌탈·보험·소독', u:'만원', step:5, v:55},
+  {id:'pDep', l:'감가상각·리스', s:'15평 창업비 ÷ 60개월', u:'만원', step:5, v:130},
+  {g:'변동비'},
+  {id:'pMat', l:'재료비율', s:'업계 평균 원가율', u:'%', step:0.5, v:35, pct:true},
+  {id:'pFee', l:'결제·배달 수수료', s:'카드 + 배달 중개', u:'%', step:0.5, v:2.5, pct:true},
+  {g:'기타'},
+  {id:'pDays', l:'월 영업일', s:'', u:'일', step:1, v:26}
+];
+
+function fld(id){ return document.getElementById(id); }
+function gv(id){ var v = parseFloat(fld(id).value); return isNaN(v)?0:v; }
+
+function renderPnlForm(){
+  var html = '';
+  PNL_FIELDS.forEach(function(f){
+    if(f.g){ html += '<div class="pgroup">'+esc(f.g)+'</div>'; return; }
+    var extra = '';
+    if(f.royal){
+      extra = '<span class="royalty-mode" role="group" aria-label="로열티 방식">'+
+        '<button type="button" data-roy="fixed" aria-pressed="'+(royMode==='fixed')+'" style="border-right:1px solid var(--line)">정액 만원</button>'+
+        '<button type="button" data-roy="pct" aria-pressed="'+(royMode==='pct')+'">정률 %</button></span>';
+    }
+    html += '<div class="prow"><div class="plab"><label for="'+f.id+'">'+esc(f.l)+'</label> '+extra+
+      '<small'+(f.id==='pLabor'?' id="pLaborNote"':'')+(f.id==='pRoyal'?' id="pRoyalNote"':'')+'>'+
+      esc(f.id==='pLabor'? LABOR[opMode].note : (f.id==='pRoyal'? royaNote() : (f.s||'')))+'</small></div>'+
+      '<div class="pctl">'+
+        '<button type="button" class="stp minus" data-for="'+f.id+'" data-dir="-1" data-step="'+f.step+'" aria-label="'+esc(f.l)+' 줄이기">−</button>'+
+        '<input id="'+f.id+'" type="number" inputmode="decimal" value="'+f.v+'" aria-label="'+esc(f.l)+' ('+esc(f.u)+')">'+
+        '<button type="button" class="stp plus" data-for="'+f.id+'" data-dir="1" data-step="'+f.step+'" aria-label="'+esc(f.l)+' 늘리기">+</button>'+
+      '</div></div>';
+  });
+  fld('pnlForm').innerHTML = html;
+  PNL_FIELDS.forEach(function(f){
+    if(f.id) fld(f.id).addEventListener('input', calcPnl);
+  });
+}
+function royaNote(){
+  return royMode==='fixed'
+    ? '저가커피 7개 브랜드 평균 22만(16.5~27.5)'
+    : '파스쿠찌 2.5% · 할리스 3.3% 정률 구조';
+}
+function setRoyaltyValue(){
+  var el = fld('pRoyal');
+  if(royMode==='fixed'){ el.value = 22; el.setAttribute('aria-label','로열티 (만원)'); }
+  else { el.value = 2.9; el.setAttribute('aria-label','로열티 (매출 대비 %)'); }
+  var n = fld('pRoyalNote'); if(n) n.textContent = royaNote();
+  calcPnl();
+}
+function setOpMode(mode){
+  opMode = mode;
+  fld('pLabor').value = LABOR[mode].cost;
+  var n = fld('pLaborNote'); if(n) n.textContent = LABOR[mode].note;
+  Array.prototype.forEach.call(fld('opTabs').querySelectorAll('button'), function(b){
+    b.setAttribute('aria-pressed', String(b.dataset.op===mode));
+  });
+  calcPnl();
+}
 function setPnl(monthly, r){
   pnlSel = r || null;
   if(monthly!=null && !isNaN(monthly)){
-    document.getElementById('pSales').value = Math.round(monthly);
-    calcPnl();
+    fld('pSales').value = Math.round(monthly);
   }
+  if(r && r.startup15){ fld('pDep').value = Math.round(r.startup15/60); }
+  calcPnl();
 }
 function calcPnl(){
-  var g = function(id){ var v = parseFloat(document.getElementById(id).value); return isNaN(v)?0:v; };
-  var sales=g('pSales'), rent=g('pRent'), labor=g('pLabor'), mat=g('pMat')/100, fee=g('pFee')/100, etc=g('pEtc'), days=Math.max(1,g('pDays'));
-  var fixed = rent+labor+etc;
+  var sales=gv('pSales'), rent=gv('pRent'), mgmt=gv('pMgmt'), elec=gv('pElec'), water=gv('pWater');
+  var ad=gv('pAd'), labor=gv('pLabor'), etc=gv('pEtc'), dep=gv('pDep'), days=Math.max(1,gv('pDays'));
+  var roy = royMode==='fixed' ? gv('pRoyal') : sales*gv('pRoyal')/100;
+  var mat = gv('pMat')/100, fee = gv('pFee')/100;
   var varRate = Math.min(0.95, mat+fee);
+  var fixed = rent+mgmt+elec+water+roy+ad+labor+etc+dep;
   var op = sales*(1-varRate) - fixed;
   var margin = sales>0 ? op/sales*100 : 0;
   var bep = varRate<1 ? fixed/(1-varRate) : NaN;
-  var out = document.getElementById('pnlOut');
   var payback = (pnlSel && pnlSel.startup15 && op>0) ? pnlSel.startup15/op : null;
+  var out = fld('pnlOut');
   out.innerHTML =
-    '<div class="big'+(op<0?' neg':'')+'">'+fmt(op)+'만원 <small>'+(state.unit==='month'?'월':'월')+' 영업이익</small></div>'+
+    '<div class="big'+(op<0?' neg':'')+'">'+fmt(op)+'만원<small style="display:block;font-size:11.5px;margin-top:2px">월 영업이익'+(opMode==='owner'?' · 점주 보수 포함':'')+'</small></div>'+
     '<div class="row"><span>영업이익률</span><span>'+margin.toFixed(1)+'%</span></div>'+
     '<div class="row"><span>월 손익분기 매출</span><span>'+(isFinite(bep)?fmt(bep)+'만원':'—')+'</span></div>'+
     '<div class="row"><span>일 손익분기 매출</span><span>'+(isFinite(bep)?fmt(bep/days)+'만원':'—')+'</span></div>'+
-    '<div class="row"><span>월 변동비('+((varRate*100).toFixed(1))+'%)</span><span>'+fmt(sales*varRate)+'만원</span></div>'+
-    '<div class="row"><span>월 고정비</span><span>'+fmt(fixed)+'만원</span></div>'+
-    (payback!=null ? '<div class="row"><span>15평 창업비 회수 (월 '+fmt(pnlSel.startup15)+'만원)</span><span>'+(isFinite(payback)?payback.toFixed(1)+'개월':'—')+'</span></div>' : '')+
+    '<div class="row"><span>월 고정비 합계</span><span>'+fmt(fixed)+'만원</span></div>'+
+    '<div class="row"><span>변동비 ('+(varRate*100).toFixed(1)+'%)</span><span>'+fmt(sales*varRate)+'만원</span></div>'+
+    '<div class="row"><span>로열티</span><span>'+fmt(roy)+'만원'+(royMode==='pct'?' ('+gv('pRoyal').toFixed(1)+'%)':'')+'</span></div>'+
+    (payback!=null ? '<div class="row"><span>창업비 회수 (15평 '+fmt(pnlSel.startup15)+'만원)</span><span>'+(isFinite(payback)?payback.toFixed(1)+'개월':'—')+'</span></div>' : '')+
     (pnlSel ? '<div class="row"><span>불러온 브랜드</span><span style="font-weight:700">'+esc(pnlSel.name)+'</span></div>' : '')+
-    '<div class="warn">'+(op<0?'현재 가정에서는 적자입니다. 매출·비율을 조정해 보세요.':'')+' 부가세·소득세·감가상각·대출이자·점주 인건비 미반영. 실제 가맹점 수익률이 아닙니다.</div>';
+    '<div class="warn">'+(op<0?'현재 가정에서는 적자입니다. 매출·비율을 조정해 보세요. ':'')+
+    (opMode==='owner' ? '점주 본인 급여는 0으로 계산되어 영업이익이 곧 점주 세전 보수입니다. ' : '점장·파트타임 인건비를 모두 반영했습니다. ')+
+    '부가세·소득세·대출이자 미반영, 실제 가맹점 수익률이 아닙니다.</div>';
 }
-['pSales','pRent','pLabor','pMat','pFee','pEtc','pDays'].forEach(function(id){
-  document.getElementById(id).addEventListener('input', calcPnl);
+fld('pnlForm').addEventListener('click', function(e){
+  var b = e.target.closest('.stp');
+  if(b){
+    var id=b.getAttribute('data-for'), dir=+b.getAttribute('data-dir'), step=+b.getAttribute('data-step');
+    var inp=fld(id), v=parseFloat(inp.value)||0;
+    v = Math.max(0, v + dir*step);
+    inp.value = step<1 ? (Math.round(v*10)/10) : Math.round(v);
+    calcPnl();
+    return;
+  }
+  var rb = e.target.closest('[data-roy]');
+  if(rb){
+    royMode = rb.getAttribute('data-roy');
+    Array.prototype.forEach.call(fld('pnlForm').querySelectorAll('[data-roy]'), function(x){
+      x.setAttribute('aria-pressed', String(x.getAttribute('data-roy')===royMode));
+    });
+    setRoyaltyValue();
+  }
+});
+fld('opTabs').addEventListener('click', function(e){
+  var b = e.target.closest('[data-op]'); if(!b) return;
+  setOpMode(b.getAttribute('data-op'));
 });
 function fillPnlSelect(){
   var rs = rows().slice().sort(function(a,b){ return a.rank-b.rank; });
-  document.getElementById('pnlBrand').innerHTML = '<option value="">브랜드 선택 (현재 권역)</option>' + rs.map(function(r){
-    return '<option value="'+r.rank+'">'+esc(r.name)+' · 월 '+fmt(r.monthly)+'만원'+(r.startup15?' · 창업비 '+fmt(r.startup15):'')+'</option>';
+  fld('pnlBrand').innerHTML = '<option value="">브랜드 선택 (현재 권역)</option>' + rs.map(function(r){
+    return '<option value="'+r.rank+'">'+esc(r.name)+' · 월 '+fmt(r.monthly)+'만원</option>';
   }).join('');
 }
-document.getElementById('pnlLoad').addEventListener('click', function(){
-  var v = document.getElementById('pnlBrand').value;
+fld('pnlLoad').addEventListener('click', function(){
+  var v = fld('pnlBrand').value;
   if(!v) return;
   var r = rows().filter(function(x){ return String(x.rank)===v; })[0];
   if(r) setPnl(r.monthly, r);
 });
-document.getElementById('pnlAvg').addEventListener('click', function(){
+fld('pnlAvg').addEventListener('click', function(){
   setPnl(sum().weighted/12, null);
 });
 
+var PNL_BASIS = [
+  ['최저임금 (2026)', '시급 10,320원 · 월 2,156,880원', '월 환산 209시간(주 40시간 + 유급주휴 8시간). 고용노동부 고시 제2025-47호'],
+  ['4대보험 사업주', '약 10.9%', '국민연금 4.75 + 건강 3.595 + 장기요양 0.4724 + 고용 1.15 + 산재 0.7 (2026년 요율)'],
+  ['인건비 · 사장 직접', '215만원', '점주 0원 + 파트타임 주 36시간: 36h×4.345주×10,320원 = 161만 + 주휴 32만 → 4대보험 포함 약 215만'],
+  ['인건비 · 오토', '505만원', '점장 1명(월 260만 + 4대보험 11% = 289만) + 파트타임 주 36시간(215만)'],
+  ['로열티 (정액)', '22만원', '저가커피 7개 브랜드 평균: 메가·더벤티 16.5 / 컴포즈·텐퍼센트·매머드 22 / 빽다방·이디야 27.5만 (정보공개서 기반 보도)'],
+  ['로열티 (정률)', '2.9%', '파스쿠찌 순매출 2.5%(공식 창업안내) · 할리스 3.3%(보도) 평균'],
+  ['광고·판촉 분담금', '3만원', '텐퍼센트 2.2 · 더벤티 2.9 · 우지 1.1만 등 저가커피 공개값 평균 약 2만 + 반올림'],
+  ['재료비율', '35%', '커피 프랜차이즈 업계 통용 원가율(업계 관계자 기준, 매출의 35%)'],
+  ['전기', '70만원', '15평 복층(1·2층 냉난방). 7평 테이크아웃 실사례 35만, 20평 무인 40~60만, 15~25평 80~150만(공과금 전체) → 복층 가중'],
+  ['수도·가스', '18만원', '테이크아웃 7평 실사례 수도 10만 + 온수·조리 가스 8만'],
+  ['관리비·공용', '20만원', '상가 관리비 15~50만(건물·상권별 편차) 중 소형 카페 기준'],
+  ['결제·배달 수수료', '2.5%', '카드 우대수수료 0.5~1.5% + 배달 중개 6.8~9.8%×배달비중. 카드·PG 2~3% 통용'],
+  ['기타 부대비', '55만원', '세무기장 13 + POS·키오스크 렌탈 7(월 5~12만) + 인터넷 8 + CCTV 3 + 정수기·제빙기 렌탈 8 + 화재·배상책임 보험 8 + 소독·소모품 8'],
+  ['감가상각·리스', '130만원', '15평 창업비 8,000만원(저가커피 6곳 7,687~8,404만) ÷ 60개월 = 133만. 브랜드를 불러오면 그 브랜드 15평 창업비÷60으로 자동 설정'],
+  ['월 임대료', '200만원', '침산동 검토 점포 기준(사용자 지정)']
+];
+function renderBasis(){
+  var h = '<thead><tr><th>항목</th><th>기본값</th><th>산출 근거</th></tr></thead><tbody>';
+  PNL_BASIS.forEach(function(r){
+    h += '<tr><td>'+esc(r[0])+'</td><td class="v">'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>';
+  });
+  h += '</tbody>';
+  var el = document.getElementById('pnlBasis');
+  if(el) el.innerHTML = h;
+}
+
 /* ---------- method ---------- */
+
 function renderMethod(){
   var meta = DATA.meta;
   document.getElementById('methodSub').textContent = '조사 기준일 '+meta.survey+' · 조회 시점 정보공개서 최신 등록본';
@@ -873,9 +1027,10 @@ function renderAll(){
 document.getElementById('stampSurvey').textContent = DATA.meta.survey;
 readHash();
 buildTabs();
+renderPnlForm();
+renderBasis();
 renderAll();
 renderMethod();
-if(!document.getElementById('pnlBrand').value) { /* keep default sales */ }
 calcPnl();
 })();
 </script>
