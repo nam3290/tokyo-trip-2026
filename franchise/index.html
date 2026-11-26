@@ -663,9 +663,9 @@ function renderTable(){
       if(c.k==='stores') return '<td>'+fmt(r.stores,'—')+'</td>';
       if(c.k==='monthly') return '<td><b>'+fmt(r.monthly)+'</b></td>';
       if(c.k==='annual') return '<td><b>'+fmt(r.annual)+'</b></td>';
-      if(c.k==='year') return '<td class="muted">'+(r.year||'—')+'</td>';
+      if(c.k==='year') return '<td class="muted'+' '+(c.cls||'')+'">'+(r.year||'—')+'</td>';
       if(c.k==='startup15') return '<td>'+fmt(r.startup15,'—')+'</td>';
-      if(c.k==='estArea') return '<td>'+(r.estArea==null?'—':(Math.round(r.estArea*10)/10).toFixed(1).replace(/\.0$/,''))+'</td>';
+      if(c.k==='estArea') return '<td class="'+(c.cls||'')+'">'+(r.estArea==null?'—':(Math.round(r.estArea*10)/10).toFixed(1).replace(/\.0$/,''))+'</td>';
       return '<td class="'+(c.cls||'')+'">'+fmt(r[c.k],'—')+'</td>';
     }).join('');
     return '<tr>'+tds+'</tr>';
