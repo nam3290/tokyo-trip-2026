@@ -511,19 +511,29 @@ function brandMap(){
 }
 function defaultCmp(){
   var m = brandMap();
+  // 업종별 기본 비교 세트(세 권역 모두 공시된 브랜드 우선)
+  var pref = {
+    cafe: ['투썸플레이스','메가엠지씨커피(MEGA MGC COFFEE)','컴포즈커피(COMPOSE COFFEE)'],
+    food: ['쿠우쿠우','샤브20'],
+    small: ['정동뚝배기']
+  }[state.ind] || [];
+  var out = pref.filter(function(n){
+    return m[n] && RKEYS.filter(function(k){ return m[n][k]; }).length>=2;
+  }).slice(0,6);
   var common = Object.keys(m).filter(function(n){ return m[n].dg && m[n].sg && m[n].bn; });
   common.sort(function(a,b){
     function mx(n){ var o=m[n]; return Math.max(o.dg.annual,o.sg.annual,o.bn.annual); }
     return mx(b)-mx(a);
   });
-  if(common.length<3){
+  common.forEach(function(n){ if(out.length<3 && out.indexOf(n)<0) out.push(n); });
+  if(out.length<3){
     var all = Object.keys(m).sort(function(a,b){
       function mx(n){ var o=m[n], best=0; RKEYS.forEach(function(k){ if(o[k]) best=Math.max(best,o[k].annual); }); return best; }
       return mx(b)-mx(a);
     });
-    return all.slice(0,3);
+    all.forEach(function(n){ if(out.length<3 && out.indexOf(n)<0) out.push(n); });
   }
-  return common.slice(0,3);
+  return out;
 }
 function cmpList(){
   if(!state.cmp[state.ind]) state.cmp[state.ind] = defaultCmp();
@@ -620,7 +630,7 @@ function renderTable(){
       if(c.k==='stores') return '<td>'+fmt(r.stores,'—')+'</td>';
       if(c.k==='monthly') return '<td><b>'+fmt(r.monthly)+'</b></td>';
       if(c.k==='annual') return '<td><b>'+fmt(r.annual)+'</b></td>';
-      if(c.k==='year') return '<td class="muted">'+fmt(r.year)+'</td>';
+      if(c.k==='year') return '<td class="muted">'+(r.year||'—')+'</td>';
       if(c.k==='startup15') return '<td>'+fmt(r.startup15,'—')+'</td>';
       if(c.k==='estArea') return '<td>'+fmt(r.estArea,'—')+'</td>';
       return '<td class="'+(c.cls||'')+'">'+fmt(r[c.k],'—')+'</td>';
