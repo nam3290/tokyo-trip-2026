@@ -927,7 +927,7 @@ var PNL_FIELDS=[
  {id:'pOwnerTarget',l:'점주 노동 기회비용 (만원/월)',v:260,s:'경제적 이익 비교용, 세무 비용 아님'}
 ];
 function fld(id){return document.getElementById(id);}
-function gv(id){var x=Number(fld(id).value);return Number.isFinite(x)?x:NaN;}
+function gv(id){var raw=fld(id).value;var x=Number(raw);return String(raw).trim()!==''&&Number.isFinite(x)?x:NaN;}
 function renderPnlForm(){
  var h='',open=false,group=0;
  PNL_FIELDS.forEach(function(f){
@@ -976,8 +976,7 @@ function estimate(mode,net){
  var other=gv('pOtherIncome'),ded=gv('pDeduct'),totalTax=taxAnnual(Math.max(0,business*12+other-ded));
  var noBusinessTax=taxAnnual(Math.max(0,other-ded));
  var attributable=Math.max(0,totalTax-noBusinessTax);
- var relief=attributable*gv('pRelief')/100;
- var tax=Math.max(0,attributable-relief)*1.1/12;
+ var tax=attributable*(1-gv('pRelief')/100)*1.1/12;
  var unrelieved=attributable*1.1/12;
  var after=business-tax,ownerIns=sumIds(['pHealth','pPension','pYellow']),reserve=sumIds(['pReplace','pRenew','pEmergency']);
  var available=after+dep-ownerIns-gv('pPrincipal')-reserve;
@@ -986,7 +985,7 @@ function estimate(mode,net){
 function breakeven(mode,metric){
  // Scan sales brackets to handle card-rate steps and progressive tax.
  var prev=0; if(estimate(mode,0)[metric]>=0)return 0;
- for(var x=10;x<=100000;x+=10){
+ for(var x=10;x<=10000;x+=10){
   if(estimate(mode,x)[metric]>=0){var lo=prev,hi=x;for(var j=0;j<22;j++){var m=(lo+hi)/2;if(estimate(mode,m)[metric]>=0)hi=m;else lo=m;}return hi*1.1;}
   prev=x;
  }
@@ -995,14 +994,14 @@ function breakeven(mode,metric){
 function calcPnl(){
  var bad=PNL_FIELDS.some(function(f){return f.id&&(!Number.isFinite(gv(f.id))||(gv(f.id)<0&&f.id!=='pCardOverride'));});
  var pctIds=['pDeliveryShare','pCardShare','pCreditMix','pVatEligible','pVatCardShare','pMat','pPack','pWaste','pDeliveryFee','pPG','pCoupon','pGift'];
- bad=bad||pctIds.some(function(k){return gv(k)>100;})||gv('pDays')<1||gv('pDays')>31||gv('pHours')>24||gv('pOrder')<=0||gv('pWage')<10320||gv('pCardOverride')< -1||gv('pCardOverride')>100||(royMode==='pct'&&gv('pRoyal')>100)||gv('pMat')+gv('pPack')+gv('pWaste')>=100;
+ bad=bad||pctIds.some(function(k){return gv(k)>100;})||gv('pDays')<1||gv('pDays')>31||gv('pHours')>24||gv('pOrder')<=0||gv('pWage')<10320||(gv('pCardOverride')<0&&gv('pCardOverride')!==-1)||gv('pCardOverride')>100||(royMode==='pct'&&gv('pRoyal')>100)||gv('pMat')+gv('pPack')+gv('pWaste')>=100;
  if(bad){fld('pnlOut').innerHTML='<div class="warn">입력 오류: 비용·비율·최저시급·영업일·주문액을 확인하세요.</div>';return;}
  var net=gv('pSales')/(gv('pVatIncluded')?1.1:1),a=estimate('owner',net),b=estimate('auto',net),r=opMode==='owner'?a:b;
  function m(v){return v==null?'—':fmt(v)+'만원';}
  function line(n,v){return '<div class="row"><span>'+esc(n)+'</span><span>'+esc(v)+'</span></div>';}
  function comparison(n,k){return '<tr><td class="l">'+esc(n)+'</td><td>'+m(a[k])+'</td><td>'+m(b[k])+'</td></tr>';}
  var h='<div class="big'+(r.available<0?' neg':'')+'">'+m(r.available)+'<small style="display:block;font-size:11.5px">월 가용현금 · '+(opMode==='owner'?'직접 운영':'오토 운영')+'</small></div>';
- h+=line('월 고객 결제액',m(r.gross))+line('월 공급가액',m(r.net))+line('영업이익',m(r.operating))+line('세후 사업소득',m(r.after))+line('감면 종료 후 가용현금',m(r.afterRelief))+line('회계상 손익분기 결제매출',m(breakeven(opMode,'operating')))+line('가용현금 손익분기 결제매출',m(breakeven(opMode,'available')));
+ h+=line('월 고객 결제액',m(r.gross))+line('월 공급가액',m(r.net))+line('영업이익',m(r.operating))+line('세후 사업소득',m(r.after))+line('감면 종료 후 가용현금',m(r.afterRelief))+line('회계상 손익분기 결제매출 (월 1억 이하 탐색)',m(breakeven(opMode,'operating')))+line('가용현금 손익분기 결제매출 (월 1억 이하 탐색)',m(breakeven(opMode,'available')));
  h+=line('필요 근무시간 / 유급 인시',Math.round(r.hours)+' / '+Math.round(r.paid)+'시간')+line('카드 추정 적용률',r.cardRate.toFixed(2)+'%')+line('배달 예상 주문수',fmt(r.orders)+'건');
  h+='<div class="sub-t">직접 운영 vs 오토 운영 (월 · 만원)</div><div class="table-wrap"><table><thead><tr><th class="l">항목</th><th>직접</th><th>오토</th></tr></thead><tbody>';
  [['순매출','net'],['식재료·포장·로스','goods'],['인건비·퇴직충당 등','labor'],['임차료·공과금','occupancy'],['본사 비용','hq'],['카드','card'],['배달 중개·PG·배달비','platform'],['추가 쿠폰·상품권 비용','discount'],['배달 광고','advertising'],['시스템·위생·수리 등','systems'],['감가상각','dep'],['영업이익','operating'],['이자·보증료','interest'],['세전 사업소득 (VAT 혜택 포함)','business'],['소득세·지방세 추정','tax'],['세후 사업소득','after'],['점주 보험·연금·공제','ownerIns'],['교체·리뉴얼·비상 적립','reserve'],['최종 가용현금','available']].forEach(function(p){h+=comparison(p[0],p[1]);});
