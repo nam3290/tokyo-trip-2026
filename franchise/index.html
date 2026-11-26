@@ -336,7 +336,7 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
   </section>
 
   <section id="sec-pnl">
-    <div class="shead"><div><span class="snum">05 / Unit economics</span><h2 style="margin-top:2px">세후 현금흐름 계산기</h2></div><div class="sub">점주 직접 운영 · 핵심 비용만 · 월세 200만원</div></div>
+    <div class="shead"><div><span class="snum">05 / Unit economics</span><h2 style="margin-top:2px">세후 현금흐름 계산기</h2></div><div class="sub">15평 단층 운영 · 08~22시 매일 · 점주 주 6일 · 월세 200만원</div></div>
     <div class="card" style="padding:16px">
       <div class="opbar">
         <div class="addbox" style="margin:0">
@@ -844,14 +844,14 @@ var hqValues={fixed:31.1,pct:1.22};
 var PNL_FIELDS=[
  {id:'pSales',l:'월매출 (만원)',v:2800,s:'고객 결제액, 부가세 포함 기본'},
  {id:'pMat',l:'원재료·포장·폐기 (%)',v:37,s:'부가세 제외 매출 기준. 원두·우유·컵·로스 포함'},
- {id:'pLabor',l:'직원 인건비 (만원)',v:406,s:'급여·주휴·사업주 보험·퇴직금 등 포함. 점주 급여 제외'},
+ {id:'pLabor',l:'직원 인건비 (만원)',v:280,s:'주 30시간+14시간, 시급 11,000원. 주휴·사업주 보험·퇴직충당 포함; 추가 교대 인력 제외'},
  {id:'pRent',l:'월 임대료 (만원)',v:200,s:'침산동 점포, 부가세 별도 가정'},
- {id:'pUtilities',l:'관리비·공과금 (만원)',v:113,s:'관리비·전기·수도·가스·인터넷 포함'},
+ {id:'pUtilities',l:'관리비·공과금 (만원)',v:80,s:'15평 공개 매물 5곳 평균 75만원 + 통신 5만원 예산'},
  {id:'pHQ',l:'본사 비용',v:31.1,s:'로열티·물류·광고·전산 등. %는 부가세 제외 매출 기준'},
- {id:'pFee',l:'카드·배달·판촉 비용 (%)',v:4.5,s:'고객 결제액 기준. 배달 비중 10% 예산, 매장별 수정'},
- {id:'pOther',l:'기타 운영비 (만원)',v:106,s:'POS·렌탈·세무·보험·청소·방역·수리·법정비용 포함'},
- {id:'pOwnerIns',l:'점주 건강보험·국민연금 (만원)',v:50,s:'실제 고지액 입력'},
- {id:'pReserve',l:'장비교체·비상 적립금 (만원)',v:85,s:'선택적 적립 예산, 실제 비용과 구분'},
+ {id:'pFee',l:'카드·배달·판촉 비용 (%)',v:3.5,s:'결제액 기준. 커피·음료 배달 비중 7% 조사 참고; 실제 배달 비중에 맞춰 수정'},
+ {id:'pOther',l:'기타 운영비 (만원)',v:55,s:'15평 예산: POS·보안·필터·음악·세무·보험·청소·방역·수리 등'},
+ {id:'pOwnerIns',l:'점주 건강보험·국민연금 (만원)',v:120,s:'월 신고소득 700만원 예시. 2026년 요율·연금 상한 적용, 실제 고지액 우선'},
+ {id:'pReserve',l:'장비교체·비상 적립금 (만원)',v:50,s:'장비 3,300만원 ÷ 7년 ≈ 39만원 + 비상 11만원. 실제 비용 아님'},
  {id:'pRelief',l:'청년창업 소득세 감면',v:0,opts:[[0,'미적용 (기본)'],[50,'50%'],[75,'75%'],[100,'100% (적격 청년)']],s:'자격 확인 후 적용'}
 ];
 var EXTRA_FIELDS=[
@@ -871,6 +871,7 @@ function renderPnlForm(){
  if(f.id==='pHQ')ctrl='<div style="display:flex;gap:6px;align-items:center;justify-content:flex-end;width:100%">'+ctrl+'<select id="pHQUnit" aria-label="본사 비용 단위" style="width:auto;flex-shrink:0"><option value="fixed">만원</option><option value="pct">%</option></select></div>';
  return '<div class="prow"><div class="plab"><label for="'+f.id+'">'+esc(f.l)+'</label><small>'+esc(f.s||'')+'</small></div><div class="pctl">'+ctrl+'</div></div>';}
  fld('pnlForm').innerHTML='<div class="pgroup">기본 운영비 · 월 기준</div>'+PNL_FIELDS.map(field).join('')+
+ '<details style="border-top:1px solid var(--line);padding:8px 0"><summary class="pgroup" style="cursor:pointer">근무시간·인건비 산출 근거</summary><div class="muted" style="font-size:12px;line-height:1.65">매장: 주 7일 08~22시 = 98시간/주<br>점주: 주 6일 08~17시 = 54시간/주<br>파트 A: 주 30시간 + 유급주휴 6시간(요건 충족 가정)<br>파트 B: 주 14시간, 주휴·퇴직충당 미반영(4주 평균 소정근로 15시간 미만 가정)<br>월 환산 365÷7÷12주, 시급 11,000원(2026 최저임금 10,320원). A 급여 172.1만원 + 사업주 보험 약 18.8 + 퇴직충당 14.3 = 205.2만원. B 급여 66.9 + 보험 예산 7.3 = 74.2만원. 합계 약 279.4만원 → 280만원. B는 장기고용 및 월 근로시간에 따른 보험 적용 가능성을 고려해 전 보험 요율을 예산에 적용. 실제 가입·근로조건에 따라 달라짐.<br><b>주의: 주 98시간 투입 = 영업 98시간, 중복 인력 0시간.</b> 휴게·피크타임·오픈/마감·점주 휴식·휴가 대체가 별도 필요하며 기본 인건비에는 미포함. 주 8시간 별도 단시간 인력이라면 약 40~46만원/월 추가 예산(가입·주휴 요건에 따라 상이).</div></details>'+
  '<details style="border-top:1px solid var(--line);padding:8px 0"><summary class="pgroup" style="cursor:pointer">추가 설정 (세금·대출·투자금)</summary>'+EXTRA_FIELDS.map(field).join('')+'</details>';
  ALL_FIELDS.forEach(function(f){fld(f.id).addEventListener('input',calcPnl);fld(f.id).addEventListener('change',calcPnl);});
  fld('pHQUnit').addEventListener('change',function(){changeHQMode(fld('pHQUnit').value);});
@@ -929,13 +930,23 @@ function fillPnlSelect(){fld('pnlBrand').innerHTML='<option value="">브랜드 �
 fld('pnlLoad').addEventListener('click',function(){var r=rows().find(function(x){return String(x.rank)===fld('pnlBrand').value;});if(r)setPnl(r.monthly,r);});
 fld('pnlAvg').addEventListener('click',function(){var w=yearSummary(state.reg).weighted;if(w!=null)setPnl(w/12,null);});
 var PNL_BASIS=[
- ['원재료·포장·폐기','37%','기존 33.5+2.5+1% 합산. 농식품부·KREI 2025 외식업체 경영실태조사(2024 실적, 커피전문점 261곳) 식재료비/매출 39.1% 및 저가커피 공개 추정 원부재료 35% 참고. 동일 규모 프랜차이즈 실측 평균은 아님.','https://www.mafra.go.kr/'],
- ['직원 인건비','406만원','기존 직접 운영 모델: 월 총 480인시, 점주 240인시, 직원 240인시, 시급 11,000원, 주휴·사업주 보험·퇴직·대체인력 및 복리후생 포함. 실제 근로계약별 수정.','https://www.moel.go.kr/'],
- ['임대·공과금','200 + 113만원','후보 점포 월세 200만원, 관리비20+전기70+수도10+가스8+통신5만원. 공과금은 예산.',''],
- ['본사 비용','31.1만원','기존 11개 공개 정액 로열티 평균 19.9만원(VAT 포함) →18.1만원(VAT 제외), 광고·물류·전산 예산 13만원. 정률 계약은 % 선택 후 순매출 대비 비율 입력. 기본 정률 1.22%는 월 결제액 2,800만원에서 31.1만원에 해당하는 환산값이며 브랜드 계약요율이 아님.','https://franchise.toolhub.kr/compare/coffee'],
- ['카드·배달·판촉','결제매출 4.5%','기존 월 2,800만원 / 배달 비중 10% 시 카드·PG·배달비·쿠폰·상품권·광고 약 125만원을 하나의 비율로 환산. 실제 배달 비중·계약별 수정.','https://www.fsc.go.kr/'],
- ['기타 운영비','106만원','기존 POS·렌탈·보안·음악·보험·세무·노무·위생·시설 수리·연간 법정비용 등 월환산 합계 반올림. 개별 견적이 없는 예산 가정.',''],
- ['세금·감가상각·점주 부담','2026 일반과세 기준','소득세 6~45% 누진세율 및 지방소득세 10% 근사. VAT 공제가능 비용은 공급가액 입력. 감가상각 130, 점주 보험 50, 적립 85만원은 기존 예산. 청년창업 감면은 자격 확인 후 선택.','https://www.nts.go.kr/']
+ ['원재료·포장·폐기','37%','기존 33.5+2.5+1% 합산. 농식품부·KREI 2025 외식업체 경영실태조사(2024 실적) 및 저가커피 공개 추정 원부재료 35% 참고. 동일 규모 실측 평균은 아님.','https://www.mafra.go.kr/'],
+ ['직원 인건비','280만원 (예산)','주 30+14시간, 시급 11,000원, 월 환산 4.345주. 주휴 6시간(A만), 보험 예산 약 10.9% 양쪽 적용, A 퇴직충당 8.33%. 실제 가입·근로조건 확인. 점주 주 54시간 포함 총 98시간으로 영업시간과 같아 휴게·피크·오픈/마감 추가 인력 필요.','https://www.moel.go.kr/mainpop2.do'],
+ ['초단시간 근로자 보험·퇴직금','개별 확인','주 14시간이어도 장기 고용·월 근로시간에 따라 가입 대상이 될 수 있음. 4주 평균 주 15시간 미만이면 퇴직금 제외.','https://www.moel.go.kr/faq/faqView.do?seqRepeat=77'],
+ ['임대·공과금','200 + 80만원','후보 점포 월세 200만원. 15평 공개 양도양수 매물 5건 공과금 65·40·85·85·100만원 평균 75만원, 통신 5만원 추가(중복 확인 필요). 광고 표본이지 전국 실측 평균이 아니며 영업시간과 계절에 따라 달라짐.','https://changuphub24.com/sub/product.php?idx=2674&mode=view'],
+ ['15평 공과금 표본 · 더벤티 안산','40만원','공개 양도양수 매물, 비용 고지서 미검증.','https://www.changuphub24.com/sub/product.php?idx=2681&mode=view'],
+ ['15평 공과금 표본 · 더벤티 강동','85만원','공개 양도양수 매물.','https://www.changuphub24.com/sub/product.php?idx=2636&mode=view'],
+ ['15평 공과금 표본 · 컴포즈 천안','85만원','공개 양도양수 매물.','https://changuphub24.com/sub/product.php?idx=2966&mode=view'],
+ ['15평 공과금 표본 · 컴포즈 수원','100만원','공개 양도양수 매물.','https://changuphub24.com/sub/product.php?idx=2928&mode=view'],
+ ['본사 비용','31.1만원','기존 11개 공개 정액 로열티 평균 19.9만원(VAT 포함) →18.1만원(VAT 제외), 광고·물류·전산 예산 13만원. 정률은 순매출 대비 % 입력. 기본 1.22%는 월 결제액 2,800만원의 환산값이지 계약요율 아님.','https://franchise.toolhub.kr/compare/coffee'],
+ ['카드·배달·판촉','결제매출 3.5% (예산)','국가통계 커피·음료 배달 비중 7.0%(2022.11~2023.12 조사) 참고. 비배달 93%×카드 비중 90%×혼합 카드요율 0.95%=0.80%, 배달 7%×(중개7.8%+PG3%+2,900원/16,000원)=2.02%, 추가 판촉·상품권 등 0.6% → 약 3.42%, 3.5% 반올림. 2026 우대 신용/체크 1%/0.75%(연 3~5억) 가정. 실제 계약에 따라 수정.','https://www.fsc.go.kr/po010101/87498'],
+ ['배달 비중 조사','커피·음료 7.0%','과거 업종 통계(특정 브랜드·15평 실측 평균 아님).','https://mods.go.kr/boardDownload.es?bid=213&list_no=428916&seq=5'],
+ ['배달 비용 공식 참고','중개·PG·배달료','농식품부 2025.6 상생안 중개 7.8%·PG3%·배달비 3,400원 등 참조. 실제 매장 계약에 따라 다름.','https://www.mafra.go.kr/bbs/home/792/588245/download.do'],
+ ['기타 운영비','55만원 (예산)','POS·키오스크8, 보안4, 정수필터4, 음악1, 사업장보험3, 세무·신고 월환산12, 청소·세척7, 방역·폐기5, 수리10, 법정비용1만원. 소형 매장 공개 종합 운영비 예산(메가/컴포즈 등 약 100만원, 공과금 포함)과 비교하되 각 단가는 개별 견적 미확보.','https://franchise.toolhub.kr/brands/mega-coffee'],
+ ['점주 보험료','120만원 (소득 예시)','사업주 직장가입 본인분 전액 가정. 월 신고소득 700만원×(건강7.19%+장기요양0.9448%)=56.94만원, 국민연금 2026.7 상한 659만원×9.5%=62.61만원, 총119.55만원. 실제 신고소득·보험 가입 형태에 따라 다름. 세무상 건보 필요경비/연금 소득공제 효과는 기본 계산 미반영.','https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0097M0.do'],
+ ['건강보험·장기요양','7.19% + 0.9448%','2026년도 공식 요율, 사업주 본인 부담 기준 예산.','https://edi.nhis.or.kr/portal/images/popup/20251204_pop01longdesc.html'],
+ ['장비교체·비상 적립','50만원 (예산)','메가 공식 주방기기·기물 3,254.2만원, 카페게이트 공개 장비·설비 3,300만원 참고. 3,300만원/84개월=39.3만원 + 비상 10.7만원. 7년은 계획용 교체주기이지 실측 수명/세법상 내용연수가 아님. 적립금은 가용현금에서만 차감.','https://www.mega-mgccoffee.com/startup/cost/'],
+ ['세금·감가상각','2026 일반과세 기준','소득세 6~45% 누진세율 및 지방소득세 10% 근사. VAT 공제가능 비용은 공급가액 입력. 감가상각 130만원은 기존 예산(실제 자산 기준 수정). 청년창업 감면은 자격 확인 후 선택.','https://www.nts.go.kr/']
 ];
 function renderBasis(){fld('pnlBasis').innerHTML=PNL_BASIS.map(function(r){return '<div class="brow"><div class="t"><span>'+esc(r[0])+'</span><b>'+esc(r[1])+'</b></div><div class="s">'+esc(r[2])+(r[3]?' · <a target="_blank" rel="noopener" href="'+esc(r[3])+'">출처</a>':'')+'</div></div>';}).join('');}
 
