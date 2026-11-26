@@ -662,7 +662,7 @@ function renderTable(){
       if(c.k==='annual') return '<td><b>'+fmt(r.annual)+'</b></td>';
       if(c.k==='year') return '<td class="muted">'+(r.year||'—')+'</td>';
       if(c.k==='startup15') return '<td>'+fmt(r.startup15,'—')+'</td>';
-      if(c.k==='estArea') return '<td>'+fmt(r.estArea,'—')+'</td>';
+      if(c.k==='estArea') return '<td>'+(r.estArea==null?'—':(Math.round(r.estArea*10)/10).toFixed(1).replace(/\.0$/,''))+'</td>';
       return '<td class="'+(c.cls||'')+'">'+fmt(r[c.k],'—')+'</td>';
     }).join('');
     return '<tr>'+tds+'</tr>';
@@ -759,7 +759,7 @@ function openDetail(code){
          '<div class="fee-line"><span>3.3㎡당 인테리어 × 15평</span><b>'+(interior15!=null?fmt(interior15):'—')+'</b></div>'+
          '<div class="fee-line" style="border-bottom:0"><span><b>합계</b></span><b style="color:var(--green)">'+fmt(r.startup15,'—')+'만원</b></div>';
     if(state.ind==='small'){
-      h += '<div class="muted" style="font-size:11.5px;margin-top:6px">추정 매장면적 '+fmt(r.estArea,'—')+'평 · 공시 기준점포면적 '+fmt(r.baseArea,'—')+'㎡</div>';
+      h += '<div class="muted" style="font-size:11.5px;margin-top:6px">추정 매장면적 '+(r.estArea==null?'—':(Math.round(r.estArea*10)/10)+'평')+' · 공시 기준점포면적 '+fmt(r.baseArea,'—')+'㎡</div>';
     }
     h += '<div class="muted" style="font-size:11px;margin-top:4px">임차보증금·권리금·별도공사(전기·수도·간판) 제외</div>';
   }
