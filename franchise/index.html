@@ -839,13 +839,15 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !docume
 
 /* ---------- P&L: simple owner-operated cafe ---------- */
 var pnlSel=null;
+var hqMode='fixed';
+var hqValues={fixed:31.1,pct:1.22};
 var PNL_FIELDS=[
  {id:'pSales',l:'월매출 (만원)',v:2800,s:'고객 결제액, 부가세 포함 기본'},
  {id:'pMat',l:'원재료·포장·폐기 (%)',v:37,s:'부가세 제외 매출 기준. 원두·우유·컵·로스 포함'},
  {id:'pLabor',l:'직원 인건비 (만원)',v:406,s:'급여·주휴·사업주 보험·퇴직금 등 포함. 점주 급여 제외'},
  {id:'pRent',l:'월 임대료 (만원)',v:200,s:'침산동 점포, 부가세 별도 가정'},
  {id:'pUtilities',l:'관리비·공과금 (만원)',v:113,s:'관리비·전기·수도·가스·인터넷 포함'},
- {id:'pHQ',l:'본사 비용 (만원)',v:31.1,s:'로열티·물류·광고·전산 등 별도 부담금'},
+ {id:'pHQ',l:'본사 비용',v:31.1,s:'로열티·물류·광고·전산 등. %는 부가세 제외 매출 기준'},
  {id:'pFee',l:'카드·배달·판촉 비용 (%)',v:4.5,s:'고객 결제액 기준. 배달 비중 10% 예산, 매장별 수정'},
  {id:'pOther',l:'기타 운영비 (만원)',v:106,s:'POS·렌탈·세무·보험·청소·방역·수리·법정비용 포함'},
  {id:'pOwnerIns',l:'점주 건강보험·국민연금 (만원)',v:50,s:'실제 고지액 입력'},
@@ -866,26 +868,38 @@ function fld(id){return document.getElementById(id);}
 function gv(id){var raw=fld(id).value,x=Number(raw);return String(raw).trim()!==''&&Number.isFinite(x)?x:NaN;}
 function renderPnlForm(){
  function field(f){var ctrl=f.opts?'<select id="'+f.id+'" style="max-width:100%">'+f.opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===f.v?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select>':'<input id="'+f.id+'" type="number" min="0" step="any" value="'+f.v+'" style="width:100%;max-width:135px" aria-label="'+esc(f.l)+'">';
+ if(f.id==='pHQ')ctrl='<div style="display:flex;gap:6px;align-items:center;justify-content:flex-end;width:100%">'+ctrl+'<select id="pHQUnit" aria-label="본사 비용 단위" style="width:auto;flex-shrink:0"><option value="fixed">만원</option><option value="pct">%</option></select></div>';
  return '<div class="prow"><div class="plab"><label for="'+f.id+'">'+esc(f.l)+'</label><small>'+esc(f.s||'')+'</small></div><div class="pctl">'+ctrl+'</div></div>';}
  fld('pnlForm').innerHTML='<div class="pgroup">기본 운영비 · 월 기준</div>'+PNL_FIELDS.map(field).join('')+
  '<details style="border-top:1px solid var(--line);padding:8px 0"><summary class="pgroup" style="cursor:pointer">추가 설정 (세금·대출·투자금)</summary>'+EXTRA_FIELDS.map(field).join('')+'</details>';
  ALL_FIELDS.forEach(function(f){fld(f.id).addEventListener('input',calcPnl);fld(f.id).addEventListener('change',calcPnl);});
+ fld('pHQUnit').addEventListener('change',function(){changeHQMode(fld('pHQUnit').value);});
 }
+function changeHQMode(next){
+ if(next===hqMode)return;
+ var current=gv('pHQ');
+ if(Number.isFinite(current)&&current>=0)hqValues[hqMode]=current;
+ hqMode=next;
+ fld('pHQ').value=hqValues[next];
+ fld('pHQ').setAttribute('aria-label',next==='pct'?'본사 비용 (순매출 대비 %)':'본사 비용 (만원)');
+ calcPnl();
+}
+function hqCost(net){return hqMode==='pct'?net*gv('pHQ')/100:gv('pHQ');}
 function taxAnnual(x){var b=[[1400,.06,0],[5000,.15,126],[8800,.24,576],[15000,.35,1544],[30000,.38,1994],[50000,.40,2594],[100000,.42,3594],[Infinity,.45,6594]].find(function(z){return x<=z[0];});return Math.max(0,x*b[1]-b[2]);}
 function estimate(net){
- var gross=net*1.1,goods=net*gv('pMat')/100,fee=gross*gv('pFee')/100;
- var cashCosts=goods+fee+gv('pLabor')+gv('pRent')+gv('pUtilities')+gv('pHQ')+gv('pOther');
+ var gross=net*1.1,goods=net*gv('pMat')/100,fee=gross*gv('pFee')/100,hq=hqCost(net);
+ var cashCosts=goods+fee+gv('pLabor')+gv('pRent')+gv('pUtilities')+hq+gv('pOther');
  var dep=gv('pDep'),op=net-cashCosts-dep;
  // Candidate VAT base: 90% of candidate operating purchases; 70% of combined settlement fees taxable.
  // Approximate allowance for mixed exempt inputs/insurance/card charges. Not a VAT return.
- var inputVat=(goods+gv('pRent')+gv('pUtilities')+gv('pHQ')+gv('pOther')+fee*.7)*.9*.1;
+ var inputVat=(goods+gv('pRent')+gv('pUtilities')+hq+gv('pOther')+fee*.7)*.9*.1;
  var outputVat=net*.1,rawVat=outputVat-inputVat;
  var credit=gv('pVatCard')?Math.min(Math.max(0,rawVat),gross*.9*.013,1000/12):0;
  var vat=rawVat-credit,preTax=op-gv('pInterest')+credit;
  var normalTax=taxAnnual(Math.max(0,preTax*12-gv('pDeduct')))*1.1/12;
  var tax=normalTax*(1-gv('pRelief')/100),after=preTax-tax;
  var cash=after+dep-gv('pOwnerIns')-gv('pPrincipal');
- return {gross:gross,net:net,goods:goods,fee:fee,cashCosts:cashCosts,dep:dep,op:op,inputVat:inputVat,outputVat:outputVat,credit:credit,vat:vat,preTax:preTax,tax:tax,normalTax:normalTax,after:after,cash:cash,available:cash-gv('pReserve'),noRelief:cash-gv('pReserve')-(normalTax-tax)};
+ return {gross:gross,net:net,goods:goods,fee:fee,hq:hq,cashCosts:cashCosts,dep:dep,op:op,inputVat:inputVat,outputVat:outputVat,credit:credit,vat:vat,preTax:preTax,tax:tax,normalTax:normalTax,after:after,cash:cash,available:cash-gv('pReserve'),noRelief:cash-gv('pReserve')-(normalTax-tax)};
 }
 function breakeven(){
  if(estimate(0).available>=0)return 0;
@@ -895,15 +909,15 @@ function breakeven(){
  return hi*1.1;
 }
 function calcPnl(){
- var bad=ALL_FIELDS.some(function(f){return !Number.isFinite(gv(f.id))||gv(f.id)<0;})||gv('pMat')>100||gv('pFee')>100||gv('pMat')+gv('pFee')*1.1>=100;
+ var bad=ALL_FIELDS.some(function(f){return !Number.isFinite(gv(f.id))||gv(f.id)<0;})||gv('pMat')>100||gv('pFee')>100||(hqMode==='pct'&&gv('pHQ')>100)||gv('pMat')+gv('pFee')*1.1+(hqMode==='pct'?gv('pHQ'):0)>=100;
  if(bad){fld('pnlOut').innerHTML='<div class="warn">입력 오류: 비용과 매출, 원가·수수료 비율을 확인하세요.</div>';return;}
  var n=gv('pSales')/(gv('pVatIncluded')?1.1:1),r=estimate(n);
  function m(v){return v==null?'—':fmt(v)+'만원';}
  function line(k,v){return '<div class="row"><span>'+esc(k)+'</span><span>'+esc(v)+'</span></div>';}
  var h='<div class="big'+(r.available<0?' neg':'')+'">'+m(r.available)+'<small style="display:block;font-size:11.5px">월 최종 가용현금 (적립금 차감 후)</small></div>';
- h+=line('부가세 제외 매출',m(r.net))+line('실제 운영비 합계',m(r.cashCosts))+line('영업이익 (감가상각 차감)',m(r.op))+line('소득세·지방소득세 추정',m(r.tax))+line('세후 사업소득',m(r.after))+line('적립 전 현금 (점주 보험·대출 차감)',m(r.cash))+line('예비비 적립',m(gv('pReserve')))+line('가용현금 손익분기 결제매출',m(breakeven()));
+ h+=line('부가세 제외 매출',m(r.net))+line('실제 운영비 합계',m(r.cashCosts))+line('본사 비용'+(hqMode==='pct'?' (순매출 '+gv('pHQ')+'%)':''),m(r.hq))+line('영업이익 (감가상각 차감)',m(r.op))+line('소득세·지방소득세 추정',m(r.tax))+line('세후 사업소득',m(r.after))+line('적립 전 현금 (점주 보험·대출 차감)',m(r.cash))+line('예비비 적립',m(gv('pReserve')))+line('가용현금 손익분기 결제매출',m(breakeven()));
  if(gv('pRelief'))h+=line('감면 종료 후 가용현금',m(r.noRelief));
- h+='<details style="margin-top:10px"><summary class="sub-t" style="cursor:pointer">운영비 세부 내역</summary>'+line('재료·포장·폐기',m(r.goods))+line('직원 인건비',m(gv('pLabor')))+line('임대료',m(gv('pRent')))+line('공과금·관리비',m(gv('pUtilities')))+line('본사 부담금',m(gv('pHQ')))+line('카드·배달·판촉',m(r.fee))+line('기타 운영비',m(gv('pOther')))+line('감가상각 (비현금)',m(r.dep))+line('대출이자·보증료',m(gv('pInterest')))+line('대출 원금',m(gv('pPrincipal')))+line('점주 보험·연금',m(gv('pOwnerIns')))+'</details>';
+ h+='<details style="margin-top:10px"><summary class="sub-t" style="cursor:pointer">운영비 세부 내역</summary>'+line('재료·포장·폐기',m(r.goods))+line('직원 인건비',m(gv('pLabor')))+line('임대료',m(gv('pRent')))+line('공과금·관리비',m(gv('pUtilities')))+line('본사 부담금',m(r.hq))+line('카드·배달·판촉',m(r.fee))+line('기타 운영비',m(gv('pOther')))+line('감가상각 (비현금)',m(r.dep))+line('대출이자·보증료',m(gv('pInterest')))+line('대출 원금',m(gv('pPrincipal')))+line('점주 보험·연금',m(gv('pOwnerIns')))+'</details>';
  h+='<details style="margin-top:8px"><summary class="sub-t" style="cursor:pointer">부가세·세금 계산 내역</summary>'+line('매출세액',m(r.outputVat))+line('매입세액 공제 추정',m(r.inputVat))+line('발행세액공제',m(r.credit))+line('월 VAT 납부 예상 (음수는 환급)',m(r.vat))+line('연간 소득세·지방세 추정',m(r.tax*12))+'<p class="muted" style="font-size:11px">공제 가능한 부가세를 제외한 비용 입력 기준. 일반 VAT는 공급가액 손익에 이미 반영되어 추가 차감하지 않습니다. 매입세액은 그룹 비용의 과세/공제 비율 가정으로 추정한 값입니다.</p></details>';
  if(gv('pInvest')>0)h+=line('투자금 회수 추정',r.available>0?(gv('pInvest')/r.available).toFixed(1)+'개월':'—');
  if(pnlSel)h+=line('불러온 브랜드',pnlSel.name);
@@ -918,7 +932,7 @@ var PNL_BASIS=[
  ['원재료·포장·폐기','37%','기존 33.5+2.5+1% 합산. 농식품부·KREI 2025 외식업체 경영실태조사(2024 실적, 커피전문점 261곳) 식재료비/매출 39.1% 및 저가커피 공개 추정 원부재료 35% 참고. 동일 규모 프랜차이즈 실측 평균은 아님.','https://www.mafra.go.kr/'],
  ['직원 인건비','406만원','기존 직접 운영 모델: 월 총 480인시, 점주 240인시, 직원 240인시, 시급 11,000원, 주휴·사업주 보험·퇴직·대체인력 및 복리후생 포함. 실제 근로계약별 수정.','https://www.moel.go.kr/'],
  ['임대·공과금','200 + 113만원','후보 점포 월세 200만원, 관리비20+전기70+수도10+가스8+통신5만원. 공과금은 예산.',''],
- ['본사 비용','31.1만원','기존 11개 공개 정액 로열티 평균 19.9만원(VAT 포함) →18.1만원(VAT 제외), 광고·물류·전산 예산 13만원. 정률 계약이면 실제 월 부담액 입력.','https://franchise.toolhub.kr/compare/coffee'],
+ ['본사 비용','31.1만원','기존 11개 공개 정액 로열티 평균 19.9만원(VAT 포함) →18.1만원(VAT 제외), 광고·물류·전산 예산 13만원. 정률 계약은 % 선택 후 순매출 대비 비율 입력. 기본 정률 1.22%는 월 결제액 2,800만원에서 31.1만원에 해당하는 환산값이며 브랜드 계약요율이 아님.','https://franchise.toolhub.kr/compare/coffee'],
  ['카드·배달·판촉','결제매출 4.5%','기존 월 2,800만원 / 배달 비중 10% 시 카드·PG·배달비·쿠폰·상품권·광고 약 125만원을 하나의 비율로 환산. 실제 배달 비중·계약별 수정.','https://www.fsc.go.kr/'],
  ['기타 운영비','106만원','기존 POS·렌탈·보안·음악·보험·세무·노무·위생·시설 수리·연간 법정비용 등 월환산 합계 반올림. 개별 견적이 없는 예산 가정.',''],
  ['세금·감가상각·점주 부담','2026 일반과세 기준','소득세 6~45% 누진세율 및 지방소득세 10% 근사. VAT 공제가능 비용은 공급가액 입력. 감가상각 130, 점주 보험 50, 적립 85만원은 기존 예산. 청년창업 감면은 자격 확인 후 선택.','https://www.nts.go.kr/']
