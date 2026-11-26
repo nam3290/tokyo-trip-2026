@@ -849,9 +849,8 @@ var PNL_FIELDS=[
  {id:'pUtilities',l:'관리비·공과금 (만원)',v:80,s:'15평 공개 매물 5곳 평균 75만원 + 통신 5만원 예산'},
  {id:'pHQ',l:'본사 비용',v:31.1,s:'로열티·물류·광고·전산 등. %는 부가세 제외 매출 기준'},
  {id:'pFee',l:'카드·배달·판촉 비용 (%)',v:3.5,s:'결제액 기준. 커피·음료 배달 비중 7% 조사 참고; 실제 배달 비중에 맞춰 수정'},
- {id:'pOther',l:'기타 운영비 (만원)',v:55,s:'15평 예산: POS·보안·필터·음악·세무·보험·청소·방역·수리 등'},
+ {id:'pOther',l:'기타 운영비 (만원)',v:55,s:'15평 예산: POS·보안·필터·음악·세무·보험·청소·방역·경미한 수리 등. 장비 관리비 포함, 교체 적립 제외'},
  {id:'pOwnerIns',l:'점주 건강보험·국민연금 (만원)',v:120,s:'월 신고소득 700만원 예시. 2026년 요율·연금 상한 적용, 실제 고지액 우선'},
- {id:'pReserve',l:'장비교체·비상 적립금 (만원)',v:50,s:'장비 3,300만원 ÷ 7년 ≈ 39만원 + 비상 11만원. 실제 비용 아님'},
  {id:'pRelief',l:'청년창업 소득세 감면',v:0,opts:[[0,'미적용 (기본)'],[50,'50%'],[75,'75%'],[100,'100% (적격 청년)']],s:'자격 확인 후 적용'}
 ];
 var EXTRA_FIELDS=[
@@ -900,11 +899,11 @@ function estimate(net){
  var normalTax=taxAnnual(Math.max(0,preTax*12-gv('pDeduct')))*1.1/12;
  var tax=normalTax*(1-gv('pRelief')/100),after=preTax-tax;
  var cash=after+dep-gv('pOwnerIns')-gv('pPrincipal');
- return {gross:gross,net:net,goods:goods,fee:fee,hq:hq,cashCosts:cashCosts,dep:dep,op:op,inputVat:inputVat,outputVat:outputVat,credit:credit,vat:vat,preTax:preTax,tax:tax,normalTax:normalTax,after:after,cash:cash,available:cash-gv('pReserve'),noRelief:cash-gv('pReserve')-(normalTax-tax)};
+ return {gross:gross,net:net,goods:goods,fee:fee,hq:hq,cashCosts:cashCosts,dep:dep,op:op,inputVat:inputVat,outputVat:outputVat,credit:credit,vat:vat,preTax:preTax,tax:tax,normalTax:normalTax,after:after,cash:cash,available:cash,noRelief:cash-(normalTax-tax)};
 }
 function breakeven(){
  if(estimate(0).available>=0)return 0;
- // Solve for the lowest nonnegative monthly cash after reserves, up to 1억 gross.
+ // Solve for the lowest nonnegative monthly available cash, up to 1억 gross.
  var lo=0,hi=10000/1.1;if(estimate(hi).available<0)return null;
  for(var j=0;j<40;j++){var mid=(lo+hi)/2;if(estimate(mid).available>=0)hi=mid;else lo=mid;}
  return hi*1.1;
@@ -915,14 +914,14 @@ function calcPnl(){
  var n=gv('pSales')/(gv('pVatIncluded')?1.1:1),r=estimate(n);
  function m(v){return v==null?'—':fmt(v)+'만원';}
  function line(k,v){return '<div class="row"><span>'+esc(k)+'</span><span>'+esc(v)+'</span></div>';}
- var h='<div class="big'+(r.available<0?' neg':'')+'">'+m(r.available)+'<small style="display:block;font-size:11.5px">월 최종 가용현금 (적립금 차감 후)</small></div>';
- h+=line('부가세 제외 매출',m(r.net))+line('실제 운영비 합계',m(r.cashCosts))+line('본사 비용'+(hqMode==='pct'?' (순매출 '+gv('pHQ')+'%)':''),m(r.hq))+line('영업이익 (감가상각 차감)',m(r.op))+line('소득세·지방소득세 추정',m(r.tax))+line('세후 사업소득',m(r.after))+line('적립 전 현금 (점주 보험·대출 차감)',m(r.cash))+line('예비비 적립',m(gv('pReserve')))+line('가용현금 손익분기 결제매출',m(breakeven()));
+ var h='<div class="big'+(r.available<0?' neg':'')+'">'+m(r.available)+'<small style="display:block;font-size:11.5px">월 최종 가용현금 (장비 교체 적립 제외)</small></div>';
+ h+=line('부가세 제외 매출',m(r.net))+line('실제 운영비 합계',m(r.cashCosts))+line('본사 비용'+(hqMode==='pct'?' (순매출 '+gv('pHQ')+'%)':''),m(r.hq))+line('영업이익 (감가상각 차감)',m(r.op))+line('소득세·지방소득세 추정',m(r.tax))+line('세후 사업소득',m(r.after))+line('점주 보험·대출 차감 후 현금',m(r.cash))+line('가용현금 손익분기 결제매출',m(breakeven()))+line('24개월 누적 가용현금 (동일 실적 가정)',m(r.available*24));
  if(gv('pRelief'))h+=line('감면 종료 후 가용현금',m(r.noRelief));
  h+='<details style="margin-top:10px"><summary class="sub-t" style="cursor:pointer">운영비 세부 내역</summary>'+line('재료·포장·폐기',m(r.goods))+line('직원 인건비',m(gv('pLabor')))+line('임대료',m(gv('pRent')))+line('공과금·관리비',m(gv('pUtilities')))+line('본사 부담금',m(r.hq))+line('카드·배달·판촉',m(r.fee))+line('기타 운영비',m(gv('pOther')))+line('감가상각 (비현금)',m(r.dep))+line('대출이자·보증료',m(gv('pInterest')))+line('대출 원금',m(gv('pPrincipal')))+line('점주 보험·연금',m(gv('pOwnerIns')))+'</details>';
  h+='<details style="margin-top:8px"><summary class="sub-t" style="cursor:pointer">부가세·세금 계산 내역</summary>'+line('매출세액',m(r.outputVat))+line('매입세액 공제 추정',m(r.inputVat))+line('발행세액공제',m(r.credit))+line('월 VAT 납부 예상 (음수는 환급)',m(r.vat))+line('연간 소득세·지방세 추정',m(r.tax*12))+'<p class="muted" style="font-size:11px">공제 가능한 부가세를 제외한 비용 입력 기준. 일반 VAT는 공급가액 손익에 이미 반영되어 추가 차감하지 않습니다. 매입세액은 그룹 비용의 과세/공제 비율 가정으로 추정한 값입니다.</p></details>';
  if(gv('pInvest')>0)h+=line('투자금 회수 추정',r.available>0?(gv('pInvest')/r.available).toFixed(1)+'개월':'—');
  if(pnlSel)h+=line('불러온 브랜드',pnlSel.name);
- h+='<div class="warn">점주 직접 운영·일반과세 개인사업자·동일 월매출 12개월 가정. 평균 및 예산값을 사용한 추정입니다. 점주 본인의 노동 대가가 포함되며 다른 소득·실제 소득공제·감면 자격에 따라 세금은 달라집니다. 공시 매출의 VAT 포함 여부와 실제 납부액은 확인하세요.</div>';
+ h+='<div class="warn">점주 직접 운영·일반과세 개인사업자·동일 월매출 12개월 가정. 평균 및 예산값을 사용한 추정입니다. 2년 운영 후 매각을 가정해 장비 교체·비상 적립금은 제외합니다. 실제 고장 및 매각 비용은 별도이고 24개월 누적액에 권리금은 포함되지 않습니다. 점주 본인의 노동 대가가 포함되며 다른 소득·실제 소득공제·감면 자격에 따라 세금은 달라집니다. 공시 매출의 VAT 포함 여부와 실제 납부액은 확인하세요.</div>';
  fld('pnlOut').innerHTML=h;
 }
 function setPnl(monthly,r){pnlSel=r||null;if(monthly!=null&&Number.isFinite(monthly))fld('pSales').value=Number(monthly.toFixed(1));calcPnl();}
@@ -945,8 +944,8 @@ var PNL_BASIS=[
  ['기타 운영비','55만원 (예산)','POS·키오스크8, 보안4, 정수필터4, 음악1, 사업장보험3, 세무·신고 월환산12, 청소·세척7, 방역·폐기5, 수리10, 법정비용1만원. 소형 매장 공개 종합 운영비 예산(메가/컴포즈 등 약 100만원, 공과금 포함)과 비교하되 각 단가는 개별 견적 미확보.','https://franchise.toolhub.kr/brands/mega-coffee'],
  ['점주 보험료','120만원 (소득 예시)','사업주 직장가입 본인분 전액 가정. 월 신고소득 700만원×(건강7.19%+장기요양0.9448%)=56.94만원, 국민연금 2026.7 상한 659만원×9.5%=62.61만원, 총119.55만원. 실제 신고소득·보험 가입 형태에 따라 다름. 세무상 건보 필요경비/연금 소득공제 효과는 기본 계산 미반영.','https://www.nps.or.kr/pnsinfo/ntpsklg/getOHAF0097M0.do'],
  ['건강보험·장기요양','7.19% + 0.9448%','2026년도 공식 요율, 사업주 본인 부담 기준 예산.','https://edi.nhis.or.kr/portal/images/popup/20251204_pop01longdesc.html'],
- ['장비교체·비상 적립','50만원 (예산)','메가 공식 주방기기·기물 3,254.2만원, 카페게이트 공개 장비·설비 3,300만원 참고. 3,300만원/84개월=39.3만원 + 비상 10.7만원. 7년은 계획용 교체주기이지 실측 수명/세법상 내용연수가 아님. 적립금은 가용현금에서만 차감.','https://www.mega-mgccoffee.com/startup/cost/'],
- ['세금·감가상각','2026 일반과세 기준','소득세 6~45% 누진세율 및 지방소득세 10% 근사. VAT 공제가능 비용은 공급가액 입력. 감가상각 130만원은 기존 예산(실제 자산 기준 수정). 청년창업 감면은 자격 확인 후 선택.','https://www.nts.go.kr/']
+ ['장비 정기관리·경미한 수리','월 10만원 (기타 운영비 55만원에 포함)','2년 운영 후 매각 목표에 맞춰 기존 수리 예산만 유지. 정수필터 4만원도 기타 운영비에 이미 포함. 별도 장비교체·리뉴얼·비상 적립금은 제외하며 실제 고장 및 매각 전 수리비는 별도 발생 가능. 월 10만원은 실측 평균이 아닌 최소 관리 예산 가정.',''],
+ ['세금·감가상각','2026 일반과세 기준','소득세 6~45% 누진세율 및 지방소득세 10% 근사. VAT 공제가능 비용은 공급가액 입력. 감가상각 130만원은 기존 세무상 비현금 비용 가정(실제 자산 기준 수정), 장비 교체 적립이 아니며 현금 계산에서 다시 가산합니다. 청년창업 감면은 자격 확인 후 선택.','https://www.nts.go.kr/']
 ];
 function renderBasis(){fld('pnlBasis').innerHTML=PNL_BASIS.map(function(r){return '<div class="brow"><div class="t"><span>'+esc(r[0])+'</span><b>'+esc(r[1])+'</b></div><div class="s">'+esc(r[2])+(r[3]?' · <a target="_blank" rel="noopener" href="'+esc(r[3])+'">출처</a>':'')+'</div></div>';}).join('');}
 
