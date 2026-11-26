@@ -258,9 +258,9 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
 </header>
 <main>
   <div class="hero">
-    <span class="eyebrow">Franchise Sales Index · Verified</span>
+    <span class="eyebrow">Franchise Sales Index · Disclosure-based estimates</span>
     <h1>프랜차이즈 매출 검증 대시보드</h1>
-    <p>공정거래위원회 가맹사업정보제공시스템 <b>정보공개서 원문 실측값</b>만으로 만든 권역별 매출 순위입니다. 카페·음식점·음식점 소형 점포를 한 화면에서 전환하며 비교하세요.</p>
+    <p>공정거래위원회 가맹사업정보제공시스템 <b>정보공개서 기반 지역별 공시자료</b>를 가공한 권역별 추정 매출 순위입니다. 카페·음식점·음식점 소형 점포를 한 화면에서 전환하며 비교하세요.</p>
     <div class="stamp">
       <span>조사 기준일 <b id="stampSurvey">2026-11-25</b> (KST)</span>
       <span>가맹점사업자 기준 · 직영점 제외</span>
@@ -269,7 +269,7 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
   </div>
 
   <div class="notice">
-    <b>자료 범위</b> · 구버전 자료(2024년 컴포즈·디저트39 등)와 근사치(≈), 부분 표본(87건)은 쓰지 않았습니다. 표에 실린 모든 매출 값은 공정위 정보공개서에서 시·도별 가맹점수·평균매출액을 직접 확인한 값이며, 미공시 지역은 추정하지 않고 가중평균에서 제외했습니다.
+    <b>자료 범위</b> · 기본 순위표는 2025년 실적입니다. 전체 연도 선택 시 2023~2025년 자료가 섞입니다. 연말 점포 수를 사용한 권역 평균은 근사치이며, 실제 매출 산정 점포 수와 다를 수 있습니다. 미공시 지역은 제외하며, 원문 전수 대조 및 15평 창업비 검증은 미완료입니다.
   </div>
 
   <div class="controls">
@@ -308,16 +308,18 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
       <div class="chips" id="cmpChips"></div>
       <div class="cmp-grid" id="cmpGrid"></div>
       <div class="table-wrap" style="margin-top:12px" id="cmpTableWrap"></div>
-      <div class="tfoot"><span>매출이 높은 권역을 강조합니다. 값이 없는 권역은 정보공개서 미공시(5점 미만)입니다.</span></div>
+      <div class="tfoot"><span>세 권역 모두 공시 범위가 확인되고 실적연도가 같은 경우에만 최고 권역을 강조합니다. * 는 부분공시 또는 점포수 미확인입니다. — 는 미공시 또는 현재 수록 범위 밖입니다. 연도와 부분공시 여부를 함께 확인하세요.</span></div>
     </div>
   </section>
 
   <section id="sec-table">
-    <div class="shead"><div><span class="snum">04 / Full table</span><h2 style="margin-top:2px">전체 순위표</h2></div><div class="sub">열 제목을 누르면 정렬됩니다 · 순위는 필터 이전 권역 순위</div></div>
+    <div class="shead"><div><span class="snum">04 / Full table</span><h2 style="margin-top:2px">전체 순위표</h2></div><div class="sub">열 제목을 누르면 정렬 · 선택 실적연도 기준 수록 자료 내 순위 (검색·점포 필터 전)</div></div>
     <div class="filters">
       <div class="grow"><input type="text" id="q" placeholder="브랜드·법인명 검색" autocomplete="off"></div>
       <select id="fStores" class="sm" aria-label="최소 가맹점 수"></select>
       <select id="fYear" class="sm" aria-label="실적연도"></select>
+       <select id="fCoverage" class="sm" aria-label="매출 공시 범위"><option value="0">전체 공시 범위</option><option value="100">지역 매출 모두 공시</option></select>
+       <select id="fArea" class="sm" aria-label="추정 면적 상한"><option value="0">추정 면적 전체</option><option value="10">10평 이하</option><option value="15">15평 이하</option><option value="20">20평 이하</option></select>
       <select id="fStartup" class="sm" aria-label="15평 창업비 상한" hidden></select>
       <button class="mini" id="fTop" type="button" hidden>TOP 50만</button>
       <button class="mini" id="csv" type="button">CSV 저장 ↓</button>
@@ -344,7 +346,7 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
         <div class="addbox" style="margin:0">
           <select id="pnlBrand" aria-label="브랜드 매출 불러오기" style="flex:1 1 190px"></select>
           <button class="mini" id="pnlLoad" type="button">매출 불러오기</button>
-          <button class="mini" id="pnlAvg" type="button">권역 평균</button>
+          <button class="mini" id="pnlAvg" type="button">선택 연도 수록 평균</button>
         </div>
       </div>
       <div class="pnl">
@@ -365,7 +367,7 @@ footer{max-width:1240px;margin:30px auto 0;padding:18px;border-top:1px solid var
   </section>
 
   <footer>
-    프랜차이즈 매출 검증 대시보드 · 공정거래위원회 가맹사업정보제공시스템 정보공개서 원문 기준.<br>
+    프랜차이즈 매출 검증 대시보드 · 공정거래위원회 가맹사업정보제공시스템 정보공개서 기반 가공자료 · 2026-11-26 계산 로직 검토.<br>
     정보공개서의 평균매출은 가맹점이 본부에 보고한 값으로, 부가세 처리·매출 누락 여부에 따라 실제와 차이가 날 수 있습니다. 매출은 수익이 아니며, 창업 결정 전 해당 상권의 실사가 필요합니다.
   </footer>
 </main>
@@ -389,7 +391,37 @@ var RN = {dg:'대구·경북', sg:'서울·경기', bn:'부산·경남'};
 var RS = {dg:'대경', sg:'서경', bn:'부경'};
 var RC = {dg:'var(--dg)', sg:'var(--sg)', bn:'var(--bn)'};
 var nf = new Intl.NumberFormat('ko-KR');
-var state = {ind:'cafe', reg:'dg', unit:'month', q:'', stores:0, year:'all', startup:0, top50:false, sort:{k:'rank', d:1}, cmp:{}};
+var state = {ind:'cafe', reg:'dg', unit:'month', q:'', stores:0, year:'2025', coverage:0, area:0, startup:0, top50:false, sort:{k:'rank', d:1}, cmp:{}};
+var PROVS={dg:['대구','경북'],sg:['서울','경기'],bn:['부산','경남']};
+Object.keys(IND).forEach(function(i){
+  RKEYS.forEach(function(k){
+    var counts={};
+    IND[i].regions[k].rows.forEach(function(r){
+      var pv=(r.prov||[]).filter(function(p){return PROVS[k].indexOf(p.n)>=0;});
+      r.reportedStores=r.stores;
+      r.knownStores=pv.reduce(function(t,p){return t+(Number(p.s)||0);},0);
+      r.unknownStores=pv.some(function(p){return p.s==null;});
+      r.totalStores=r.unknownStores?null:r.knownStores;
+      r.coverage=r.totalStores>0?100*r.reportedStores/r.totalStores:null;
+      r.partial=r.knownStores>r.reportedStores;
+      r.incomplete=r.partial||r.unknownStores;
+      r.sampleStores=null; // actual sales sample size not supplied in source dataset
+      r.yearRank=counts[r.year]=(counts[r.year]||0)+1;
+      if(r.estArea==null&&r.perPyeong>0) r.estArea=r.annual/r.perPyeong;
+      r.legacyStartup15=r.startup15;
+      r.startup15=null; // invalid unverified estimate; do not use in decision metrics
+    });
+  });
+});
+function shownRank(r){return state.year==='all'?r.rank:r.yearRank;}
+function coverageLabel(r){return r.coverage==null?'—':r.coverage.toFixed(1)+'%';}
+function yearRows(k){return IND[state.ind].regions[k].rows.filter(function(r){return state.year==='all'||String(r.year)===String(state.year);});}
+function yearSummary(k){
+  var rr=yearRows(k), n=rr.reduce(function(t,r){return t+r.reportedStores;},0);
+  var a=rr.map(function(r){return r.annual;}).sort(function(x,y){return x-y;});
+  var mid=a.length? (a[Math.floor((a.length-1)/2)]+a[Math.floor(a.length/2)])/2:null;
+  return {brands:rr.length,stores:n,weighted:n?rr.reduce(function(t,r){return t+r.annual*r.reportedStores;},0)/n:null,median:mid};
+}
 
 function fmt(v, dash){ return (v===null||v===undefined||isNaN(v)) ? (dash||'—') : nf.format(Math.round(v)); }
 function money(v, unit){
@@ -444,16 +476,18 @@ function fillFilters(){
     return '<option value="'+y+'"'+(String(state.year)===String(y)?' selected':'')+'>'+y+'</option>';
   }).join('');
   var fs = document.getElementById('fStores');
-  var opts = [[0,'점포 수 제한 없음'],[10,'10점 이상'],[30,'30점 이상'],[50,'50점 이상']];
+  var opts = [[0,'공시지역 점포 수 전체'],[10,'10점 이상'],[30,'30점 이상'],[50,'50점 이상']];
   fs.innerHTML = opts.map(function(o){ return '<option value="'+o[0]+'"'+(state.stores===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('');
   var st = document.getElementById('fStartup');
-  var has = cur().hasStartup;
+  var has = cur().hasStartup && rows().some(function(r){return r.startup15!=null;});
   st.hidden = !has;
   st.innerHTML = [[0,'15평 창업비 전체'],[10000,'1억 이하'],[20000,'2억 이하']].map(function(o){
     return '<option value="'+o[0]+'"'+(state.startup===o[0]?' selected':'')+'>'+o[1]+'</option>';
   }).join('');
   var ft = document.getElementById('fTop');
   ft.hidden = state.ind!=='cafe';
+  document.getElementById('fCoverage').value=String(state.coverage);
+  document.getElementById('fArea').value=String(state.area);
   ft.classList.toggle('on', state.top50);
   ft.setAttribute('aria-pressed', String(state.top50));
 }
@@ -462,7 +496,9 @@ function fillFilters(){
 function filtered(){
   var q = state.q.trim().toLowerCase();
   return rows().filter(function(r){
-    if(state.top50 && !r.inTop50) return false;
+    if(state.top50 && shownRank(r)>50) return false;
+    if(state.coverage && !(r.coverage>=state.coverage)) return false;
+    if(state.area && !(r.estArea!=null&&r.estArea<=state.area)) return false;
     if(state.stores && !(r.stores>=state.stores)) return false;
     if(state.year!=='all' && String(r.year)!==String(state.year)) return false;
     if(cur().hasStartup && state.startup){
@@ -476,9 +512,10 @@ function filtered(){
     return true;
   }).sort(function(a,b){
     var k = state.sort.k, d = state.sort.d;
-    var va = a[k], vb = b[k];
-    if(va===null||va===undefined) va = -Infinity;
-    if(vb===null||vb===undefined) vb = -Infinity;
+    var va = k==='rank'?shownRank(a):a[k], vb = k==='rank'?shownRank(b):b[k];
+    if(va==null&&vb==null) return a.rank-b.rank;
+    if(va==null) return 1;
+    if(vb==null) return -1;
     if(typeof va==='string'||typeof vb==='string'){
       return String(va).localeCompare(String(vb),'ko')*d;
     }
@@ -491,22 +528,22 @@ function filtered(){
 function renderKpi(){
   var g = document.getElementById('kpiGrid');
   g.innerHTML = RKEYS.map(function(k){
-    var s = IND[state.ind].regions[k].summary;
-    var w = state.unit==='month' ? s.weighted/12 : s.weighted;
-    var lead = IND[state.ind].regions[k].rows[0];
+    var s = yearSummary(k);
+    var w = s.weighted==null?null:(state.unit==='month' ? s.weighted/12 : s.weighted);
+    var lead = yearRows(k)[0];
     var ld = lead ? (state.unit==='month'? lead.monthly : lead.annual) : null;
-    var med = state.unit==='month' ? s.median/12 : s.median;
+    var med = s.median==null?null:(state.unit==='month' ? s.median/12 : s.median);
     return '<button type="button" class="card kpi'+(state.reg===k?' on':'')+'" data-kpi="'+k+'">'+
       '<span class="rl">'+RN[k]+'</span>'+
       '<strong>'+fmt(w)+'<span style="font-size:12px;font-weight:700">만원</span></strong>'+
-      '<span class="cap">'+(state.unit==='month'?'월':'연')+' 가맹점 가중평균</span>'+
+      '<span class="cap">'+(state.unit==='month'?'월':'연')+' 수록 자료 가중평균(근사)</span>'+
       '<span class="lead">1위 '+(lead?esc(lead.name):'—')+' '+(lead?fmt(ld)+'만원':'')+(lead&&lead.stores?' · '+lead.stores+'점':'')+'</span>'+
-      '<span class="meta">공시 '+s.brands+'개 브랜드 · '+fmt(s.stores)+'점 · 중앙값 '+fmt(med)+'만원</span>'+
+      '<span class="meta">공시 '+s.brands+'개 브랜드 · '+fmt(s.stores)+'공시지역 점 · 브랜드 중앙값 '+fmt(med)+'만원</span>'+
     '</button>';
   }).join('');
-  document.getElementById('kpiSub').textContent = cur().label + ' · ' + cur().sub;
+  document.getElementById('kpiSub').textContent = cur().label + ' · '+(state.year==='all'?'혼합연도':state.year+'년')+' · 수록 자료 기준 (음식점은 TOP 50 표본)';
   document.getElementById('indNote').textContent = cur().coverage || (state.ind==='cafe'
-    ? '카페는 권역 공시 브랜드 전체(대구·경북 62 · 서울·경기 169 · 부산·경남 81)를 수록했고, 51위 이하는 3.3㎡당 매출이 원자료에 없어 — 로 표시됩니다.'
+    ? '카페 기존 수록 범위: 대구·경북 62 · 서울·경기 169 · 부산·경남 81. 미수록 브랜드 존재 여부는 독립 확인되지 않았습니다.'
     : '음식점 표는 권역별 상위 50개 브랜드입니다. 점포 1~2곳짜리 브랜드는 그 한 곳의 입지로 평균이 결정되니 점포 수를 함께 보세요.');
 }
 document.getElementById('kpiGrid').addEventListener('click', function(e){
@@ -520,11 +557,11 @@ function renderChart(){
   var top = list.filter(function(r){ return r.stores>=10; });
   var base = top.length>=5 ? top : list;
   var sel = base.slice().sort(function(a,b){ return (b.annual||0)-(a.annual||0); }).slice(0,10);
-  var max = sel.length ? (sel[0].annual||1) : 1;
+  var max = sel.length ? (val(sel[0])||1) : 1;
   var unitTxt = state.unit==='month' ? '월매출' : '연매출';
   document.getElementById('chartSub').textContent = RN[state.reg]+' · '+unitTxt+' 기준 · 현재 필터 반영'+(base===top?' · 가맹점 10점 이상':'');
   document.getElementById('barList').innerHTML = sel.length ? sel.map(function(r,i){
-    var w = Math.max(2, (val(r)||0)/max*100);
+    var w = Math.max(0, (val(r)||0)/max*100);
     return '<div class="bar-row'+(i<3?' big':'')+'">'+
       '<div class="bar-name" title="'+esc(r.name)+'"><span class="rk">'+(i+1)+'</span>'+esc(r.name)+'</div>'+
       '<div class="bar-track"><div class="bar-fill" style="width:'+w.toFixed(1)+'%"></div></div>'+
@@ -593,7 +630,7 @@ function renderCompare(){
       var w = r ? Math.max(1.5, val(r)/max*100) : 0;
       return '<div class="cmp-bar"><span class="r">'+RS[k]+'</span>'+
         '<div class="cmp-track"><i class="r-'+k+'" style="width:'+w.toFixed(1)+'%"></i></div>'+
-        '<span class="v">'+(r?fmt(val(r)):'—')+'</span></div>';
+        '<span class="v">'+(r?fmt(val(r))+(r.incomplete?'*':''):'—')+'</span></div>';
     }).join('');
     return '<div class="cmp-item"><div class="cmp-head"><span>'+esc(n)+'</span><span class="muted" style="font-weight:600;font-size:11px">'+(state.unit==='month'?'월':'연')+' · 만원</span></div>'+bars+'</div>';
   }).join('');
@@ -601,14 +638,15 @@ function renderCompare(){
   var head = '<table><thead><tr><th class="l">브랜드</th>'+RKEYS.map(function(k){ return '<th>'+RN[k]+'</th>'; }).join('')+'<th>최고 권역</th></tr></thead><tbody>';
   var body = list.map(function(n){
     var vals = RKEYS.map(function(k){ return m[n][k] ? val(m[n][k]) : null; });
-    var best = Math.max.apply(null, vals.filter(function(v){ return v!==null; }).concat([-1]));
+    var comparable=RKEYS.every(function(k){return m[n][k]&&!m[n][k].incomplete;})&&new Set(RKEYS.map(function(k){return m[n][k]&&m[n][k].year;})).size===1;
+    var best = comparable?Math.max.apply(null, vals): -1;
     var cells = RKEYS.map(function(k, i){
       var v = vals[i];
       var isBest = v!==null && v===best;
-      return '<td'+(isBest?' style="color:var(--green);font-weight:800"':'')+'>'+(v===null?'—':fmt(v))+'</td>';
+      return '<td'+(isBest?' style="color:var(--green);font-weight:800"':'')+'>'+(v===null?'—':fmt(v)+'<small style="display:block">'+m[n][k].year+(m[n][k].partial?' · 부분공시':(m[n][k].unknownStores?' · 점포수 미확인':''))+'</small>')+'</td>';
     }).join('');
     var bi = vals.indexOf(best);
-    return '<tr><td class="l name">'+esc(n)+'</td>'+cells+'<td class="muted">'+(bi>=0?RN[RKEYS[bi]]:'—')+'</td></tr>';
+    return '<tr><td class="l name">'+esc(n)+'</td>'+cells+'<td class="muted">'+(bi>=0?RN[RKEYS[bi]]:'비교 제한')+'</td></tr>';
   }).join('');
   document.getElementById('cmpTableWrap').innerHTML = list.length ? head+body+'</tbody></table>' : '';
 }
@@ -634,13 +672,15 @@ function cols(){
   var c = [
     {k:'rank', t:'순위', cls:''},
     {k:'name', t:'브랜드', cls:'l', sortable:true},
-    {k:'stores', t:'권역 점포', cls:''},
+    {k:'totalStores', t:'전체 점포', cls:''},
+    {k:'stores', t:'공시지역 점포', cls:''},
+    {k:'coverage', t:'지역 커버리지', cls:''},
     {k:state.unit==='month'?'monthly':'annual', t:(state.unit==='month'?'월매출':'연매출'), cls:'', sortKey:'annual'},
     {k:'perPyeong', t:'3.3㎡당 연', cls:'hide-sm'},
     {k:'natStores', t:'전국 점포', cls:'hide-sm'},
   ];
-  if(cur().hasStartup) c.push({k:'startup15', t:'15평 창업비', cls:''});
-  if(state.ind==='small') c.push({k:'estArea', t:'추정 면적(평)', cls:'hide-sm'});
+  if(cur().hasStartup) c.push({k:'startup15', t:'15평 창업비(미검증)', cls:''});
+  c.push({k:'estArea', t:'매출비율 면적(평, 추정)', cls:'hide-sm'});
   c.push({k:'year', t:'실적연도', cls:'hide-sm'});
   c.push({k:'_detail', t:'상세', cls:''});
   return c;
@@ -660,7 +700,8 @@ function renderTable(){
     var tds = cs.map(function(c){
       if(c.k==='_detail') return '<td><button type="button" class="detail" data-detail="'+esc(r.regno)+'">보기</button></td>';
       if(c.k==='name') return '<td class="l name" title="'+esc(r.name)+'">'+esc(r.name)+'<small>'+esc(r.corp||'')+(r.cat?' · '+esc(r.cat):'')+'</small></td>';
-      if(c.k==='rank') return '<td><span class="rank'+(r.rank<=3?' top':'')+'">'+r.rank+'</span></td>';
+      if(c.k==='rank') return '<td><span class="rank'+(shownRank(r)<=3?' top':'')+'">'+shownRank(r)+'</span></td>';
+       if(c.k==='coverage') return '<td>'+coverageLabel(r)+(r.partial?' · 부분':(r.unknownStores?' · 미확인':''))+'</td>';
       if(c.k==='stores') return '<td>'+fmt(r.stores,'—')+'</td>';
       if(c.k==='monthly') return '<td><b>'+fmt(r.monthly)+'</b></td>';
       if(c.k==='annual') return '<td><b>'+fmt(r.annual)+'</b></td>';
@@ -674,7 +715,7 @@ function renderTable(){
 
   document.getElementById('empty').hidden = list.length>0;
   document.getElementById('rowInfo').textContent = RN[state.reg]+' · '+list.length+'개 표시 / 전체 '+rows().length+'개 · 단위 만원';
-  document.getElementById('srcInfo').textContent = cur().id==='cafe' ? 'TOP 50은 정보공개서 원문 실측, 51위 이하는 권역 공시 원자료' : '정보공개서 원문 실측 '+(cur().id==='food'?'129':'177')+'개 브랜드';
+  document.getElementById('srcInfo').textContent = '권역 평균은 연말 점포수 가중 근사치 · 실제 매출 산정 점포수 미확보 · 원문 전수 검증 미완료';
 }
 document.getElementById('thead').addEventListener('click', function(e){
   var th = e.target.closest('th[data-sort]'); if(!th) return;
@@ -688,30 +729,32 @@ document.getElementById('tbody').addEventListener('click', function(e){
 });
 document.getElementById('q').addEventListener('input', function(e){ state.q = e.target.value; renderChart(); renderTable(); });
 document.getElementById('fStores').addEventListener('change', function(e){ state.stores = +e.target.value; renderChart(); renderTable(); });
-document.getElementById('fYear').addEventListener('change', function(e){ state.year = e.target.value; renderChart(); renderTable(); });
+document.getElementById('fYear').addEventListener('change', function(e){ state.year = e.target.value; renderKpi(); renderChart(); renderTable(); fillPnlSelect(); });
+document.getElementById('fCoverage').addEventListener('change',function(e){state.coverage=+e.target.value;renderChart();renderTable();});
+document.getElementById('fArea').addEventListener('change',function(e){state.area=+e.target.value;renderChart();renderTable();});
 document.getElementById('fStartup').addEventListener('change', function(e){ state.startup = +e.target.value; renderChart(); renderTable(); });
 document.getElementById('fTop').addEventListener('click', function(){ state.top50 = !state.top50; this.classList.toggle('on', state.top50); renderChart(); renderTable(); });
 document.getElementById('reset').addEventListener('click', function(){
-  state.q=''; state.stores=0; state.year='all'; state.startup=0; state.top50=false; state.sort={k:'rank',d:1};
-  document.getElementById('q').value=''; syncHash(); fillFilters(); renderChart(); renderTable();
+  state.q=''; state.stores=0; state.year='2025'; state.coverage=0; state.area=0; state.startup=0; state.top50=false; state.sort={k:'rank',d:1};
+  document.getElementById('q').value=''; syncHash(); fillFilters(); renderKpi(); renderChart(); renderTable(); fillPnlSelect();
 });
 
 /* ---------- CSV ---------- */
 function csv(){
   var list = filtered();
-  var head = ['순위','브랜드','법인명','권역','기준연도','권역 점포수','연평균매출(만원)','월평균매출(만원)','3.3㎡당 연매출(만원)','전국 점포수'];
+  var head = ['순위','브랜드','법인명','권역','기준연도','권역 전체 점포수','공시지역 연말 점포수','지역 커버리지(%)','실제 매출 산정 점포수','연평균매출(만원)','월평균매출(만원)','3.3㎡당 연매출(만원)','전국 점포수'];
   if(cur().hasStartup) head.push('15평 기준 창업비(만원)');
-  if(state.ind==='small') head.push('추정 매장면적(평)','공시 기준점포면적(㎡)');
+  head.push('매출비율 추정 면적(평)'); if(state.ind==='small') head.push('공시 기준점포면적(㎡)');
   if(cur().hasStartup) head.push('업종중분류');
   head.push('최신 공시일','자료 구분');
   var lines = [head.join(',')];
   list.forEach(function(r){
-    var row = [r.rank, r.name, r.corp||'', RN[state.reg], r.year||'', r.stores==null?'':r.stores,
+    var row = [shownRank(r), r.name, r.corp||'', RN[state.reg], r.year||'', r.totalStores,r.reportedStores,r.coverage==null?'':r.coverage.toFixed(1),'미확보',
       r.annual==null?'':r.annual, r.monthly==null?'':r.monthly, r.perPyeong==null?'':r.perPyeong, r.natStores==null?'':r.natStores];
     if(cur().hasStartup) row.push(r.startup15==null?'':r.startup15);
-    if(state.ind==='small') row.push(r.estArea==null?'':r.estArea, r.baseArea==null?'':r.baseArea);
+    row.push(r.estArea==null?'':r.estArea.toFixed(1)); if(state.ind==='small') row.push(r.baseArea==null?'':r.baseArea);
     if(cur().hasStartup) row.push(r.cat||'');
-    row.push(r.disclosed||'', r.src||'');
+    row.push(r.disclosed||'', '기존 수록 공시자료(독립 원문 검증 미완료)');
     lines.push(row.map(function(v){ v=String(v); return /[",\n]/.test(v)? '"'+v.replace(/"/g,'""')+'"' : v; }).join(','));
   });
   var blob = new Blob(['\ufeff'+lines.join('\r\n')], {type:'text/csv;charset=utf-8;'});
@@ -725,47 +768,48 @@ document.getElementById('csv').addEventListener('click', csv);
 
 /* ---------- detail modal ---------- */
 function findRow(code){
-  for(var i=0;i<RKEYS.length;i++){
-    var rs = IND[state.ind].regions[RKEYS[i]].rows;
-    for(var j=0;j<rs.length;j++){ if(rs[j].regno===code) return rs[j]; }
-  }
-  return null;
+  return rows().find(function(r){return r.regno===code;})||null;
 }
 function openDetail(code){
   var r = findRow(code); if(!r) return;
-  var s = cur().regions[state.reg].summary;
+  var s = yearSummary(state.reg);
   var badges = ['<span class="badge g">'+RN[state.reg]+'</span>',
     '<span class="badge">'+(r.year||'—')+' 결산</span>'];
   if(r.cat) badges.push('<span class="badge">'+esc(r.cat)+'</span>');
   if(r.disclosed) badges.push('<span class="badge">공시 '+esc(r.disclosed)+'</span>');
-  badges.push('<span class="badge">'+esc(r.src)+'</span>');
-  if(r.inTop50) badges.push('<span class="badge g">권역 TOP 50</span>');
+  badges.push('<span class="badge">'+esc('기존 공시자료 · 독립 검증 미완료')+'</span>');
+  if(shownRank(r)<=50) badges.push('<span class="badge g">권역 TOP 50</span>');
 
   var h = '<h3 id="mTitle">'+esc(r.name)+'</h3><div class="muted" style="font-size:12px;margin-top:2px">'+esc(r.corp||'')+(r.regno?' · 등록번호 '+esc(r.regno):'')+'</div>';
   h += '<div class="badges">'+badges.join('')+'</div>';
   h += '<div class="stat-grid">'+
     '<div class="stat"><span>권역 연평균매출</span><b>'+fmt(r.annual)+'만원</b></div>'+
     '<div class="stat"><span>월평균매출</span><b>'+fmt(r.monthly)+'만원</b></div>'+
-    '<div class="stat"><span>권역 가맹점수</span><b>'+fmt(r.stores,'—')+'점</b></div>'+
+    '<div class="stat"><span>권역 전체 가맹점수</span><b>'+fmt(r.totalStores,'—')+'점</b></div>'+
+    '<div class="stat"><span>공시지역 연말 점포수</span><b>'+fmt(r.reportedStores)+'점</b></div>'+
+    '<div class="stat"><span>지역 커버리지</span><b>'+coverageLabel(r)+'</b></div>'+
+    '<div class="stat"><span>실제 매출 산정 점포수</span><b>미확보</b></div>'+
     '<div class="stat"><span>3.3㎡당 연매출</span><b>'+fmt(r.perPyeong,'—')+'만원</b></div>'+
     '<div class="stat"><span>전국 가맹점수</span><b>'+fmt(r.natStores,'—')+'점</b></div>'+
     '<div class="stat"><span>전국 연평균매출</span><b>'+(r.natAnnual?fmt(r.natAnnual)+'만원':'—')+'</b></div>'+
   '</div>';
 
+  h+='<p class="muted" style="font-size:12px">'+(r.partial?'일부 지역 매출 미공시. 표시 매출은 공시지역만 반영합니다. ':'')+(r.unknownStores?'일부 지역 점포수가 미확인되어 전체 점포수·커버리지를 산출하지 않습니다. ':'')+'연말 점포수 가중 근사치이며, 실제 매출 산정 표본 수는 미확보입니다.</p>';
+  if(r.estArea!=null) h+='<p class="muted">매출/평당매출 비율 추정 면적: '+r.estArea.toFixed(1)+'평 (실측 면적 아님)</p>';
   if(cur().hasStartup){
     var f = r.fee || {};
     var interior15 = (f.interior!=null) ? f.interior*15 : null;
-    h += '<div class="sub-t">15평 기준 창업비용 내역 (만원)</div>';
+    h += '<div class="sub-t">기존 수록 공시 비용 항목 (만원) · 기준 면적 확인 필요</div>';
     h += '<div class="fee-line"><span>가입비</span><b>'+fmt(f.join,'—')+'</b></div>'+
          '<div class="fee-line"><span>교육비</span><b>'+fmt(f.edu,'—')+'</b></div>'+
          '<div class="fee-line"><span>보증금(본부 예치)</span><b>'+fmt(f.dep,'—')+'</b></div>'+
          '<div class="fee-line"><span>기타비용</span><b>'+fmt(f.etc,'—')+'</b></div>'+
-         '<div class="fee-line"><span>3.3㎡당 인테리어 × 15평</span><b>'+(interior15!=null?fmt(interior15):'—')+'</b></div>'+
-         '<div class="fee-line" style="border-bottom:0"><span><b>합계</b></span><b style="color:var(--green)">'+fmt(r.startup15,'—')+'만원</b></div>';
+         '<div class="fee-line"><span>3.3㎡당 인테리어 단가</span><b>'+fmt(f.interior,'—')+'</b></div>'+
+         '<div class="fee-line" style="border-bottom:0"><span><b>15평 창업비</b></span><b>미확인</b></div>';
     if(state.ind==='small'){
       h += '<div class="muted" style="font-size:11.5px;margin-top:6px">추정 매장면적 '+(r.estArea==null?'—':(Math.round(r.estArea*10)/10)+'평')+' · 공시 기준점포면적 '+fmt(r.baseArea,'—')+'㎡</div>';
     }
-    h += '<div class="muted" style="font-size:11px;margin-top:4px">임차보증금·권리금·별도공사(전기·수도·간판) 제외</div>';
+    h += '<div class="muted" style="font-size:11px;margin-top:4px">기타비용에 인테리어가 포함될 수 있어 합산하지 않습니다. 기준 면적, 실제 출점 가능 면적 및 본사 견적 확인 필요.</div>';
   }
 
   var pv = (r.prov||[]);
@@ -776,7 +820,8 @@ function openDetail(code){
     });
     h += '</tbody></table></div>';
   }
-  h += '<div class="muted" style="font-size:11px;margin-top:8px">권역 가중평균 '+fmt(s.weighted)+'만원/년 (권역 전체 '+s.brands+'개 브랜드 · '+fmt(s.stores)+'점)</div>';
+  h += '<div class="muted" style="font-size:11px;margin-top:8px">수록 자료 가중평균 '+fmt(s.weighted)+'만원/년 ('+s.brands+'개 브랜드 · 공시지역 '+fmt(s.stores)+'점)</div>';
+  h += '<p class="muted" style="font-size:12px"><a href="https://franchise.ftc.go.kr/mnu/00013/program/userRqst/list.do" target="_blank" rel="noopener">공정위 정보공개서 열람</a> · 등록번호 '+esc(r.regno||'—')+'로 검색하여 실적연도·매출산정 대상 수·비용 포함 항목을 확인하세요.</p>';
   h += '<div class="act"><button type="button" id="mPnl">이 매출로 손익 계산</button><button type="button" class="ghost" data-close>닫기</button></div>';
 
   document.getElementById('mBody').innerHTML = h;
@@ -801,10 +846,7 @@ var pnlSel = null;
 var opMode = 'owner';
 var royMode = 'fixed';
 
-var LABOR = {
-  owner: {cost:215, note:'점주 급여 0(세전 점주수익) + 파트타임 주 36시간'},
-  auto:  {cost:505, note:'점장 1명 + 파트타임 주 36시간 커버'}
-};
+var LABOR={owner:{note:'점주 근무시간 차감 후 유급 인력 추정'},auto:{note:'모든 근무시간을 유급 인력으로 산정'}};
 
 var PNL_FIELDS = [
   {g:'매출(넣어오는 값)'},
@@ -816,14 +858,22 @@ var PNL_FIELDS = [
   {id:'pWater', l:'수도·가스', s:'', u:'만원', step:1, v:18},
   {id:'pRoyal', l:'로열티', s:'', u:'만원', step:1, v:22, royal:true},
   {id:'pAd', l:'광고·판촉 분담금', s:'본사 광고비 가맹점 분담', u:'만원', step:1, v:3},
-  {id:'pLabor', l:'인건비', s:'', u:'만원', step:5, v:215, labor:true},
+  {id:'pLabor', l:'인건비 (직접 수정 가능)', s:'', u:'만원', step:5, v:0, labor:true},
   {id:'pEtc', l:'기타 부대비', s:'세무·POS·렌탈·보험·소독', u:'만원', step:5, v:55},
-  {id:'pDep', l:'감가상각·리스', s:'15평 창업비 ÷ 60개월', u:'만원', step:5, v:130},
+  {id:'pDep', l:'감가상각 (비현금 비용)', s:'사용자 가정 · 리스료는 기타비용에 입력', u:'만원', step:5, v:130},
   {g:'변동비'},
   {id:'pMat', l:'재료비율', s:'업계 평균 원가율', u:'%', step:0.5, v:35, pct:true},
   {id:'pFee', l:'결제·배달 수수료', s:'카드 + 배달 중개', u:'%', step:0.5, v:2.5, pct:true},
-  {g:'기타'},
-  {id:'pDays', l:'월 영업일', s:'', u:'일', step:1, v:26}
+  {g:'인력 배치 가정 · 변경 시 인건비 자동 산정'},
+  {id:'pDays', l:'월 영업일', s:'', u:'일', step:1, v:26},
+  {id:'pHours', l:'하루 영업시간', s:'', u:'시간', step:0.5, v:12},
+  {id:'pPrep', l:'하루 오픈·마감 추가 인시', s:'직원 전체 합계', u:'시간', step:0.5, v:1},
+  {id:'pPeak', l:'하루 피크 추가 인시', s:'추가 인원 × 겹치는 시간', u:'시간', step:0.5, v:3},
+  {id:'pOwnerHours', l:'점주 월 근무시간', s:'직접 운영 시만 적용', u:'시간', step:10, v:220},
+  {id:'pWage', l:'평균 시급', s:'2026년 최저임금 10,320원 이상 가정', u:'원', step:100, v:10320},
+  {id:'pLaborLoad', l:'주휴·사업주 부담 가산율', s:'예시 33.2% · 실제 근무조건별 상이', u:'%', step:1, v:33.2},
+  {g:'투자금 회수 가정'},
+  {id:'pInvest', l:'실제 초기 투자금', s:'확인한 금액 입력 · 미입력 시 회수기간 미산출', u:'만원', step:100, v:0}
 ];
 
 function fld(id){ return document.getElementById(id); }
@@ -850,9 +900,12 @@ function renderPnlForm(){
   });
   fld('pnlForm').innerHTML = html;
   PNL_FIELDS.forEach(function(f){
-    if(f.id) fld(f.id).addEventListener('input', calcPnl);
+    if(f.id) fld(f.id).addEventListener('input',function(){if(isLaborField(f.id)) updateLabor(); calcPnl();});
   });
 }
+function isLaborField(id){return ['pDays','pHours','pPrep','pPeak','pOwnerHours','pWage','pLaborLoad'].indexOf(id)>=0;}
+function laborHours(){return Math.max(0,gv('pDays'))*(Math.max(0,gv('pHours'))+Math.max(0,gv('pPrep'))+Math.max(0,gv('pPeak')));}
+function updateLabor(){var paid=Math.max(0,laborHours()-(opMode==='owner'?Math.max(0,gv('pOwnerHours')):0)); fld('pLabor').value=Math.round(paid*Math.max(0,gv('pWage'))*(1+Math.max(0,gv('pLaborLoad'))/100)/10000);var n=fld('pLaborNote');if(n)n.textContent=LABOR[opMode].note+' · 월 유급 '+Math.round(paid)+'인시';}
 function royaNote(){
   return royMode==='fixed'
     ? '저가커피 7개 브랜드 평균 22만(16.5~27.5)'
@@ -867,8 +920,8 @@ function setRoyaltyValue(){
 }
 function setOpMode(mode){
   opMode = mode;
-  fld('pLabor').value = LABOR[mode].cost;
-  var n = fld('pLaborNote'); if(n) n.textContent = LABOR[mode].note;
+  updateLabor();
+  // labor note updated by updateLabor
   Array.prototype.forEach.call(fld('opTabs').querySelectorAll('button'), function(b){
     b.setAttribute('aria-pressed', String(b.dataset.op===mode));
   });
@@ -879,20 +932,24 @@ function setPnl(monthly, r){
   if(monthly!=null && !isNaN(monthly)){
     fld('pSales').value = Math.round(monthly);
   }
-  if(r && r.startup15){ fld('pDep').value = Math.round(r.startup15/60); }
+  // Investment and depreciation are user assumptions, never inferred from unverified startup estimates.
   calcPnl();
 }
 function calcPnl(){
   var sales=gv('pSales'), rent=gv('pRent'), mgmt=gv('pMgmt'), elec=gv('pElec'), water=gv('pWater');
   var ad=gv('pAd'), labor=gv('pLabor'), etc=gv('pEtc'), dep=gv('pDep'), days=Math.max(1,gv('pDays'));
-  var roy = royMode==='fixed' ? gv('pRoyal') : sales*gv('pRoyal')/100;
-  var mat = gv('pMat')/100, fee = gv('pFee')/100;
-  var varRate = Math.min(0.95, mat+fee);
-  var fixed = rent+mgmt+elec+water+roy+ad+labor+etc+dep;
-  var op = sales*(1-varRate) - fixed;
-  var margin = sales>0 ? op/sales*100 : 0;
-  var bep = varRate<1 ? fixed/(1-varRate) : NaN;
-  var payback = (pnlSel && pnlSel.startup15 && op>0) ? pnlSel.startup15/op : null;
+  var royFixed=royMode==='fixed'?gv('pRoyal'):0, royRate=royMode==='pct'?gv('pRoyal')/100:0;
+  var roy=royFixed+sales*royRate;
+  var mat=gv('pMat')/100, fee=gv('pFee')/100;
+  var varRate=mat+fee+royRate;
+  var fixed=rent+mgmt+elec+water+royFixed+ad+labor+etc+dep;
+  var invalid=PNL_FIELDS.some(function(f){return f.id&&gv(f.id)<0;})||gv('pDays')>31||gv('pHours')>24||varRate>=1||gv('pDays')<1;
+  if(invalid){fld('pnlOut').innerHTML='<div class="warn">입력 오류: 음수 비용, 100% 이상 변동비율, 잘못된 영업일·시간을 확인하세요.</div>';return;}
+  var op=sales*(1-varRate)-fixed;
+  var margin=sales>0?op/sales*100:0;
+  var bep=fixed/(1-varRate);
+  var cash=op+dep;
+  var payback=gv('pInvest')>0&&cash>0?gv('pInvest')/cash:null;
   var out = fld('pnlOut');
   out.innerHTML =
     '<div class="big'+(op<0?' neg':'')+'">'+fmt(op)+'만원<small style="display:block;font-size:11.5px;margin-top:2px">월 영업이익'+(opMode==='owner'?' · 점주 보수 포함':'')+'</small></div>'+
@@ -901,12 +958,13 @@ function calcPnl(){
     '<div class="row"><span>일 손익분기 매출</span><span>'+(isFinite(bep)?fmt(bep/days)+'만원':'—')+'</span></div>'+
     '<div class="row"><span>월 고정비 합계</span><span>'+fmt(fixed)+'만원</span></div>'+
     '<div class="row"><span>변동비 ('+(varRate*100).toFixed(1)+'%)</span><span>'+fmt(sales*varRate)+'만원</span></div>'+
-    '<div class="row"><span>로열티</span><span>'+fmt(roy)+'만원'+(royMode==='pct'?' ('+gv('pRoyal').toFixed(1)+'%)':'')+'</span></div>'+
-    (payback!=null ? '<div class="row"><span>창업비 회수 (15평 '+fmt(pnlSel.startup15)+'만원)</span><span>'+(isFinite(payback)?payback.toFixed(1)+'개월':'—')+'</span></div>' : '')+
+    '<div class="row"><span>로열티 (위 비용에 포함)</span><span>'+fmt(roy)+'만원'+(royMode==='pct'?' ('+gv('pRoyal').toFixed(1)+'%)':'')+'</span></div>'+
+    '<div class="row"><span>월 영업현금흐름 추정 (감가상각 가산)</span><span>'+fmt(cash)+'만원</span></div>'+
+    '<div class="row"><span>초기 투자금 회수 (세전·금융비용 전)</span><span>'+(payback==null?'—':payback.toFixed(1)+'개월')+'</span></div>'+
     (pnlSel ? '<div class="row"><span>불러온 브랜드</span><span style="font-weight:700">'+esc(pnlSel.name)+'</span></div>' : '')+
     '<div class="warn">'+(op<0?'현재 가정에서는 적자입니다. 매출·비율을 조정해 보세요. ':'')+
     (opMode==='owner' ? '점주 본인 급여는 0으로 계산되어 영업이익이 곧 점주 세전 보수입니다. ' : '점장·파트타임 인건비를 모두 반영했습니다. ')+
-    '부가세·소득세·대출이자 미반영, 실제 가맹점 수익률이 아닙니다.</div>';
+    '매출·비용의 부가세 기준 통일 필요. 소득세·대출 상환·이자·퇴직금·휴가 대체인력·운전자본 미반영. 점주 노동가치는 별도. 감가상각 가산액은 리스 등 실제 현금 지출을 제외한 순수 감가상각만 입력해야 합니다.</div>';
 }
 fld('pnlForm').addEventListener('click', function(e){
   var b = e.target.closest('.stp');
@@ -915,7 +973,7 @@ fld('pnlForm').addEventListener('click', function(e){
     var inp=fld(id), v=parseFloat(inp.value)||0;
     v = Math.max(0, v + dir*step);
     inp.value = step<1 ? (Math.round(v*10)/10) : Math.round(v);
-    calcPnl();
+    if(isLaborField(id))updateLabor(); calcPnl();
     return;
   }
   var rb = e.target.closest('[data-roy]');
@@ -932,7 +990,7 @@ fld('opTabs').addEventListener('click', function(e){
   setOpMode(b.getAttribute('data-op'));
 });
 function fillPnlSelect(){
-  var rs = rows().slice().sort(function(a,b){ return a.rank-b.rank; });
+  var rs = yearRows(state.reg).slice().sort(function(a,b){ return a.rank-b.rank; });
   fld('pnlBrand').innerHTML = '<option value="">브랜드 선택 (현재 권역)</option>' + rs.map(function(r){
     return '<option value="'+r.rank+'">'+esc(r.name)+' · 월 '+fmt(r.monthly)+'만원</option>';
   }).join('');
@@ -944,14 +1002,13 @@ fld('pnlLoad').addEventListener('click', function(){
   if(r) setPnl(r.monthly, r);
 });
 fld('pnlAvg').addEventListener('click', function(){
-  setPnl(sum().weighted/12, null);
+  var w=yearSummary(state.reg).weighted; if(w!=null) setPnl(w/12, null);
 });
 
 var PNL_BASIS = [
   ['최저임금 (2026)', '시급 10,320원 · 월 2,156,880원', '월 환산 209시간(주 40시간 + 유급주휴 8시간). 고용노동부 고시 제2025-47호'],
   ['4대보험 사업주', '약 10.9%', '국민연금 4.75 + 건강 3.595 + 장기요양 0.4724 + 고용 1.15 + 산재 0.7 (2026년 요율)'],
-  ['인건비 · 사장 직접', '215만원', '점주 0원 + 파트타임 주 36시간: 36h×4.345주×10,320원 = 161만 + 주휴 32만 → 4대보험 포함 약 215만'],
-  ['인건비 · 오토', '505만원', '점장 1명(월 260만 + 4대보험 11% = 289만) + 파트타임 주 36시간(215만)'],
+  ['인건비 · 인력시간 기준','자동 산출','(영업시간+준비/마감 인시+피크 추가 인시)×영업일−점주 근무시간(직접 운영만) × 시급 × 가산율. 배치·휴게·주휴 조건에 따라 실제 금액 상이.'],
   ['로열티 (정액)', '22만원', '저가커피 7개 브랜드 평균: 메가·더벤티 16.5 / 컴포즈·텐퍼센트·매머드 22 / 빽다방·이디야 27.5만 (정보공개서 기반 보도)'],
   ['로열티 (정률)', '2.9%', '파스쿠찌 순매출 2.5%(공식 창업안내) · 할리스 3.3%(보도) 평균'],
   ['광고·판촉 분담금', '3만원', '텐퍼센트 2.2 · 더벤티 2.9 · 우지 1.1만 등 저가커피 공개값 평균 약 2만 + 반올림'],
@@ -961,7 +1018,7 @@ var PNL_BASIS = [
   ['관리비·공용', '20만원', '상가 관리비 15~50만(건물·상권별 편차) 중 소형 카페 기준'],
   ['결제·배달 수수료', '2.5%', '카드 우대수수료 0.5~1.5% + 배달 중개 6.8~9.8%×배달비중. 카드·PG 2~3% 통용'],
   ['기타 부대비', '55만원', '세무기장 13 + POS·키오스크 렌탈 7(월 5~12만) + 인터넷 8 + CCTV 3 + 정수기·제빙기 렌탈 8 + 화재·배상책임 보험 8 + 소독·소모품 8'],
-  ['감가상각·리스', '130만원', '15평 창업비 8,000만원(저가커피 6곳 7,687~8,404만) ÷ 60개월 = 133만. 브랜드를 불러오면 그 브랜드 15평 창업비÷60으로 자동 설정'],
+  ['감가상각·리스', '130만원', '130만원은 임의 예시. 실제 감가상각 대상 자산과 내용연수로 계산. 브랜드 창업비 자동 연동 중단'],
   ['월 임대료', '200만원', '침산동 검토 점포 기준(사용자 지정)']
 ];
 function renderBasis(){
@@ -977,30 +1034,29 @@ function renderBasis(){
 
 function renderMethod(){
   var meta = DATA.meta;
-  document.getElementById('methodSub').textContent = '조사 기준일 '+meta.survey+' · 조회 시점 정보공개서 최신 등록본';
+  document.getElementById('methodSub').textContent = '기존 수집일 '+meta.survey+' · 2026-11-26 계산 검토 · 원문 전수 재검증 미완료';
   var cafe = IND.cafe.regions, food = IND.food.regions, small = IND.small.regions;
   var g = document.getElementById('methodGrid');
   g.innerHTML =
     '<div class="card mcard"><h3>1. 데이터 출처</h3>'+
-      '<p><b>카페</b> — 공정위 정보공개서에 업종 중분류 ‘커피’로 등록된 <b>780건 원문을 전부 열어</b> 가맹점사업자 평균매출 표를 직접 파싱했습니다(파싱 실패 0건). 중복 24건 정리 후 고유 756개, 그중 매출 공시 410개가 모집단이고 권역 데이터 보유는 대구·경북 '+cafe.dg.summary.brands+' · 서울·경기 '+cafe.sg.summary.brands+' · 부산·경남 '+cafe.bn.summary.brands+'개입니다.</p>'+
-      '<p><b>음식점</b> — 공공데이터포털 OpenAPI(브랜드 목록 15125467 · 지역별 매출 15125494 · 가맹점 현황 15110241)로 브랜드×시도 221,634행을 확보해 피자·햄버거·치킨·주류·카페·디저트를 제외한 3,291개 브랜드를 대상으로 산출했고, TOP 50에 오른 129개 브랜드는 정보공개서 원문에서 값을 직접 대조했습니다.</p>'+
-      '<p><b>음식점 소형</b> — 권역 추정 평균 매장면적 20평 이하이면서 공시 기준점포면적 66㎡ 이하인 점포만 추린 TOP 50으로, 376개 브랜드 원문을 확인했습니다.</p>'+
+      '<p><b>카페</b> — 기존 수록 데이터의 권역별 브랜드 수는 대구·경북 '+cafe.dg.summary.brands+' · 서울·경기 '+cafe.sg.summary.brands+' · 부산·경남 '+cafe.bn.summary.brands+'개입니다.</p>'+
+      '<p><b>음식점</b> — 기존 수집본은 공공데이터포털 OpenAPI(브랜드 목록 15125467 · 지역별 매출 15125494 · 가맹점 현황 15110241)를 출처로 기록하고 있으며, 기존 수집본에서 상위 50개를 표시합니다. 전체 API 원자료 및 원문 수집 로그는 현재 독립 확인하지 못했습니다.</p>'+
+      '<p><b>음식점 소형</b> — 기존 자료에서 권역 매출/평당매출 비율로 추정한 면적이 20평 이하인 브랜드를 선별한 표입니다. 개별 점포 실측 면적이나 실제 15평 출점 가능성을 보장하지 않습니다.</p>'+
     '</div>'+
     '<div class="card mcard"><h3>2. 가중평균 산식</h3>'+
-      '<p>권역은 두 시·도의 가맹점 수로 지역별 평균매출을 가중평균합니다. 권역 점포 1곳이 평균적으로 올리는 매출, 즉 창업자가 실제로 마주할 시장 평균에 가까운 값입니다.</p>'+
-      '<pre>권역 평균연매출 = Σ(시·도 점포수 × 시·도 평균연매출) ÷ Σ(시·도 점포수)\n월평균 매출 = 연매출 ÷ 12</pre>'+
-      '<p>매출이 0인 시·도는 <b>미공시</b>로 보고 제외했습니다(시행령 별표1 제3호 사목: 직전 사업연도 말 5점 미만 지역은 기재 생략 가능). 추정치를 대입하지 않았습니다.</p>'+
+      '<p>매출이 공개된 시·도의 연말 가맹점 수로 지역 평균매출을 가중평균한 근사치입니다. 정확한 통합 평균은 실제 매출 산정 대상 점포 수가 필요하나 현재 자료에 없습니다. 지역 커버리지는 공시지역 연말 점포 수 ÷ 권역 전체 연말 점포 수이며 실제 매출 표본 비율은 아닙니다. 명시적으로 점포수가 누락된 지역은 커버리지 미확인으로 표시합니다.</p>'+
+      '<pre>권역 추정 평균연매출 = Σ(공시 시·도 연말 점포수 × 평균연매출) ÷ Σ(공시 시·도 연말 점포수)\n월평균 매출 = 연매출 ÷ 12</pre>'+
+      '<p>기존 자료에서 미공시로 분류된 지역은 제외합니다. 0과 미공시의 원문상 구분은 독립 확인이 필요합니다. 미공시 매출을 임의 대입하지 않습니다.</p>'+
     '</div>'+
     '<div class="card mcard"><h3>3. 15평 기준 창업비용</h3>'+
-      '<pre>15평 창업비 = 최초 부담금(가입비+교육비+보증금+기타)\n            + (3.3㎡당 인테리어비 × 15)</pre>'+
-      '<p>임차보증금·권리금·별도공사(전기·수도·간판)는 <b>제외</b>한 값입니다. 원문에 부담금이나 인테리어 단가가 없거나 0으로 기재된 브랜드는 추측하지 않고 빈칸(—)으로 두었습니다.</p>'+
+      '<p>기존 산식은 기타비용에 포함된 인테리어를 중복 가산할 위험이 있어 15평 창업비를 모두 미확인 처리했습니다. 원문 기준면적·포함 항목과 실제 본사 견적을 확인하기 전에는 환산하지 않습니다.</p>'+
     '</div>'+
     '<div class="card mcard"><h3>4. 한계와 주의</h3><ul>'+
       '<li>평균매출은 가맹점이 본부에 보고한 값이라 부가세 처리·매출 누락에 따라 실제와 차이가 날 수 있습니다.</li>'+
       '<li>권역 점포가 5곳 미만인 브랜드는 그 1~2곳의 입지·면적이 평균을 좌우합니다. 점포 수를 함께 보세요(필터: 10점 이상).</li>'+
-      '<li>브랜드별 최신 등록본을 썼기 때문에 대부분 2025년 결산이지만 투썸플레이스·탐앤탐스 등 일부는 2024년 결산입니다(실적연도 열).</li>'+
-      '<li>카페는 권역 공시 브랜드 전체를 수록했고, 51위 이하는 원자료에 3.3㎡당 매출이 없어 — 로 표시됩니다.</li>'+
-      '<li>음식점·소형 표는 권역별 상위 50개만 실었으므로 ‘전체 브랜드 수’와 표 행 수가 다릅니다.</li>'+
+      '<li>수록 자료는 2023~2025년 결산 혼합이며 기본 순위는 2025년만 표시합니다. 전체 연도 선택 시 혼합 순위입니다. 최신 등록 여부는 개별 원문 확인이 필요합니다.</li>'+
+      '<li>카페는 기존 수록 범위 내 순위이며, 전체 모집단의 누락 여부는 미검증입니다. 평당 매출이 없는 행은 면적 추정도 하지 않습니다.</li>'+
+      '<li>음식점·소형은 기존 상위 50개 표본만 있어 2025년 필터 순위도 그 표본 내부 순위입니다. 요약 평균은 선택 연도의 수록 표본으로 재산출합니다.</li>'+
     '</ul></div>'+
     '<div class="card mcard"><h3>5. 참고 — API에만 있는 브랜드</h3>'+
       '<p><b>영커피</b>(BRD_20191303, 2025 결산)는 정보공개서 원문 전수 목록에 없고 공정위 OpenAPI에 <b>구간값</b>으로만 있습니다: 대구 4점 180,000~210,000천원, 경북 1점 190,000~220,000천원. 구간 중앙값으로 계산하면 대구·경북 가중평균 약 <b>19,700만원</b>입니다.</p>'+
@@ -1037,6 +1093,7 @@ document.getElementById('stampSurvey').textContent = DATA.meta.survey;
 readHash();
 buildTabs();
 renderPnlForm();
+updateLabor();
 renderBasis();
 renderAll();
 renderMethod();
